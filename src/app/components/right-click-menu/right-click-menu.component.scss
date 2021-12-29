@@ -1,0 +1,12 @@
+.box {
+  background-color: lightcoral;
+
+  & > .options:hover {
+    background-color: lightblue;
+  }
+}
+
+.options {
+  width: 200px;
+  padding: 1vh;
+}

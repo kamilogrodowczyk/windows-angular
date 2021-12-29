@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  font-size: 87.5%;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@mixin display($display) {
+  display: $display;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  margin: 0;
+  margin-top: 5px;
+  line-height: 1.2;
+}
+
+fa-icon {
+  font-size: 30px;
+}
+
+.container {
+  @include display(flex);
+  flex-direction: column;
+}
+
+.container-grid {
+  @include display(grid);
+  gap: 2vh;
+}
+
+.flex-start {
+  justify-content: start;
+  align-content: start;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+}

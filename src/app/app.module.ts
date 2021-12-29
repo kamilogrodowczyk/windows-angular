@@ -3,14 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ItemsComponent } from './components/items/items.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RightClickMenuComponent } from './components/right-click-menu/right-click-menu.component';
+import { TaskbarComponent } from './components/taskbar/taskbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ItemsComponent,
+    RightClickMenuComponent,
+    TaskbarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
