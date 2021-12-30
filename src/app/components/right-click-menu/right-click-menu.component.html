@@ -1,6 +1,3 @@
-<div class="container-grid flex-start box absolute">
-  <p class="options">Widok</p>
-  <p class="options">Odśwież</p>
-  <p class="options">Ustawienia ekranu</p>
-  <p class="options">Personalizuj</p>
+<div class="container-grid flex-start box">
+  <p class="options" *ngFor="let item of items">{{ item }}</p>
 </div>
