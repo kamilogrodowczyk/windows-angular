@@ -1,0 +1,7 @@
+<div
+  *ngIf="desktopMenuService.menuItems.length"
+  [style.left]="left"
+  [style.top]="top"
+>
+  <p *ngFor="let item of desktopMenuService.menuItems">{{ item }}</p>
+</div>

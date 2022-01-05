@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RightClickMenuComponent } from './right-click-menu.component';
+import { DesktopItemsComponent } from './desktop-items.component';
 
-describe('RightClickMenuComponent', () => {
-  let component: RightClickMenuComponent;
-  let fixture: ComponentFixture<RightClickMenuComponent>;
+describe('DesktopItemsComponent', () => {
+  let component: DesktopItemsComponent;
+  let fixture: ComponentFixture<DesktopItemsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RightClickMenuComponent ]
+      declarations: [ DesktopItemsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RightClickMenuComponent);
+    fixture = TestBed.createComponent(DesktopItemsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

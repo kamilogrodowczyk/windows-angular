@@ -1,16 +1,19 @@
-.box {
+div {
+  display: grid;
+  justify-content: start;
+  align-content: start;
   background-color: lightcoral;
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 1;
 
-  & > .options:hover {
+  & > p:hover {
     background-color: lightblue;
   }
 }
 
-.options {
+p {
   width: 200px;
   padding: 1vh;
 }
