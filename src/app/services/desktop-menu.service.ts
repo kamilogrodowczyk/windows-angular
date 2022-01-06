@@ -11,5 +11,9 @@ export class DesktopMenuService {
     this.menuItems = desktopMenu[index].name;
   }
 
+  clearItems() {
+    this.menuItems = [];
+  }
+
   constructor() {}
 }

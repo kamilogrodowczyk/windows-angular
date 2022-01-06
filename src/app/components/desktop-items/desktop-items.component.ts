@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { debounceTime } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DesktopItems, DesktopItemsCustom } from 'src/app/mocks/desktopItems';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 
@@ -9,18 +8,17 @@ import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
   styleUrls: ['./desktop-items.component.scss'],
 })
 export class DesktopItemsComponent implements OnInit {
+  @Output() newIndex = new EventEmitter();
+
   items = DesktopItems;
   customItems = DesktopItemsCustom;
 
-  left: string = '';
-  top: string = '';
-
-  constructor(public desktopMenuService: DesktopMenuService) {}
+  constructor(private desktopMenuService: DesktopMenuService) {}
 
   ngOnInit(): void {}
 
-  setPosition(e: MouseEvent) {
-    e.preventDefault();
-    [this.left, this.top] = [`${e.clientX}px`, `${e.clientY}px`];
+  setIndex(index: number) {
+    this.newIndex.emit(index);
+    this.desktopMenuService.getItems(index);
   }
 }

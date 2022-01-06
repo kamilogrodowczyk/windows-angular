@@ -1,21 +1,16 @@
 <button
   *ngFor="let item of items"
-  appDesktopItems
-  (debounceClick)="setPosition($event); desktopMenuService.getItems(0)"
+  appDesktopMenu
+  (debounceClick)="setIndex(0)"
 >
   <fa-icon [icon]="item.icon"></fa-icon>
   <p>{{ item.name }}</p>
 </button>
 <button
   *ngFor="let item of customItems"
-  appDesktopItems
-  (debounceClick)="setPosition($event); desktopMenuService.getItems(1)"
+  appDesktopMenu
+  (debounceClick)="setIndex(1)"
 >
   <fa-icon [icon]="item.icon"></fa-icon>
   <p>{{ item.name }}</p>
 </button>
-<app-desktop-menu
-  [attr.aria-expanded]="left !== ''"
-  [left]="left"
-  [top]="top"
-></app-desktop-menu>

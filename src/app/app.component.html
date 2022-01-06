@@ -1,4 +1,14 @@
-<div>
-  <app-desktop-items></app-desktop-items>
+<div appDesktopMenu
+  (debounceClick)="appDesktopMenu.setPosition($event); addMenuOnBody($event)"
+  (click)="desktopMenuService.clearItems();"
+  #appDesktopMenu="appDesktopMenu"
+  [length]="desktopMenuService.menuItems.length"
+>
+  <app-desktop-items (newIndex)="getMenu($event)"></app-desktop-items>
   <app-taskbar></app-taskbar>
 </div>
+<app-desktop-menu
+  [attr.aria-expanded]="left !== ''"
+  [left]="appDesktopMenu.left"
+  [top]="appDesktopMenu.top"
+></app-desktop-menu>

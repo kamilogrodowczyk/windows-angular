@@ -8,13 +8,18 @@ import {
 import { debounceTime, Subject, Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[appDesktopItems]',
+  selector: '[appDesktopMenu]',
+  exportAs: 'appDesktopMenu',
 })
 export class DesktopItemsDirective {
   @Input() debounceTime = 300;
-  @Output() debounceClick = new EventEmitter();
+  @Input() length = 0;
+  @Output() debounceClick = new EventEmitter(true);
   private clicks = new Subject();
-  private subscription: Subscription = new Subscription;
+  private subscription: Subscription = new Subscription();
+
+  public left: string = '';
+  public top: string = '';
 
   constructor() {}
 
@@ -31,7 +36,23 @@ export class DesktopItemsDirective {
   @HostListener('contextmenu', ['$event'])
   clickEvent(e: MouseEvent) {
     e.preventDefault();
-    e.stopPropagation();
     this.clicks.next(e);
+  }
+
+  setPosition(e: MouseEvent) {
+    const minWidth = 200;
+    const minHeight = 45 * this.length;
+    const screenWidth = window.screen.width - minWidth;
+    const screenHeight = window.innerHeight - minHeight;
+
+    [this.left, this.top] = [`${e.clientX}px`, `${e.clientY}px`];
+
+    if (screenWidth < e.clientX) {
+      this.left = `${e.clientX - minWidth}px`;
+    }
+
+    if (screenHeight < e.clientY) {
+      this.top = `${e.clientY - minHeight}px`;
+    }
   }
 }

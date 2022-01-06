@@ -13,6 +13,11 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 h1 {
   font-size: 2.369em;
   line-height: 1.1;
