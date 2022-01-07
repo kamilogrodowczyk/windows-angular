@@ -1,7 +1,15 @@
-<div
-  *ngIf="desktopMenuService.menuItems.length"
-  [style.left]="left"
-  [style.top]="top"
->
-  <p *ngFor="let item of desktopMenuService.menuItems">{{ item }}</p>
+<div [style.left]="left" [style.top]="top">
+  <button
+    *ngFor="let item of service.menuItems; index as i"
+    (click)="setFn($event)"
+  >
+    <a
+      routerLink="/{{ iconName.trim().toLowerCase() }}"
+      *ngIf="service.anchorItems[i]; else elseBlock"
+      >{{ item }}</a
+    >
+    <ng-template #elseBlock
+      ><p>{{ item }}</p></ng-template
+    >
+  </button>
 </div>

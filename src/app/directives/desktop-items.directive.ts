@@ -39,7 +39,7 @@ export class DesktopItemsDirective {
     this.clicks.next(e);
   }
 
-  setPosition(e: MouseEvent) {
+  setPosition(e: any) {
     const minWidth = 200;
     const minHeight = 45 * this.length;
     const screenWidth = window.screen.width - minWidth;

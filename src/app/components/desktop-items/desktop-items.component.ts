@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DesktopItems, DesktopItemsCustom } from 'src/app/mocks/desktopItems';
+import { DesktopItems } from 'src/app/mocks/desktopItems';
+import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
+import { DesktopItemCustom } from '../../types/desktopItems';
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-desktop-items',
@@ -11,11 +14,24 @@ export class DesktopItemsComponent implements OnInit {
   @Output() newIndex = new EventEmitter();
 
   items = DesktopItems;
-  customItems = DesktopItemsCustom;
+  faFolder = faFolder;
 
-  constructor(private desktopMenuService: DesktopMenuService) {}
+  customItems: DesktopItemCustom[] = [];
 
-  ngOnInit(): void {}
+  constructor(
+    private desktopMenuService: DesktopMenuService,
+    private desktopItemsService: DesktopItemsService
+  ) {}
+
+  ngOnInit(): void {
+    this.getCustomItems();
+  }
+
+  getCustomItems() {
+    this.desktopItemsService
+      .getCustomItems()
+      .subscribe((items) => (this.customItems = items));
+  }
 
   setIndex(index: number) {
     this.newIndex.emit(index);

@@ -11,7 +11,9 @@ export class AppComponent {
 
   left: string = '';
   top: string = '';
+  iconName: string = '';
   length: number = 0;
+
 
   ngOnInit(): void {}
 
@@ -26,7 +28,8 @@ export class AppComponent {
       e.target.nodeName === 'APP-DESKTOP-ITEMS' ||
       e.target.nodeName === 'DIV'
     ) {
-      this.desktopMenuService.getItems(2);
+      this.desktopMenuService.getItems(3);
     }
+    this.iconName = e.target.name;
   }
 }

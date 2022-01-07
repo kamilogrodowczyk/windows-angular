@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faWindows } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-taskbar',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./taskbar.component.scss']
 })
 export class TaskbarComponent implements OnInit {
+  faWindows = faWindows;
+  today: number = Date.now();
 
   constructor() { }
 

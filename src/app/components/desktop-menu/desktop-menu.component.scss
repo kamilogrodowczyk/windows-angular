@@ -2,16 +2,28 @@ div {
   display: grid;
   justify-content: start;
   align-content: start;
-  background-color: lightcoral;
+  background-color: #ECE6E4;
   position: absolute;
-  z-index: 1;
-
-  & > p:hover {
-    background-color: lightblue;
-  }
+  z-index: 3;
+  border: solid 1px #736D6B;
 }
 
-p {
-  width: 200px;
+a, p {
   padding: 1vh;
+  cursor: default;
+}
+
+button {
+  width: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  background-color: transparent;
+  position: relative;
+
+  &:hover {
+    background-color: #F9F5F4;
+  }
 }

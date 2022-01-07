@@ -1,1 +1,7 @@
-<div></div>
+<div class="taskbar">
+  <fa-icon [icon]="faWindows" title="Start"></fa-icon>
+  <div title="{{ today | date: 'cccc, d LLLL yyyy' }}">
+    <p>{{ today | date: "HH:mm" }}</p>
+    <p>{{ today | date: "dd.MM.yyyy" }}</p>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 <button
-  *ngFor="let item of items"
+  *ngFor="let item of items; index as i"
   appDesktopMenu
-  (debounceClick)="setIndex(0)"
+  (debounceClick)="setIndex(i)"
+  data-name="{{item.name}}"
 >
   <fa-icon [icon]="item.icon"></fa-icon>
   <p>{{ item.name }}</p>
@@ -9,8 +10,8 @@
 <button
   *ngFor="let item of customItems"
   appDesktopMenu
-  (debounceClick)="setIndex(1)"
+  (debounceClick)="setIndex(2)"
 >
-  <fa-icon [icon]="item.icon"></fa-icon>
+  <fa-icon [icon]="faFolder"></fa-icon>
   <p>{{ item.name }}</p>
 </button>

@@ -8,6 +8,7 @@ import { TaskbarComponent } from './components/taskbar/taskbar.component';
 import { DesktopMenuComponent } from './components/desktop-menu/desktop-menu.component';
 import { DesktopItemsComponent } from './components/desktop-items/desktop-items.component';
 import { DesktopItemsDirective } from './directives/desktop-items.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,15 @@ import { DesktopItemsDirective } from './directives/desktop-items.directive';
     TaskbarComponent,
     DesktopMenuComponent,
     DesktopItemsComponent,
-    DesktopItemsDirective
+    DesktopItemsDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

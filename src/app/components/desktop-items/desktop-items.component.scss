@@ -7,8 +7,21 @@ button {
   flex-direction: column;
   position: relative;
   background-color: transparent;
+  position: relative;
 
-  &:hover {
-    background-color: lightblue;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    border: none;
+  }
+
+  &:hover::before {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
   }
 }

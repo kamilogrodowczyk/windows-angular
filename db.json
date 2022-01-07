@@ -1,0 +1,12 @@
+{
+  "customMenuItems": [
+    {
+      "icon": "faFolder",
+      "name": "Folder 1"
+    },
+    {
+      "icon": "faFolder",
+      "name": "Folder 2"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { faDesktop, faDumpster, faFolder } from '@fortawesome/free-solid-svg-icons';
-import { desktopItem } from '../types/desktopItems';
+import { desktopItem, DesktopItemCustom } from '../types/desktopItems';
 
 export const DesktopItems: desktopItem[] = [
   {
@@ -9,16 +9,5 @@ export const DesktopItems: desktopItem[] = [
   {
     icon: faDesktop,
     name: 'This PC',
-  },
-];
-
-export const DesktopItemsCustom: desktopItem[] = [
-  {
-    icon: faFolder,
-    name: 'Folder 1',
-  },
-  {
-    icon: faFolder,
-    name: 'Folder 2',
   },
 ];
