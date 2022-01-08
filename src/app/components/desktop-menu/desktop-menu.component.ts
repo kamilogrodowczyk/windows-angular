@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { desktopMenu } from 'src/app/mocks/desktopMenu';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
-import { DesktopMenu as desktopMenuInterface } from '../../types/desktopMenu';
 
 @Component({
   selector: 'app-desktop-menu',

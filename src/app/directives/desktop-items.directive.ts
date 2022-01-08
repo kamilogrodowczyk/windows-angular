@@ -9,11 +9,12 @@ import { debounceTime, Subject, Subscription } from 'rxjs';
 
 @Directive({
   selector: '[appDesktopMenu]',
-  exportAs: 'appDesktopMenu',
+  exportAs: 'dMenu',
 })
 export class DesktopItemsDirective {
   @Input() debounceTime = 300;
   @Input() length = 0;
+  @Input() iconName = '';
   @Output() debounceClick = new EventEmitter(true);
   private clicks = new Subject();
   private subscription: Subscription = new Subscription();
@@ -34,7 +35,7 @@ export class DesktopItemsDirective {
   }
 
   @HostListener('contextmenu', ['$event'])
-  clickEvent(e: MouseEvent) {
+  clickEvent(e: any) {
     e.preventDefault();
     this.clicks.next(e);
   }
@@ -53,6 +54,10 @@ export class DesktopItemsDirective {
 
     if (screenHeight < e.clientY) {
       this.top = `${e.clientY - minHeight}px`;
+    }
+
+    if (e.target.name) {
+      this.iconName = e.target.name.replace(/\s/g, '').toLowerCase();
     }
   }
 }

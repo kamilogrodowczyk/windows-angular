@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DesktopItems } from 'src/app/mocks/desktopItems';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
@@ -11,8 +11,6 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./desktop-items.component.scss'],
 })
 export class DesktopItemsComponent implements OnInit {
-  @Output() newIndex = new EventEmitter();
-
   items = DesktopItems;
   faFolder = faFolder;
 
@@ -34,7 +32,10 @@ export class DesktopItemsComponent implements OnInit {
   }
 
   setIndex(index: number) {
-    this.newIndex.emit(index);
     this.desktopMenuService.getItems(index);
+  }
+
+  createRoute(item: string) {
+    return item.replace(/\s/g, '').toLowerCase();
   }
 }

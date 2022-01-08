@@ -11,17 +11,11 @@ export class AppComponent {
 
   left: string = '';
   top: string = '';
-  iconName: string = '';
-  length: number = 0;
-
+  expandedFlag: boolean = false;
 
   ngOnInit(): void {}
 
   constructor(public desktopMenuService: DesktopMenuService) {}
-
-  getMenu(index: number) {
-    this.desktopMenuService.getItems(index);
-  }
 
   addMenuOnBody(e: any) {
     if (
@@ -30,6 +24,5 @@ export class AppComponent {
     ) {
       this.desktopMenuService.getItems(3);
     }
-    this.iconName = e.target.name;
   }
 }

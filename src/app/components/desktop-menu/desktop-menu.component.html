@@ -4,7 +4,7 @@
     (click)="setFn($event)"
   >
     <a
-      routerLink="/{{ iconName.trim().toLowerCase() }}"
+      routerLink="/{{ iconName }}"
       *ngIf="service.anchorItems[i]; else elseBlock"
       >{{ item }}</a
     >

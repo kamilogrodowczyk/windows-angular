@@ -1,15 +1,16 @@
-<div appDesktopMenu
-  (debounceClick)="appDesktopMenu.setPosition($event); addMenuOnBody($event)"
-  (click)="desktopMenuService.clearItems();"
-  #appDesktopMenu="appDesktopMenu"
+<div
+  appDesktopMenu
+  (debounceClick)="dMenu.setPosition($event); addMenuOnBody($event); expandedFlag=false;"
+  (click)="desktopMenuService.clearItems(); expandedFlag=true;"
+  #dMenu="dMenu"
   [length]="desktopMenuService.menuItems.length"
 >
-  <app-desktop-items (newIndex)="getMenu($event)"></app-desktop-items>
+  <router-outlet></router-outlet>
   <app-taskbar></app-taskbar>
+  <app-desktop-menu
+    [attr.aria-expanded]="dMenu.left !== ''"
+    [left]="dMenu.left"
+    [top]="dMenu.top"
+    [iconName]="dMenu.iconName"
+  ></app-desktop-menu>
 </div>
-<app-desktop-menu
-  [attr.aria-expanded]="left !== ''"
-  [left]="appDesktopMenu.left"
-  [top]="appDesktopMenu.top"
-  [iconName]="iconName"
-></app-desktop-menu>

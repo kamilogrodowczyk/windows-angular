@@ -9,6 +9,7 @@ import { DesktopMenuComponent } from './components/desktop-menu/desktop-menu.com
 import { DesktopItemsComponent } from './components/desktop-items/desktop-items.component';
 import { DesktopItemsDirective } from './directives/desktop-items.directive';
 import { HttpClientModule } from '@angular/common/http';
+import { AppIconComponent } from './components/app-icon/app-icon.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     DesktopMenuComponent,
     DesktopItemsComponent,
     DesktopItemsDirective,
+    AppIconComponent,
   ],
   imports: [
     BrowserModule,
