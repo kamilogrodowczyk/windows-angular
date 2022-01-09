@@ -56,6 +56,8 @@ export class DesktopItemsDirective {
       this.top = `${e.clientY - minHeight}px`;
     }
 
+    console.log(e.target.nodeName)
+
     if (e.target.name) {
       this.iconName = e.target.name.replace(/\s/g, '').toLowerCase();
     }

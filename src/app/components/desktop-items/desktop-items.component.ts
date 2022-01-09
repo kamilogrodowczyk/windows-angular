@@ -13,6 +13,9 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 export class DesktopItemsComponent implements OnInit {
   items = DesktopItems;
   faFolder = faFolder;
+  left: string = '';
+  top: string = '';
+  expandedFlag: boolean = false;
 
   customItems: DesktopItemCustom[] = [];
 

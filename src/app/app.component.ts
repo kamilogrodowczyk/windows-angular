@@ -9,20 +9,7 @@ import { DesktopMenuService } from './services/desktop-menu.service';
 export class AppComponent {
   title = 'windows-project';
 
-  left: string = '';
-  top: string = '';
-  expandedFlag: boolean = false;
-
   ngOnInit(): void {}
 
   constructor(public desktopMenuService: DesktopMenuService) {}
-
-  addMenuOnBody(e: any) {
-    if (
-      e.target.nodeName === 'APP-DESKTOP-ITEMS' ||
-      e.target.nodeName === 'DIV'
-    ) {
-      this.desktopMenuService.getItems(3);
-    }
-  }
 }
