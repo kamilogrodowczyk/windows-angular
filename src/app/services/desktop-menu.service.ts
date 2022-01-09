@@ -22,5 +22,9 @@ export class DesktopMenuService {
     window.location.reload();
   }
 
+  changeName(text: string) {
+    return text.replace(/\s/g, '').toLowerCase();
+  }
+
   constructor() {}
 }

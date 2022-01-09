@@ -2,15 +2,15 @@ import { DesktopMenu as desktopMenuInterface } from '../types/desktopMenu';
 
 export const desktopMenu: desktopMenuInterface[] = [
   {
-    name: ['Open', 'Opróżnij kosz', 'Zmień nazwę'],
+    name: ['Open', 'Opróżnij kosz', 'Change name'],
     anchor: [true, false, true],
   },
   {
-    name: ['Open', 'Zmień nazwę'],
+    name: ['Open', 'Change name'],
     anchor: [true, true],
   },
   {
-    name: ['Open', 'Wytnij', 'Kopiuj', 'Usuń', 'Zmień nazwę'],
+    name: ['Open', 'Wytnij', 'Kopiuj', 'Usuń', 'Change name'],
     anchor: [true, false, false, false, true],
   },
   {

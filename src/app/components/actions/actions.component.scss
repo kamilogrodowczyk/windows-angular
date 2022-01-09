@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+}
+
+div {
+  width: 25rem;
+  height: 15rem;
+  background-color: #222;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  label {
+      color: white;
+  }
+
+  input {
+      width: 50%;
+  }
+}

@@ -18,10 +18,7 @@ export class AppComponent {
   constructor(public desktopMenuService: DesktopMenuService) {}
 
   addMenuOnBody(e: any) {
-    if (
-      e.target.nodeName === 'APP-DESKTOP-ITEMS' ||
-      e.target.nodeName === 'DIV'
-    ) {
+    if (e.target.nodeName !== 'A') {
       this.desktopMenuService.getItems(3);
     }
   }

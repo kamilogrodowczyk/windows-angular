@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { debounceTime, Subject, Subscription } from 'rxjs';
+import { DesktopMenuService } from '../services/desktop-menu.service';
 
 @Directive({
   selector: '[appDesktopMenu]',
@@ -22,7 +23,7 @@ export class DesktopItemsDirective {
   public left: string = '';
   public top: string = '';
 
-  constructor() {}
+  constructor(private service: DesktopMenuService) {}
 
   ngOnInit() {
     this.subscription = this.clicks
@@ -57,7 +58,7 @@ export class DesktopItemsDirective {
     }
 
     if (e.target.name) {
-      this.iconName = e.target.name.replace(/\s/g, '').toLowerCase();
+      this.iconName = e.target.name;
     }
   }
 }
