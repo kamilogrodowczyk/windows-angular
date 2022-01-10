@@ -1,8 +1,9 @@
 <a
   *ngFor="let item of items; index as i"
-  routerLink="{{ createRoute(item.name) }}"
+  routerLink="{{item['linkName']}}"
   appDesktopMenu
-  (debounceClick)="setIndex(i);"
+  (click)="passRoute(item['linkName'])"
+  (debounceClick)="setIndex(i)"
   data-name="{{ item.name }}"
 >
   <button>
@@ -12,7 +13,7 @@
 </a>
 <a
   *ngFor="let item of customItems"
-  routerLink="{{ createRoute(item.name) }}"
+  routerLink="{{item['linkName']}}"
   appDesktopMenu
   (debounceClick)="setIndex(2)"
   data-name="{{ item.name }}"

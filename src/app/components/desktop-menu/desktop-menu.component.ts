@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { desktopMenu } from 'src/app/mocks/desktopMenu';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
+import { DesktopMenu } from 'src/app/types/desktopMenu';
 
 @Component({
   selector: 'app-desktop-menu',
@@ -11,12 +13,12 @@ export class DesktopMenuComponent implements OnInit {
   @Input() left: string = '';
   @Input() top: string = '';
   @Input() iconName: string = '';
-  actionName: string = '';
+  menuItems: DesktopMenu[] = desktopMenu;
 
   constructor(public service: DesktopMenuService, private router: Router) {}
 
-  setFn(e: any) {
-    switch (e.target.innerText) {
+  setFn(item: string) {
+    switch (item) {
       case 'Refresh':
         this.service.refresh();
         break;
@@ -24,8 +26,8 @@ export class DesktopMenuComponent implements OnInit {
         this.router.navigate([this.service.changeName(this.iconName)]);
         break;
       case 'Change name':
-        this.actionName = this.service.changeName(e.target.innerText);
-        this.router.navigate([this.service.changeName(this.iconName), this.actionName]);
+        const actionRoute = this.menuItems[0].name.indexOf(item)
+        this.router.navigate([this.service.changeName(this.iconName), desktopMenu[0]['linkName'][actionRoute]]);
         break;
       default:
         return;

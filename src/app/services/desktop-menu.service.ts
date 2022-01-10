@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { desktopMenu } from '../mocks/desktopMenu';
-import { DesktopMenu } from '../types/desktopMenu';
 
 @Injectable({
   providedIn: 'root',

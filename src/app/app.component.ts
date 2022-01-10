@@ -12,6 +12,7 @@ export class AppComponent {
   left: string = '';
   top: string = '';
   expandedFlag: boolean = false;
+  iconRoute: string = '';
 
   ngOnInit(): void {}
 
@@ -21,5 +22,9 @@ export class AppComponent {
     if (e.target.nodeName !== 'A') {
       this.desktopMenuService.getItems(3);
     }
+  }
+
+  getRoute(route: string) {
+    this.iconRoute = route;
   }
 }

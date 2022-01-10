@@ -17,10 +17,22 @@ div {
   gap: 1rem;
 
   label {
-      color: white;
+    color: white;
   }
 
   input {
-      width: 50%;
+    width: 50%;
+  }
+}
+
+button {
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  background-color: #d3394c;
+  color: white;
+
+  &:hover {
+    background-color: #a3394c;
+    transition: background-color 0.2s ease-in-out;
   }
 }

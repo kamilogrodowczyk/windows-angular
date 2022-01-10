@@ -1,5 +1,9 @@
-import { faDesktop, faDumpster, faFolder } from '@fortawesome/free-solid-svg-icons';
-import { desktopItem, DesktopItemCustom } from '../types/desktopItems';
+import {
+  faDesktop,
+  faDumpster,
+} from '@fortawesome/free-solid-svg-icons';
+import { desktopItem } from '../types/desktopItems';
+import { defineProperty } from '../helpers/defineProperty';
 
 export const DesktopItems: desktopItem[] = [
   {
@@ -11,3 +15,5 @@ export const DesktopItems: desktopItem[] = [
     name: 'This PC',
   },
 ];
+
+defineProperty<desktopItem>(DesktopItems);

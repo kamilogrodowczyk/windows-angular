@@ -1,7 +1,7 @@
 <div [style.left]="left" [style.top]="top">
   <button
     *ngFor="let item of service.menuItems; index as i"
-    (click)="setFn($event)"
+    (click)="setFn(item)"
   >
     <a
       *ngIf="service.anchorItems[i]; else elseBlock"

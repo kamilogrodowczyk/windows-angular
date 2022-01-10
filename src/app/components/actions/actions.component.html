@@ -1,4 +1,11 @@
-<div>
-  <label for="new-name">New name</label>
-  <input id="new-name" [(ngModel)]="iconName" type="text" placeholder="New name" />
+<div *ngIf="iconName">
+  <label for="new-name">New name:</label>
+  <input
+    id="new-name"
+    [(ngModel)]="iconName.name"
+    (change)="changeLinkName()"
+    type="text"
+    placeholder="New name"
+  />
+  <button (click)="updateIconName()">Save</button>
 </div>

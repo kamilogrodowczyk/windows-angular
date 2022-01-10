@@ -1,12 +1,16 @@
 {
   "customMenuItems": [
     {
+      "id": 3,
       "icon": "faFolder",
-      "name": "Folder 1"
+      "name": "Folder",
+      "linkName": "folder"
     },
     {
+      "id": 4,
       "icon": "faFolder",
-      "name": "Folder 2"
+      "name": "Folder 3",
+      "linkName": "folder3"
     }
   ]
 }

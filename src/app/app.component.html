@@ -1,6 +1,6 @@
 <div
   appDesktopMenu
-  (debounceClick)="dMenu.setPosition($event); addMenuOnBody($event); expandedFlag=false;"
+  (debounceClick)="dMenu.setPosition($event); addMenuOnBody($event); expandedFlag=false"
   (click)="desktopMenuService.clearItems(); expandedFlag=true;"
   #dMenu="dMenu"
   [length]="desktopMenuService.menuItems.length"

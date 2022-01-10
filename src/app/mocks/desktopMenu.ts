@@ -1,3 +1,4 @@
+import { definePropertyArray } from '../helpers/defineProperty';
 import { DesktopMenu as desktopMenuInterface } from '../types/desktopMenu';
 
 export const desktopMenu: desktopMenuInterface[] = [
@@ -14,7 +15,16 @@ export const desktopMenu: desktopMenuInterface[] = [
     anchor: [true, false, false, false, true],
   },
   {
-    name: ['Widok', 'Sortuj według', 'Refresh', 'Nowy folder', 'Ustawienia ekranu', 'Personalizuj'],
+    name: [
+      'Widok',
+      'Sortuj według',
+      'Refresh',
+      'Nowy folder',
+      'Ustawienia ekranu',
+      'Personalizuj',
+    ],
     anchor: [true, false, false, true, true, true],
   },
 ];
+
+definePropertyArray(desktopMenu);
