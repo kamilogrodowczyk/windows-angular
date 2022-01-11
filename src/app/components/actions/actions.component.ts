@@ -1,9 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DesktopItemsDirective } from 'src/app/directives/desktop-items.directive';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
-import { DesktopItemCustom } from 'src/app/types/desktopItems';
+import { DesktopItem } from 'src/app/types/desktopItems';
 
 @Component({
   selector: 'app-actions',
@@ -11,7 +11,7 @@ import { DesktopItemCustom } from 'src/app/types/desktopItems';
   styleUrls: ['./actions.component.scss'],
 })
 export class ActionsComponent implements OnInit {
-  iconName?: DesktopItemCustom;
+  iconName?: DesktopItem;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class ActionsComponent implements OnInit {
   getItems(): void {
     const linkName = String(this.route.snapshot.paramMap.get('appIcon'));
     this.service
-      .getCustomItem(linkName)
+      .getItem(linkName)
       .subscribe((icon) => (this.iconName = icon[0]));
   }
 

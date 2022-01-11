@@ -1,9 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DesktopItems } from 'src/app/mocks/desktopItems';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
-import { DesktopItemCustom } from '../../types/desktopItems';
-import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { DesktopItem } from '../../types/desktopItems';
 
 @Component({
   selector: 'app-desktop-items',
@@ -12,10 +10,9 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 })
 export class DesktopItemsComponent implements OnInit {
   @Output() getRoute = new EventEmitter();
-  items = DesktopItems;
-  faFolder = faFolder;
 
-  customItems: DesktopItemCustom[] = [];
+  iconItems: DesktopItem[] = [];
+  defaultIconItems: DesktopItem[] = [];
 
   constructor(
     private desktopMenuService: DesktopMenuService,
@@ -23,17 +20,21 @@ export class DesktopItemsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCustomItems();
+    this.getItems();
   }
 
-  getCustomItems() {
-    this.desktopItemsService
-      .getCustomItems()
-      .subscribe((items) => (this.customItems = items));
+  getItems() {
+    this.desktopItemsService.getItems().subscribe((items) => {
+      this.iconItems = items;
+    });
   }
 
-  setIndex(index: number) {
-    this.desktopMenuService.getItems(index);
+  setIndex(index: number, repeatIndex: number | null = null) {
+    if (repeatIndex && index > repeatIndex) {
+      this.desktopMenuService.getItems(repeatIndex);
+    } else {
+      this.desktopMenuService.getItems(index);
+    }
   }
 
   passRoute(route: string) {

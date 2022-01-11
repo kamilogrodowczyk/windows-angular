@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DesktopItemCustom } from '../types/desktopItems';
+import { DesktopItem } from '../types/desktopItems';
 import { catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DesktopItemsService {
-  private iconsUrl = 'http://localhost:5000/customMenuItems';
+  private iconsUrl = 'http://localhost:5000/iconItems';
 
   constructor(private http: HttpClient) {}
 
@@ -23,19 +23,19 @@ export class DesktopItemsService {
     };
   }
 
-  getCustomItems(): Observable<DesktopItemCustom[]> {
-    return this.http.get<DesktopItemCustom[]>(this.iconsUrl);
+  getItems(): Observable<DesktopItem[]> {
+    return this.http.get<DesktopItem[]>(this.iconsUrl);
   }
 
-  getCustomItem(linkName: string): Observable<DesktopItemCustom[]> {
+  getItem(linkName: string): Observable<DesktopItem[]> {
     return this.http
-      .get<DesktopItemCustom[]>(`${this.iconsUrl}/?linkName=${linkName}`)
+      .get<DesktopItem[]>(`${this.iconsUrl}/?linkName=${linkName}`)
       .pipe(
-        catchError(this.handleError<DesktopItemCustom[]>('getCustomItem', []))
+        catchError(this.handleError<DesktopItem[]>('getCustomItem', []))
       );
   }
 
-  updateItem(item: DesktopItemCustom): Observable<any> {
+  updateItem(item: DesktopItem): Observable<any> {
     return this.http
       .put(`${this.iconsUrl}/${item['id']}`, item, this.httpOptions)
       .pipe(catchError(this.handleError('updateItem')));

@@ -1,14 +1,26 @@
 {
-  "customMenuItems": [
+  "iconItems": [
+    {
+      "id": 1,
+      "icon": "dumpster",
+      "name": "Recycle Bin",
+      "linkName": "recyclebin"
+    },
+    {
+      "id": 2,
+      "icon": "desktop",
+      "name": "This PC",
+      "linkName": "thispc"
+    },
     {
       "id": 3,
-      "icon": "faFolder",
+      "icon": "folder",
       "name": "Folder",
       "linkName": "folder"
     },
     {
       "id": 4,
-      "icon": "faFolder",
+      "icon": "folder",
       "name": "Folder 3",
       "linkName": "folder3"
     }

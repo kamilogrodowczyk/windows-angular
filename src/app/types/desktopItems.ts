@@ -1,12 +1,8 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
-export interface desktopItem {
-  icon: IconDefinition;
+export interface DesktopItem {
+  id: number,
+  icon: IconProp;
   name: string;
-  [propName: string]: any;
-}
-
-export interface DesktopItemCustom {
-  name: string;
-  [propName: string]: any;
+  linkName: string;
 }

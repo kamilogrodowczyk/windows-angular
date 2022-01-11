@@ -1,25 +1,12 @@
 <a
-  *ngFor="let item of items; index as i"
-  routerLink="{{item['linkName']}}"
   appDesktopMenu
-  (click)="passRoute(item['linkName'])"
-  (debounceClick)="setIndex(i)"
+  *ngFor="let item of iconItems; index as i"
+  routerLink="{{ item.linkName }}"
+  (debounceClick)="setIndex(i, 2)"
   data-name="{{ item.name }}"
 >
   <button>
     <fa-icon [icon]="item.icon"></fa-icon>
-    <p>{{ item.name }}</p>
-  </button>
-</a>
-<a
-  *ngFor="let item of customItems"
-  routerLink="{{item['linkName']}}"
-  appDesktopMenu
-  (debounceClick)="setIndex(2)"
-  data-name="{{ item.name }}"
->
-  <button>
-    <fa-icon [icon]="faFolder"></fa-icon>
     <p>{{ item.name }}</p>
   </button>
 </a>
