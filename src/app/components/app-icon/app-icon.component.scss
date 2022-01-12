@@ -1,15 +1,51 @@
+$gray: #b6b6b6;
+
 :host {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 95vh;
+  height: 100vh;
+  width: 100%;
 }
 
-div {
-  display: flex;
-  width: 200px;
-  height: 200px;
-  justify-content: center;
-  align-items: center;
+.container {
+  width: 50%;
+  height: 75%;
   background-color: white;
+  padding: .5rem 1rem;
+
+  & > *:not(.container__elements.header):hover {
+    cursor: default;
+    background-color: lightblue;
+  }
+}
+
+.container__elements {
+  display: flex;
+  justify-content: space-around;
+
+  & > * {
+    flex:1;
+    padding-left: .5rem;
+  }
+
+  &.header > * {
+    border-right: solid 1px $gray;
+    margin-bottom: 1rem;
+    color: $gray;
+  }
+
+  & > *:first-child {
+    flex: 2;
+  }
+}
+
+span {
+  display: flex;
+  align-items: center;
+}
+
+fa-icon {
+  font-size: 1rem;
+  margin-right: .5rem;
 }

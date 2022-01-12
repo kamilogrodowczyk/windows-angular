@@ -12,7 +12,8 @@ import { DesktopItemsDirective } from './directives/desktop-items.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { AppIconComponent } from './components/app-icon/app-icon.component';
 import { ActionsComponent } from './components/actions/actions.component';
-import { faDumpster, faDesktop, faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faDumpster, faDesktop, faFolder, faFile } from '@fortawesome/free-solid-svg-icons';
+import { AddElementComponent } from './components/add-element/add-element.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { faDumpster, faDesktop, faFolder } from '@fortawesome/free-solid-svg-ico
     DesktopItemsDirective,
     AppIconComponent,
     ActionsComponent,
+    AddElementComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,6 @@ import { faDumpster, faDesktop, faFolder } from '@fortawesome/free-solid-svg-ico
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faDumpster, faDesktop, faFolder);
+    library.addIcons(faDumpster, faDesktop, faFolder, faFile);
   }
 }

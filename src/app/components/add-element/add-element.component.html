@@ -1,0 +1,10 @@
+<form class="container" (ngSubmit)="onSubmit($event)">
+    <label for="icon"></label>
+    <select [(ngModel)]="icon" name="icon" id="icon">
+      <option *ngFor="let type of iconTypes" [ngValue]="type">{{ type }}</option>
+    </select>
+    <label for="name">Name: </label>
+    <input [(ngModel)]="name" id="name" name="name" type="text" />
+    <button type="submit">Add</button>
+  </form>
+  
