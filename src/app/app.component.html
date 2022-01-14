@@ -6,11 +6,11 @@
   [length]="desktopMenuService.menuItems.length"
 >
   <router-outlet></router-outlet>
+  <app-desktop-items></app-desktop-items>
   <app-taskbar></app-taskbar>
   <app-desktop-menu
     [attr.aria-expanded]="dMenu.left !== ''"
     [left]="dMenu.left"
     [top]="dMenu.top"
-    [iconName]="dMenu.iconName"
   ></app-desktop-menu>
 </div>

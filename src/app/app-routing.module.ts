@@ -6,7 +6,7 @@ import { DesktopItemsComponent } from './components/desktop-items/desktop-items.
 import { AddElementComponent } from './components/add-element/add-element.component';
 
 const routes: Routes = [
-  { path: '', component: DesktopItemsComponent },
+  // { path: '', component: DesktopItemsComponent },
   {
     path: 'desktop/newfolder',
     component: AddElementComponent,

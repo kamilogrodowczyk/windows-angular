@@ -5,15 +5,7 @@
       "icon": "dumpster",
       "name": "Recycle Bin",
       "linkName": "recyclebin",
-      "elements": [
-        {
-          "icon": "folder",
-          "name": "Test",
-          "linkName": "test",
-          "elements": [],
-          "id": 5
-        }
-      ]
+      "elements": []
     },
     {
       "id": 2,

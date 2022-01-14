@@ -56,9 +56,5 @@ export class DesktopItemsDirective {
     if (screenHeight < e.clientY) {
       this.top = `${e.clientY - minHeight}px`;
     }
-
-    if (e.target.name) {
-      this.iconName = e.target.name;
-    }
   }
 }

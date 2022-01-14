@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
+import { EventService } from 'src/app/services/event.service';
 import { DesktopItem } from '../../types/desktopItems';
 
 @Component({
@@ -16,7 +17,8 @@ export class DesktopItemsComponent implements OnInit {
 
   constructor(
     private desktopMenuService: DesktopMenuService,
-    private desktopItemsService: DesktopItemsService
+    private desktopItemsService: DesktopItemsService,
+    private eventService: EventService
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class DesktopItemsComponent implements OnInit {
     }
   }
 
-  passRoute(route: string) {
-    this.getRoute.emit(route);
+  getElementName(name: string): void {
+    this.eventService.getAppElementName(name);
   }
 }
