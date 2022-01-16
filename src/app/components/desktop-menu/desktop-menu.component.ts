@@ -35,7 +35,7 @@ export class DesktopMenuComponent implements OnInit {
   setFn(item: string) {
     switch (item) {
       case 'Refresh':
-        this.service.refresh();
+        window.location.reload();
         break;
       case 'Open':
         this.router.navigate([this.iconName]);
@@ -45,6 +45,9 @@ export class DesktopMenuComponent implements OnInit {
         break;
       case 'New folder':
         this.router.navigate(['desktop', 'newfolder']);
+        break;
+      case 'Remove':
+        this.service.onRemoveClick(this.iconName);
         break;
       default:
         return;

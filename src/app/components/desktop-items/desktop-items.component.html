@@ -3,7 +3,6 @@
   *ngFor="let item of iconItems; index as i"
   routerLink="{{ item.linkName }}"
   (debounceClick)="setIndex(i, 2); getElementName(item.name)"
-  data-name="{{ item.name }}"
 >
   <button>
     <fa-icon [icon]="item.icon"></fa-icon>

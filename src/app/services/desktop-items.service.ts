@@ -45,9 +45,9 @@ export class DesktopItemsService {
       .pipe(catchError(this.handleError('updateItem')));
   }
 
-  deleteItem(item: DesktopItem): Observable<DesktopItem> {
+  deleteItem(id: any): Observable<DesktopItem> {
     return this.http
-      .delete<DesktopItem>(`${this.iconsUrl}/${item['id']}`, this.httpOptions)
+      .delete<DesktopItem>(`${this.iconsUrl}/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError<DesktopItem>('deleteItem')));
   }
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { EventService } from 'src/app/services/event.service';
@@ -11,6 +12,7 @@ import { DesktopItem } from '../../types/desktopItems';
 })
 export class DesktopItemsComponent implements OnInit {
   @Output() getRoute = new EventEmitter();
+  subscription: Subscription = new Subscription();
 
   iconItems: DesktopItem[] = [];
   defaultIconItems: DesktopItem[] = [];
@@ -19,10 +21,18 @@ export class DesktopItemsComponent implements OnInit {
     private desktopMenuService: DesktopMenuService,
     private desktopItemsService: DesktopItemsService,
     private eventService: EventService
-  ) {}
+  ) {
+    this.subscription = this.desktopMenuService.allItems$.subscribe(
+      (items) => (this.iconItems = items)
+    );
+  }
 
   ngOnInit(): void {
     this.getItems();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getItems() {

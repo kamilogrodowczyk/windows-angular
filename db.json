@@ -46,11 +46,11 @@
       ]
     },
     {
+      "id": 5,
       "icon": "folder",
       "name": "Test",
       "linkName": "test",
-      "elements": [],
-      "id": 5
+      "elements": []
     }
   ]
 }
