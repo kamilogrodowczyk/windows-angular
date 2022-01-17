@@ -8,7 +8,7 @@ const middlewares = jsonServer.defaults();
 
 app.use(express.static(__dirname + "/dist/windows-project"));
 
-app.use(router);
+app.use('/iconItems', router);
 app.use(middlewares);
 
 app.get("/*", function (req, res) {
