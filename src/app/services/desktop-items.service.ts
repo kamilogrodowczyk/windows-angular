@@ -8,7 +8,7 @@ import { catchError } from 'rxjs';
   providedIn: 'root',
 })
 export class DesktopItemsService {
-  private iconsUrl = 'http://localhost:5000/iconItems';
+  private iconsUrl = '';
 
   constructor(private http: HttpClient) {}
 
