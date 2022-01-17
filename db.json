@@ -16,8 +16,8 @@
     {
       "id": 3,
       "icon": "folder",
-      "name": "Folder",
-      "linkName": "folder",
+      "name": "Folder123",
+      "linkName": "folder123",
       "elements": [
         {
           "icon": "file",
@@ -28,29 +28,6 @@
           "characters": 17
         }
       ]
-    },
-    {
-      "id": 4,
-      "icon": "folder",
-      "name": "Folder 3",
-      "linkName": "folder3",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "icon": "folder",
-      "name": "Test",
-      "linkName": "test",
-      "elements": []
     }
   ]
 }

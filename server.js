@@ -3,7 +3,7 @@ const path = require("path");
 const app = express();
 
 const jsonServer = require("json-server");
-const router = jsonServer.router(path.join(__dirname, 'db.json'));
+const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 
 app.use(express.static(__dirname + "/dist/windows-project"));
