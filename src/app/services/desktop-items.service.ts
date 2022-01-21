@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { DesktopItem } from '../types/desktopItems';
 import { catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class DesktopItemsService {
-  private iconsUrl: string = environment.apiUrl;
+  readonly iconsUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -17,21 +17,31 @@ export class DesktopItemsService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  private handleError<T>(operation: string, result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(`${operation}: ${error.message}`);
-      return of(result as T);
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse): Observable<T> => {
+
+      console.error(error);
+
+      if (error.error instanceof Event) {
+        throw error.error;
+      }
+
+      const message = `server returned code ${error.status} with body "${error.error}"`;
+      throw new Error(`${operation} failed: ${message}`);
     };
+
   }
 
   getItems(): Observable<DesktopItem[]> {
-    return this.http.get<DesktopItem[]>(this.iconsUrl);
+    return this.http
+      .get<DesktopItem[]>(this.iconsUrl)
+      .pipe(catchError(this.handleError<DesktopItem[]>('getItems')));
   }
 
   getItem(linkName: string): Observable<DesktopItem[]> {
     return this.http
       .get<DesktopItem[]>(`${this.iconsUrl}/?linkName=${linkName}`)
-      .pipe(catchError(this.handleError<DesktopItem[]>('getCustomItem', [])));
+      .pipe(catchError(this.handleError<DesktopItem[]>('getItem')));
   }
 
   addDesktopItem(desktopItem: DesktopItem): Observable<DesktopItem> {
