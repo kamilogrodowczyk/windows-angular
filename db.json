@@ -7,18 +7,11 @@
       "linkName": "recyclebin",
       "elements": [
         {
+          "id": 5,
           "icon": "folder",
-          "name": "Test2",
-          "linkName": "test2",
-          "elements": [],
-          "id": 6
-        },
-        {
-          "icon": "folder",
-          "name": "Siema",
-          "linkName": "siema",
-          "elements": [],
-          "id": 6
+          "name": "Test 1",
+          "linkName": "test1",
+          "elements": []
         }
       ]
     },
@@ -61,18 +54,11 @@
       ]
     },
     {
-      "id": 5,
-      "icon": "folder",
-      "name": "Test 1",
-      "linkName": "test1",
-      "elements": []
-    },
-    {
-      "icon": "folder",
-      "name": "Test",
-      "linkName": "test",
+      "icon": "file",
+      "name": "Test1234",
+      "linkName": "test1234",
       "elements": [],
-      "id": 6
+      "id": 5
     }
   ]
 }

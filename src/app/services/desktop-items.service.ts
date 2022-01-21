@@ -3,12 +3,13 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DesktopItem } from '../types/desktopItems';
 import { catchError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DesktopItemsService {
-  private iconsUrl = '/iconItems';
+  private iconsUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
