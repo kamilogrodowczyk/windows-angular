@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http/testing';
 
 import { DesktopItemsService } from './desktop-items.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { DesktopItem } from '../types/desktopItems';
 
 describe('DesktopItemsService', () => {
@@ -87,9 +87,95 @@ describe('DesktopItemsService', () => {
     });
 
     it('should return 404 error', () => {
-      const msg = 'Deliberate 404';
+      const msg = 'Error 404';
       service.getItems().subscribe({
         next: (items) => fail('expected to fail'),
+        error: (e) => expect(e.message).toContain(msg),
+      });
+
+      const req = httpTestingController.expectOne(service.iconsUrl);
+      req.flush(msg, { status: 404, statusText: 'Not Found' });
+    });
+  });
+
+  describe('updateItem', () => {
+    const putUrl = (id: number) => `${service.iconsUrl}/${id}`;
+    const updatedItem: DesktopItem = {
+      id: 1,
+      icon: 'folder',
+      name: 'Test-folder',
+      linkName: 'test-folder',
+      elements: [],
+    };
+
+    it('should update desktop item and return it', () => {
+      service.updateItem(updatedItem).subscribe({
+        next: (item) =>
+          expect(item)
+            .withContext('should return updated item')
+            .toEqual(updatedItem),
+        error: fail,
+      });
+
+      // HeroService should have made one request to PUT hero
+      const req = httpTestingController.expectOne(putUrl(1));
+      expect(req.request.method).toEqual('PUT');
+      expect(req.request.body).toEqual(updatedItem);
+
+      // Expect server to return the hero after PUT
+      const expectedResponse = new HttpResponse({
+        status: 200,
+        statusText: 'OK',
+        body: updatedItem,
+      });
+      req.event(expectedResponse);
+    });
+
+    it('should return 404 error', () => {
+      const msg = 'Error 404';
+      service.updateItem(updatedItem).subscribe({
+        next: (item) => fail('expected to fail'),
+        error: (e) => expect(e.message).toContain(msg),
+      });
+
+      const req = httpTestingController.expectOne(putUrl(1));
+      req.flush(msg, { status: 404, statusText: 'Not Found' });
+    });
+  });
+
+  describe('addDesktopItem', () => {
+    const addedItem: DesktopItem = {
+      id: 1,
+      icon: 'folder',
+      name: 'Test-folder',
+      linkName: 'test-folder',
+      elements: [],
+    };
+
+    it('should add new item and return it', () => {
+      service.addDesktopItem(addedItem).subscribe({
+        next: (item) =>
+          expect(item).withContext('should return new item').toEqual(addedItem),
+        error: fail,
+      });
+
+      const req = httpTestingController.expectOne(service.iconsUrl);
+      expect(req.request.method).toEqual('POST');
+      expect(req.request.body).toEqual(addedItem);
+
+      const expectedResponse = new HttpResponse({
+        status: 200,
+        statusText: 'OK',
+        body: addedItem,
+      });
+
+      req.event(expectedResponse);
+    });
+
+    it('should return error 404', () => {
+      const msg = 'Error 404';
+      service.addDesktopItem(addedItem).subscribe({
+        next: (item) => fail('expected to fail'),
         error: (e) => expect(e.message).toContain(msg),
       });
 
