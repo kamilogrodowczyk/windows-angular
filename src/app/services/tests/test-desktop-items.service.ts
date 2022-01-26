@@ -16,8 +16,8 @@ export class TestDesktopItemsService extends DesktopItemsService {
   lastResult!: Observable<any>;
 
   override addDesktopItem(desktopItem: DesktopItem): Observable<DesktopItem> {
-    const newItem = this.desktopItems.push(desktopItem);
-    this.lastResult = of(newItem);
+    this.desktopItems.push(desktopItem);
+    this.lastResult = of(this.desktopItems);
     return this.lastResult;
   }
 
