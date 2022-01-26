@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { defer, Observable, of } from 'rxjs';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
-import { DesktopItemElement } from 'src/app/types/desktopItems';
+import { DesktopItem, DesktopItemElement } from 'src/app/types/desktopItems';
 
 @Component({
   selector: 'app-app-icon',
@@ -9,21 +11,26 @@ import { DesktopItemElement } from 'src/app/types/desktopItems';
   styleUrls: ['./app-icon.component.scss'],
 })
 export class AppIconComponent implements OnInit {
-  appElements: DesktopItemElement[] = [];
-
   constructor(
     private service: DesktopItemsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
+  selectedItem: DesktopItemElement[] = [];
+
   ngOnInit(): void {
-    this.getAppElement();
+    this.route.paramMap.subscribe((p) =>
+      this.getSelectedItem(p.get('appIcon'))
+    );
   }
 
-  getAppElement() {
-    const linkName = String(this.route.snapshot.paramMap.get('appIcon'));
+  getSelectedItem(linkName: string | null): void {
+    if (!linkName) {
+      this.selectedItem = [];
+      return;
+    }
     this.service
       .getItem(linkName)
-      .subscribe((items) => (this.appElements = items[0].elements));
+      .subscribe((item) => (this.selectedItem = item.elements));
   }
 }

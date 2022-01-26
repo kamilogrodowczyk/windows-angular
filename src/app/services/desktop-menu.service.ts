@@ -45,7 +45,7 @@ export class DesktopMenuService {
   getRecycleBin() {
     this.desktopItemsService
       .getItem('recyclebin')
-      .subscribe((item) => (this.recycleBin = item[0]));
+      .subscribe((item) => (this.recycleBin = item));
   }
 
   updateElementsinArray(item: DesktopItem): Observable<DesktopItem> {
@@ -63,7 +63,7 @@ export class DesktopMenuService {
     this.desktopItemsService
       .getItem(iconName)
       .pipe(
-        mergeMap((item) => this.updateElementsinArray(item[0])),
+        mergeMap((item) => this.updateElementsinArray(item)),
         mergeMap((item) => this.desktopItemsService.deleteItem(item.id)),
         mergeMap(() =>
           this.recycleBin

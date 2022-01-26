@@ -27,7 +27,7 @@ export class ActionsComponent implements OnInit {
     const linkName = String(this.route.snapshot.paramMap.get('appIcon'));
     this.service
       .getItem(linkName)
-      .subscribe((icon) => (this.iconName = icon[0]));
+      .subscribe((icon) => (this.iconName = icon));
   }
 
   changeLinkName() {

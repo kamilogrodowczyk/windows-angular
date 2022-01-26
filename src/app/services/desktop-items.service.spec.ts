@@ -183,4 +183,60 @@ describe('DesktopItemsService', () => {
       req.flush(msg, { status: 404, statusText: 'Not Found' });
     });
   });
+
+  describe('deleteItem', () => {
+    const putUrl = (id: number) => `${service.iconsUrl}/${id}`;
+    const removedItem: DesktopItem = {
+      id: 1,
+      icon: 'folder',
+      name: 'Test-folder',
+      linkName: 'test-folder',
+      elements: [],
+    };
+
+    it('should delete item and return it', () => {
+      service.deleteItem(removedItem.id).subscribe({
+        next: (item) =>
+          expect(item)
+            .withContext('should return removed item')
+            .toEqual(removedItem),
+        error: fail,
+      });
+
+      const req = httpTestingController.expectOne(putUrl(1));
+      expect(req.request.method).toEqual('DELETE');
+
+      req.flush(removedItem);
+    });
+  });
+
+  describe('getItem', () => {
+    const putUrl = (linkName: string) =>
+      `${service.iconsUrl}/?linkName=${linkName}`;
+    const expectedItems: DesktopItem[] = [
+      {
+        id: 1,
+        icon: 'folder',
+        name: 'Test-folder',
+        linkName: 'test-folder',
+        elements: [],
+      },
+    ];
+
+    it('should return one item', () => {
+      const linkName = 'test-folder';
+      service.getItem(linkName).subscribe({
+        next: (item) =>
+          expect(item)
+            .withContext('should return exactly one item')
+            .toEqual(expectedItems[0]),
+        error: fail,
+      });
+
+      const req = httpTestingController.expectOne(putUrl(linkName));
+      expect(req.request.method).toEqual('GET');
+
+      req.flush(expectedItems);
+    });
+  });
 });

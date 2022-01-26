@@ -4,7 +4,7 @@
     <p>Type</p>
     <p>Size</p>
   </div>
-  <div class="container__elements" *ngFor="let item of appElements">
+  <div class="container__elements" *ngFor="let item of selectedItem">
     <span>
       <fa-icon [icon]="item.icon"></fa-icon>
       <p>{{ item.name }}</p>

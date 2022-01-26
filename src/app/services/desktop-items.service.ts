@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import {map} from 'rxjs/operators'
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { DesktopItem } from '../types/desktopItems';
 import { catchError } from 'rxjs';
@@ -38,10 +39,12 @@ export class DesktopItemsService {
       .pipe(catchError(this.handleError<DesktopItem[]>('getItems')));
   }
 
-  getItem(linkName: string): Observable<DesktopItem[]> {
+  getItem(linkName: string): Observable<DesktopItem> {
     return this.http
       .get<DesktopItem[]>(`${this.iconsUrl}/?linkName=${linkName}`)
-      .pipe(catchError(this.handleError<DesktopItem[]>('getItem')));
+      .pipe(
+        map(items => items[0]),
+        catchError(this.handleError<DesktopItem>('getItem')));
   }
 
   addDesktopItem(desktopItem: DesktopItem): Observable<DesktopItem> {
