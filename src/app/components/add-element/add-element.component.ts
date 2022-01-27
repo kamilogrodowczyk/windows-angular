@@ -25,7 +25,7 @@ export class AddElementComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(e: any) {
-    e.preventDefault();
+    // e.preventDefault();
     if(!this.name) return
 
     this.linkName = this.name.replace(/\s/g, '').toLowerCase();

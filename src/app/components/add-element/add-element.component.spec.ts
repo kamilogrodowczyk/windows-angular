@@ -18,15 +18,13 @@ let fixture: ComponentFixture<AddElementComponent>;
 let page: Page;
 
 describe('AddElementComponent', () => {
-  const locationSpy = createRouterSpy();
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [AddElementComponent],
       providers: [
         { provide: DesktopItemsService, useClass: TestDesktopItemsService },
-        { provide: Location, useValue: locationSpy },
-        {provide: Location, useClass: SpyLocation}
+        { provide: Location, useClass: SpyLocation },
       ],
     }).compileComponents();
   });
@@ -34,7 +32,7 @@ describe('AddElementComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddElementComponent);
     component = fixture.componentInstance;
-    page = new Page(fixture);
+    page = new Page();
     fixture.detectChanges();
   });
 
@@ -65,51 +63,61 @@ describe('AddElementComponent', () => {
         expect(btn.disabled).toBeTruthy();
       });
     });
+  });
 
-    it('should save new desktop item and not navigate', async () => {
+  describe('when desktopItemsService is injected', () => {
+    let testService: TestDesktopItemsService;
+    beforeEach(async () => {
+      testService = fixture.debugElement.injector.get(
+        DesktopItemsService
+      ) as any;
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+      });
+    });
+
+    it('should save new desktop item after submit', async () => {
+      const findNewItem = (newItemName: string): boolean => {
+        return testService.desktopItems.some((n) => n.name === newItemName);
+      };
+
       const nameInput = page.nameInput;
       const btn = page.submitButton;
-      const testValue = 'test';
+      const testValue = 'tessst';
+
+      // Add value to input
+      nameInput.value = testValue;
+      nameInput.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+      expect(findNewItem(testValue)).withContext('should not add new item via service').toBeFalsy();
+
+      click(btn);
+      expect(findNewItem(testValue)).withContext('should add new item via service').toBeTruthy();
+    });
+
+    it('should save new desktop item and call addDesktopItem', () => {
       const service = fixture.debugElement.injector.get(DesktopItemsService);
       const addSpy = spyOn(service, 'addDesktopItem').and.callThrough();
 
-      await fixture.whenStable().then(() => {
-        // Add value to input
-        nameInput.value = testValue;
-        nameInput.dispatchEvent(new Event('input'));
-
-        fixture.detectChanges();
-        expect(component.name).toBe(testValue);
-
-        click(btn);
-        expect(addSpy.calls.any())
-          .withContext('desktopItemsService.addDesktopItems called')
-          .toBe(true);
-      });
-    });
-
-    it('should navigate when bew desktop item saved', async () => {
       const nameInput = page.nameInput;
       const btn = page.submitButton;
-      const testValue = 'test';
-      let location: Location = TestBed.inject(Location);
+      const testValue = 'tessst';
 
-      await fixture.whenStable().then(() => {
-        // Add value to input
-        nameInput.value = testValue;
-        nameInput.dispatchEvent(new Event('input'));
+      // Add value to input
+      nameInput.value = testValue;
+      nameInput.dispatchEvent(new Event('input'));
 
-        click(btn);
-        fixture.detectChanges();
-        // expect(page.backSpy).toHaveBeenCalledTimes(1)
-      });
+      fixture.detectChanges();
+      expect(component.name).toBe(testValue);
+
+      click(btn);
+      expect(addSpy.calls.any())
+        .withContext('should call desktopItemsService.addDesktopItems')
+        .toBe(true);
     });
   });
 });
-
-function createRouterSpy() {
-  return jasmine.createSpyObj('Location', ['back']);
-}
 
 class Page {
   // getter properties wait to query the DOM until called.
@@ -124,14 +132,6 @@ class Page {
   }
   get nameInput() {
     return this.query<HTMLInputElement>('input');
-  }
-
-  backSpy: jasmine.Spy;
-
-  constructor(someFixture: ComponentFixture<AddElementComponent>) {
-    // get the navigate spy from the injected router spy object
-    const locationSpy = someFixture.debugElement.injector.get(Location) as any;
-    this.backSpy = locationSpy.navigate;
   }
 
   //// query helpers ////

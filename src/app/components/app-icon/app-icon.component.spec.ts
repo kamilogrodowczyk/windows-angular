@@ -35,13 +35,13 @@ function getElementsForLinkName(): void {
     }).compileComponents();
   });
 
-  describe('navigating to one desktop item', () => {
+  describe('when navigate to one desktop app', () => {
     let expectedElements: DesktopItem;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       expectedElements = firstElement;
       activatedRoute.setParamMap({ appIcon: expectedElements.linkName });
-      await createComponent();
+      createComponent();
     });
 
     it('should display all paragraphs and all containers', () => {
@@ -102,4 +102,8 @@ function createComponent(): void {
   page = new Page(fixture);
 
   fixture.detectChanges(); // ngOnInit
+
+  fixture.whenStable().then(() => {
+    fixture.detectChanges();
+  })
 }
