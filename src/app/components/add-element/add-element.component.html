@@ -4,6 +4,6 @@
     <option *ngFor="let type of iconTypes" [ngValue]="type">{{ type }}</option>
   </select>
   <label for="name">Name: </label>
-  <input [(ngModel)]="name" id="name" name="name" type="text" />
+  <input [(ngModel)]="name" id="name" name="name" type="text" placeholder="New name" />
   <button [disabled]="!name.length" type="submit">Add</button>
 </form>

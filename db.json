@@ -24,8 +24,8 @@
     {
       "id": 3,
       "icon": "folder",
-      "name": "Folder",
-      "linkName": "folder",
+      "name": "Test Folder",
+      "linkName": "testfolder",
       "elements": [
         {
           "icon": "file",

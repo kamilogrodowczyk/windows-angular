@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { DesktopItem } from 'src/app/types/desktopItems';
 import { DesktopItemsService } from '../desktop-items.service';
 import { getTestDesktopItems } from './test-desktop-items';
@@ -33,5 +33,16 @@ export class TestDesktopItemsService extends DesktopItemsService {
     const item = this.desktopItems.find((el) => el.linkName === linkName);
     this.lastResult = of(item);
     return this.lastResult;
+  }
+
+  override updateItem(item: DesktopItem): Observable<any> {
+    return this.lastResult = this.getItem(item.linkName).pipe(
+      map(h => {
+        if (h) {
+          return Object.assign(h, item);
+        }
+        throw new Error(`Hero ${item.linkName} not found`);
+      })
+    );
   }
 }
