@@ -26,13 +26,13 @@ export class AddElementComponent implements OnInit {
 
   onSubmit(e: any) {
     e.preventDefault();
-    if(!this.name) return
+    if(!this.name.trim()) return
 
     this.linkName = this.name.replace(/\s/g, '').toLowerCase();
 
     const newElement: DesktopItem = {
       icon: this.icon,
-      name: this.name,
+      name: this.name.trim(),
       linkName: this.linkName,
       elements: this.elements,
     };

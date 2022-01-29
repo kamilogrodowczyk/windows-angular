@@ -7,5 +7,5 @@
     type="text"
     placeholder="New name"
   />
-  <button [disabled]="!iconName.name.length" type="submit">Save</button>
+  <button [disabled]="!iconName.name.trim().length" type="submit">Save</button>
 </form>

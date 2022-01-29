@@ -41,13 +41,18 @@ describe('AddElementComponent', () => {
   });
 
   describe('when input has no value', () => {
-    it('should have disabled button', () => {
+    it('should be disabled button', () => {
       expect(page.submitButton.disabled).toBeTruthy();
     });
   });
 
   describe('when input has value', () => {
-    it('should not have disabled button', async () => {
+    it('should be disabled button if was added only whitespace', () => {
+      changeInputValue('  ');
+      expect(page.submitButton.disabled).toBeTruthy();
+    });
+
+    it('should not be disabled button', async () => {
       const nameInput = page.nameInput;
       const btn = page.submitButton;
 

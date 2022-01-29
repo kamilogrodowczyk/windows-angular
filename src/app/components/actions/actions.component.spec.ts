@@ -79,29 +79,36 @@ describe('ActionsComponent', () => {
       expect(btn.disabled).toBeTrue();
     });
 
-    it('should save updated desktop item and call updateItem', () => {
-      const service = fixture.debugElement.injector.get(DesktopItemsService);
-      const addSpy = spyOn(service, 'updateItem').and.callThrough();
-
-      const btn = page.submitButton;
-      const testInputValue = 'test';
-      changeInputValue(testInputValue);
-
-      click(btn);
-      expect(addSpy.calls.any())
-        .withContext('should call desktopItemsService.updateItem')
-        .toBe(true);
+    it('should be disabled button if was added only whitespace', () => {
+      changeInputValue('  ');
+      expect(page.submitButton.disabled).toBeTruthy();
     });
 
-    it('should save new desktop item and back by location.back', () => {
-      const locationBack = spyOn(component, 'back');
-
-      const btn = page.submitButton;
-      changeInputValue();
-
-      click(btn);
-      expect(locationBack).toHaveBeenCalled();
-    });
+    describe('when new input value is submitted', () => {
+      it('should save updated desktop item and call updateItem', () => {
+        const service = fixture.debugElement.injector.get(DesktopItemsService);
+        const addSpy = spyOn(service, 'updateItem').and.callThrough();
+  
+        const btn = page.submitButton;
+        const testInputValue = 'test';
+        changeInputValue(testInputValue);
+  
+        click(btn);
+        expect(addSpy.calls.any())
+          .withContext('should call desktopItemsService.updateItem')
+          .toBe(true);
+      });
+  
+      it('should save new desktop item and back by location.back', () => {
+        const locationBack = spyOn(component, 'back');
+  
+        const btn = page.submitButton;
+        changeInputValue();
+  
+        click(btn);
+        expect(locationBack).toHaveBeenCalled();
+      });
+    })
   });
 });
 

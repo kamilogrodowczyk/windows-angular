@@ -5,5 +5,5 @@
   </select>
   <label for="name">Name: </label>
   <input [(ngModel)]="name" id="name" name="name" type="text" placeholder="New name" />
-  <button [disabled]="!name.length" type="submit">Add</button>
+  <button [disabled]="!name.trim().length" type="submit">Add</button>
 </form>
