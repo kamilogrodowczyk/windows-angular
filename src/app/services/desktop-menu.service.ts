@@ -22,5 +22,9 @@ export class DesktopMenuService {
     window.location.reload();
   }
 
+  setIndex(index: number) {
+    this.getItems(index);
+  }
+
   constructor() {}
 }

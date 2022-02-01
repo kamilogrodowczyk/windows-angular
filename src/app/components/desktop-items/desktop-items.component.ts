@@ -34,11 +34,15 @@ export class DesktopItemsComponent implements OnInit {
       .subscribe((items) => (this.customItems = items));
   }
 
-  setIndex(index: number) {
-    this.desktopMenuService.getItems(index);
-  }
-
   createRoute(item: string) {
     return item.replace(/\s/g, '').toLowerCase();
+  }
+
+  event(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
+  setIndex(index: number) {
+    this.desktopMenuService.setIndex(index)
   }
 }

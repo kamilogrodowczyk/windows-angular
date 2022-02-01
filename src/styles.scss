@@ -15,7 +15,7 @@ html {
 
 body {
   overflow-x: hidden;
-  overflow-y: hidden;
+  // overflow-y: hidden;
 }
 
 h1 {
@@ -55,3 +55,6 @@ button {
   outline: none;
   border: none;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

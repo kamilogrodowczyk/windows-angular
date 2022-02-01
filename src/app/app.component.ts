@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DesktopMenuService } from './services/desktop-menu.service';
+import { OverlayDesktopMenuService } from './services/overlay-desktop-menu.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,13 @@ import { DesktopMenuService } from './services/desktop-menu.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'windows-project';
+  constructor(private overlayMenu: OverlayDesktopMenuService) {}
+  
+  showMenu(event: MouseEvent) {
+    this.overlayMenu.showTask(event);
+  }
 
-  ngOnInit(): void {}
-
-  constructor(public desktopMenuService: DesktopMenuService) {}
+  hideMenu() {
+    this.overlayMenu.hideTask();
+  }
 }

@@ -1,4 +1,4 @@
-<div (click)="desktopMenuService.clearItems()">
+<div appDesktopMenu (debounceClick)="showMenu($event)" (click)="hideMenu()">
   <router-outlet></router-outlet>
   <app-taskbar></app-taskbar>
 </div>
