@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
@@ -27,6 +28,7 @@ function getElementsForLinkName(): void {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppIconComponent],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: DesktopItemsService, useClass: TestDesktopItemsService },

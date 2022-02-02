@@ -1,9 +1,7 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { defer, Observable, of } from 'rxjs';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
-import { DesktopItem, DesktopItemElement } from 'src/app/types/desktopItems';
+import { DesktopItemElement } from 'src/app/types/desktopItems';
 
 @Component({
   selector: 'app-app-icon',
