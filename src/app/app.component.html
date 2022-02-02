@@ -1,15 +1,8 @@
 <div
   appDesktopMenu
-  (debounceClick)="dMenu.setPosition($event); addMenuOnBody($event); expandedFlag=false"
-  (click)="desktopMenuService.clearItems(); expandedFlag=true;"
-  #dMenu="dMenu"
-  [length]="desktopMenuService.menuItems.length"
+  (debounceClick)="showMenu($event); expandedFlag = false"
+  (click)="hideMenu(); expandedFlag = true"
 >
   <router-outlet></router-outlet>
   <app-taskbar></app-taskbar>
-  <app-desktop-menu
-    [attr.aria-expanded]="dMenu.left !== ''"
-    [left]="dMenu.left"
-    [top]="dMenu.top"
-  ></app-desktop-menu>
 </div>

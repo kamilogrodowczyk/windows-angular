@@ -11,11 +11,8 @@ import { DesktopItem } from '../../types/desktopItems';
   styleUrls: ['./desktop-items.component.scss'],
 })
 export class DesktopItemsComponent implements OnInit {
-  @Output() getRoute = new EventEmitter();
   subscription: Subscription = new Subscription();
-
   iconItems: DesktopItem[] = [];
-  defaultIconItems: DesktopItem[] = [];
 
   constructor(
     private desktopMenuService: DesktopMenuService,
