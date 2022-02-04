@@ -1,17 +1,15 @@
 import {
   ComponentFixture,
-  fakeAsync,
   TestBed,
-  tick,
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { TestDesktopItemsService } from 'src/app/services/tests/test-desktop-items.service';
 import { click } from 'src/tests/click-helper';
 import { SpyLocation } from '@angular/common/testing';
 
 import { AddElementComponent } from './add-element.component';
+import { Location } from '@angular/common';
 
 export * from "@fortawesome/angular-fontawesome";
 export * from "@fortawesome/fontawesome-svg-core";
@@ -124,13 +122,14 @@ describe('AddElementComponent', () => {
     });
 
     it('should save new desktop item and back by location.back', () => {
-      const locationBack = spyOn(component, 'back');
-
-      const btn = page.submitButton;
-      changeInputValue();
-
-      click(btn);
-      expect(locationBack).toHaveBeenCalled();
+      const location = fixture.debugElement.injector.get(Location) as SpyLocation;
+        const locationBack = spyOn(location, 'back');
+  
+        const btn = page.submitButton;
+        changeInputValue();
+  
+        click(btn);
+        expect(locationBack).toHaveBeenCalled();
     });
   });
 });

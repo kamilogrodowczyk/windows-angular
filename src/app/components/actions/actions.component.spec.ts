@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { SpyLocation } from '@angular/common/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -54,12 +55,10 @@ describe('ActionsComponent', () => {
 
   describe('when input value is changed', () => {
     let testService: TestDesktopItemsService;
-    let location: SpyLocation;
     beforeEach(async () => {
       testService = fixture.debugElement.injector.get(
         DesktopItemsService
       ) as any;
-      location = fixture.debugElement.injector.get(Location) as any;
       fixture.whenStable().then(() => {
         fixture.detectChanges();
       });
@@ -100,7 +99,8 @@ describe('ActionsComponent', () => {
       });
   
       it('should save new desktop item and back by location.back', () => {
-        const locationBack = spyOn(component, 'back');
+        const location = fixture.debugElement.injector.get(Location) as SpyLocation;
+        const locationBack = spyOn(location, 'back');
   
         const btn = page.submitButton;
         changeInputValue();

@@ -5,7 +5,7 @@ import { AppIconComponent } from './components/app-icon/app-icon.component';
 import { DesktopItemsComponent } from './components/desktop-items/desktop-items.component';
 import { AddElementComponent } from './components/add-element/add-element.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: DesktopItemsComponent },
   {
     path: 'desktop/newfolder',

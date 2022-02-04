@@ -38,10 +38,6 @@ export class AddElementComponent implements OnInit {
     };
     this.service
       .addDesktopItem(newElement)
-      .subscribe(() => this.back());
-  }
-
-  back(): void {
-    this.location.back()
+      .subscribe(() => this.location.back());
   }
 }

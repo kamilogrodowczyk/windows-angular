@@ -36,11 +36,7 @@ export class ActionsComponent implements OnInit {
     e.preventDefault();
     if (this.iconName) {
       this.updateLinkName(this.iconName);
-      this.service.updateItem(this.iconName).subscribe(() => this.back());
+      this.service.updateItem(this.iconName).subscribe(() => this.location.back());
     }
-  }
-
-  back(): void {
-    this.location.back();
   }
 }
