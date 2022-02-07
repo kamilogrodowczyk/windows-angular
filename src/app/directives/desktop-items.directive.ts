@@ -14,7 +14,7 @@ import { debounceTime, Subject, Subscription } from 'rxjs';
 export class DesktopItemsDirective {
   @Input() debounceTime = 300;
   @Output() debounceClick = new EventEmitter(true);
-  private clicks = new Subject();
+  private clicks: Subject<MouseEvent> = new Subject<MouseEvent>();
   private subscription: Subscription = new Subscription();
 
   constructor() {}
