@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { debounceTime, Subject, Subscription } from 'rxjs';
+import { debounceTime, Observable, Subject, Subscription } from 'rxjs';
 
 @Directive({
   selector: '[appDesktopMenu]',
@@ -20,13 +20,18 @@ export class DesktopItemsDirective {
   constructor() {}
 
   ngOnInit() {
-    this.subscription = this.clicks
-      .pipe(debounceTime(this.debounceTime))
-      .subscribe((e) => this.debounceClick.emit(e));
+    this.subscription = this.getClickEvent$().subscribe((e) =>
+      this.debounceClick.emit(e)
+    );
+  }
+
+  getClickEvent$(): Observable<MouseEvent> {
+    return this.clicks.asObservable().pipe(debounceTime(this.debounceTime));
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.clicks.complete();
   }
 
   @HostListener('contextmenu', ['$event'])

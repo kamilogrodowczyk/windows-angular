@@ -2,13 +2,14 @@
   <button
     *ngFor="let item of service.menuItems; index as i"
     (click)="setFn(item)"
+    mat-button
   >
     <a
       *ngIf="service.anchorItems[i]; else elseBlock"
       >{{ item }}</a
     >
     <ng-template #elseBlock
-      ><p>{{ item }}</p></ng-template
+      >{{ item }}</ng-template
     >
   </button>
 </div>

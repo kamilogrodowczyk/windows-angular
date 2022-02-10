@@ -6,7 +6,7 @@ import {
   tick,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { asyncScheduler, debounceTime, delay, observeOn } from 'rxjs';
+import { debounceTime } from 'rxjs';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { TestScheduler } from 'rxjs/testing';
 import { DesktopItemsDirective } from './desktop-items.directive';
@@ -109,19 +109,6 @@ describe('DesktopItemsDirective', () => {
         expect(actual).toEqual(expected);
       });
     });
-    it('cold - delay', () => {
-      scheduler.run((helpers) => {
-        const { cold, expectObservable, time } = helpers;
-        const input$ = '      -a------b-c-----|';
-        const t = time('       ---|');
-        //                            ---|
-        //                              ---|
-        const expected = '    ----a------b-c--|';
-
-        const result = cold(input$).pipe(delay(t));
-        expectObservable(result).toBe(expected);
-      });
-    });
 
     it('cold - debounceTime', () => {
       scheduler.run((helpers) => {
@@ -139,12 +126,15 @@ describe('DesktopItemsDirective', () => {
 
     it('should generate stream correctly', () => {
       scheduler.run((helpers) => {
-        const { cold, expectObservable } = helpers;
-        const input$ = '      -x 300ms -|';
-        const expected = '    - 300ms x-|';
+        const { cold, expectObservable, flush } = helpers;
 
-        const result = cold(input$).pipe(debounceTime(300));
-        expectObservable(result).toBe(expected);
+        const event = new MouseEvent('contextmenu');
+        const value = { x: event };
+        const source$: ColdObservable<MouseEvent> = cold('-x----', value);
+        directive.debounceTime = 3;
+
+        source$.subscribe(() => directive.clickEvent(event));
+        expectObservable(directive.getClickEvent$()).toBe('----x-', value);
       });
     });
   });
