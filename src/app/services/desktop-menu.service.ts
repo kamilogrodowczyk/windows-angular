@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { mergeMap, Observable, of, Subject } from 'rxjs';
+import { forkJoin, mergeMap, Observable, of, Subject } from 'rxjs';
 import { desktopMenu } from '../mocks/desktopMenu';
 import { DesktopItem } from '../types/desktopItems';
 import { DesktopItemsService } from './desktop-items.service';
@@ -14,7 +14,7 @@ export class DesktopMenuService {
 
   menuItems: string[] = [];
   anchorItems: boolean[] = [];
-  recycleBin?: DesktopItem;
+  recycleBin!: DesktopItem;
   allElements: DesktopItem[] = [];
 
   getItems(index: number) {
@@ -37,15 +37,13 @@ export class DesktopMenuService {
   // Remove element from desktop and add to recycle bin
 
   getAllDesktopItems() {
-    this.desktopItemsService.getItems().subscribe((items) => {
-      this.allElements = items;
+    forkJoin({
+      allItems: this.desktopItemsService.getItems(),
+      recycleBin: this.desktopItemsService.getItem('recyclebin'),
+    }).subscribe(({ allItems, recycleBin }) => {
+      this.allElements = allItems;
+      this.recycleBin = recycleBin;
     });
-  }
-
-  getRecycleBin() {
-    this.desktopItemsService
-      .getItem('recyclebin')
-      .subscribe((item) => (this.recycleBin = item));
   }
 
   updateElementsinArray(item: DesktopItem): Observable<DesktopItem> {
@@ -59,16 +57,15 @@ export class DesktopMenuService {
 
   onRemoveClick(iconName: string) {
     this.getAllDesktopItems();
-    this.getRecycleBin();
     this.desktopItemsService
       .getItem(iconName)
       .pipe(
-        mergeMap((item) => this.updateElementsinArray(item)),
-        mergeMap((item) => this.desktopItemsService.deleteItem(item.id)),
-        mergeMap(() =>
-          this.recycleBin
-            ? this.desktopItemsService.updateItem(this.recycleBin)
-            : []
+        mergeMap((item) =>
+          forkJoin([
+            this.updateElementsinArray(item),
+            this.desktopItemsService.deleteItem(item.id),
+            this.desktopItemsService.updateItem(this.recycleBin),
+          ])
         )
       )
       .subscribe();
