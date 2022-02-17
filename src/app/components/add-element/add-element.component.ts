@@ -1,8 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopItem } from '../../types/desktopItems';
+import { newItem } from './newItem';
 
 @Component({
   selector: 'app-add-element',
@@ -10,12 +12,9 @@ import { DesktopItem } from '../../types/desktopItems';
   styleUrls: ['./add-element.component.scss'],
 })
 export class AddElementComponent implements OnInit {
-  icon: IconProp = 'folder';
-  name: string = '';
-  linkName: string = '';
-  elements: [] = [];
-
   iconTypes: IconProp[] = ['folder', 'file'];
+  newItem = new newItem(this.iconTypes[0], '', '', []);
+  form!: FormGroup;
 
   constructor(
     private service: DesktopItemsService,
@@ -26,15 +25,15 @@ export class AddElementComponent implements OnInit {
 
   onSubmit(e: any) {
     e.preventDefault();
-    if(!this.name.trim()) return
+    if (!this.newItem.name.trim()) return;
 
-    this.linkName = this.name.replace(/\s/g, '').toLowerCase();
+    this.newItem.linkName = this.newItem.name.replace(/\s/g, '').toLowerCase();
 
     const newElement: DesktopItem = {
-      icon: this.icon,
-      name: this.name.trim(),
-      linkName: this.linkName,
-      elements: this.elements,
+      icon: this.newItem.icon,
+      name: this.newItem.name.trim(),
+      linkName: this.newItem.linkName,
+      elements: this.newItem.elements,
     };
     this.service
       .addDesktopItem(newElement)

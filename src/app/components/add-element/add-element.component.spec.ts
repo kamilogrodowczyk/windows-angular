@@ -113,7 +113,7 @@ describe('AddElementComponent', () => {
       const testInputValue = 'test';
       changeInputValue(testInputValue);
 
-      expect(component.name).toBe(testInputValue);
+      expect(component.newItem.name).toBe(testInputValue);
 
       click(btn);
       expect(addSpy.calls.any())

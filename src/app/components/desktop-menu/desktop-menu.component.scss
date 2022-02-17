@@ -9,7 +9,6 @@ div {
 }
 
 a, p {
-  padding: 1vh;
   cursor: default;
   width: 100%;
 }
@@ -23,6 +22,8 @@ button {
   position: relative;
   background-color: transparent;
   position: relative;
+  padding: 1vh;
+  font-size: 1rem;
 
   &:hover {
     background-color: #F9F5F4;

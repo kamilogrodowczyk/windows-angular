@@ -26,6 +26,8 @@ let location: Location;
 let router: Router;
 let page: Page;
 
+// INFO: removed mat-button
+
 const options: string[] = [
   'Refresh',
   'Open',

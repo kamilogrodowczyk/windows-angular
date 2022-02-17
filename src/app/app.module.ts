@@ -17,6 +17,8 @@ import { ActionsComponent } from './components/actions/actions.component';
 import { faDumpster, faDesktop, faFolder, faFile } from '@fortawesome/free-solid-svg-icons';
 import { AddElementComponent } from './components/add-element/add-element.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UniqueDesktopItemNameValidatorDirective } from './form-validator/unique-desktop-items-validator.directive';
+import { ForbiddenDesktopItemsValidatorDirective } from './form-validator/forbidden-desktop-items-validator.directive';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppIconComponent,
     ActionsComponent,
     AddElementComponent,
+    UniqueDesktopItemNameValidatorDirective,
+    ForbiddenDesktopItemsValidatorDirective,
   ],
   imports: [
     BrowserModule,

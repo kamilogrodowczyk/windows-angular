@@ -1,11 +1,43 @@
-<form class="container" *ngIf="iconName" (ngSubmit)="onSubmit($event)">
+<form
+  #heroForm="ngForm"
+  class="container"
+  *ngIf="iconName"
+  (ngSubmit)="onSubmit($event)"
+>
   <label for="new-name">New name:</label>
   <input
+    [(ngModel)]="iconName.name"
     id="new-name"
     name="name"
-    [(ngModel)]="iconName.name"
     type="text"
     placeholder="New name"
+    required
+    #nameClass="ngModel"
+    minlength="3"
+    maxlength="12"
+    [ngClass]="{ 'error-border': nameClass.touched && nameClass.invalid }"
+    appUniqueDesktopItemName
+    appForbiddenName
   />
-  <button [disabled]="!iconName.name.trim().length" type="submit">Save</button>
+  <div [hidden]="nameClass.valid || nameClass.untouched">
+    <p *ngIf="nameClass.errors?.['required']" class="error">Name is required</p>
+    <p *ngIf="nameClass.errors?.['minlength']" class="error">
+      Name must be at least 3 characters long
+    </p>
+    <p *ngIf="nameClass.errors?.['uniqueDesktopItemName']" class="error">
+      Name is already taken.
+    </p>
+    <p *ngIf="nameClass.errors?.['forbiddenName']" class="error">
+      This name is forbidden.
+    </p>
+    <p *ngIf="nameClass.errors?.['forbiddenChar']" class="error">
+      This character is forbidden.
+    </p>
+  </div>
+  <button
+    [disabled]="!iconName.name.trim().length || heroForm.invalid"
+    type="submit"
+  >
+    Save
+  </button>
 </form>
