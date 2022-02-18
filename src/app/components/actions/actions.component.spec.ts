@@ -64,10 +64,10 @@ describe('ActionsComponent', () => {
       });
     });
     it('should be changed linkName of desktop item as well', () => {
-      const testValue = 'Link Name Test';
+      const testValue = 'Link Test';
       changeInputValue(testValue);
       click(page.submitButton);
-      expect(component.iconName.linkName).toBe('linknametest');
+      expect(component.iconName.linkName).toBe('linktest');
     });
 
     it('should be disabled button if no input value', () => {

@@ -9,7 +9,6 @@ import { OverlayDesktopMenuService } from 'src/app/services/overlay-desktop-menu
   styleUrls: ['./desktop-menu.component.scss'],
 })
 export class DesktopMenuComponent implements OnInit {
-
   ngOnInit(): void {}
 
   constructor(
@@ -35,6 +34,9 @@ export class DesktopMenuComponent implements OnInit {
         break;
       case 'Remove':
         this.service.onRemoveClick(iconName);
+        break;
+      case 'Empty Recycle Bin':
+        this.service.clearRecycleBin();
         break;
       default:
         return;

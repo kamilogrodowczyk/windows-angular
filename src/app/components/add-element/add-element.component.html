@@ -19,9 +19,9 @@
     appForbiddenName
   />
   <div [hidden]="nameClass.valid || nameClass.untouched" class="error-container">
-    <p *ngIf="nameClass.errors?.['required']" class="error">Name is required</p>
+    <p *ngIf="nameClass.errors?.['required']" class="error">Name is required.</p>
     <p *ngIf="nameClass.errors?.['minlength']" class="error">
-      Name must be at least 3 characters long
+      Name must be at least 3 characters long.
     </p>
     <p *ngIf="nameClass.errors?.['uniqueDesktopItemName']" class="error">
       Name is already taken.
@@ -30,7 +30,7 @@
       This name is forbidden.
     </p>
     <p *ngIf="nameClass.errors?.['forbiddenChar']" class="error">
-      This character is forbidden.
+      &gt; &lt; | : " \ / ? * are forbidden.
     </p>
   </div>
   <button [disabled]="!newItem.name.trim().length || heroForm.invalid" type="submit">Add</button>

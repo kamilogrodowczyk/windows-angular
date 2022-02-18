@@ -5,22 +5,7 @@
       "icon": "dumpster",
       "name": "Recycle Bin",
       "linkName": "recyclebin",
-      "elements": [
-        {
-          "id": 5,
-          "icon": "folder",
-          "name": "Test 1",
-          "linkName": "test1",
-          "elements": []
-        },
-        {
-          "icon": "folder",
-          "name": "Test257",
-          "linkName": "test257",
-          "elements": [],
-          "id": 6
-        }
-      ]
+      "elements": []
     },
     {
       "id": 2,
@@ -47,8 +32,8 @@
     {
       "id": 4,
       "icon": "folder",
-      "name": "Folder 3",
-      "linkName": "folder3",
+      "name": "Folder 34",
+      "linkName": "folder34",
       "elements": [
         {
           "icon": "file",
@@ -59,13 +44,6 @@
           "characters": 17
         }
       ]
-    },
-    {
-      "icon": "file",
-      "name": "Test12",
-      "linkName": "test12",
-      "elements": [],
-      "id": 5
     }
   ]
 }

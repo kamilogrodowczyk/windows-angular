@@ -20,6 +20,7 @@ export class DesktopMenuService {
   getItems(index: number) {
     this.menuItems = desktopMenu[index].name;
     this.anchorItems = desktopMenu[index].anchor;
+    this.getAllDesktopItems();
   }
 
   clearItems() {
@@ -37,13 +38,15 @@ export class DesktopMenuService {
   // Remove element from desktop and add to recycle bin
 
   getAllDesktopItems() {
-    forkJoin({
-      allItems: this.desktopItemsService.getItems(),
-      recycleBin: this.desktopItemsService.getItem('recyclebin'),
-    }).subscribe(({ allItems, recycleBin }) => {
-      this.allElements = allItems;
-      this.recycleBin = recycleBin;
+    this.desktopItemsService.getItems().subscribe((items) => {
+      this.allElements = items;
+      this.recycleBin = items[0];
     });
+  }
+
+  clearRecycleBin() {
+    this.recycleBin.elements = [];
+    this.desktopItemsService.updateItem(this.recycleBin).subscribe();
   }
 
   updateElementsinArray(item: DesktopItem): Observable<DesktopItem> {
@@ -56,7 +59,6 @@ export class DesktopMenuService {
   }
 
   onRemoveClick(iconName: string) {
-    this.getAllDesktopItems();
     this.desktopItemsService
       .getItem(iconName)
       .pipe(

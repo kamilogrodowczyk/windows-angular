@@ -10,6 +10,7 @@ import { SpyLocation } from '@angular/common/testing';
 
 import { AddElementComponent } from './add-element.component';
 import { Location } from '@angular/common';
+import { UniqueDesktopItemNameValidatorDirective } from 'src/app/form-validator/unique-desktop-items-validator.directive';
 
 export * from "@fortawesome/angular-fontawesome";
 export * from "@fortawesome/fontawesome-svg-core";
@@ -23,7 +24,7 @@ describe('AddElementComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [AddElementComponent],
+      declarations: [AddElementComponent, UniqueDesktopItemNameValidatorDirective],
       providers: [
         { provide: DesktopItemsService, useClass: TestDesktopItemsService },
         { provide: Location, useClass: SpyLocation },

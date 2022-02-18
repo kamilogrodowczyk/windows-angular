@@ -3,7 +3,7 @@ import { DesktopMenu as desktopMenuInterface } from '../types/desktopMenu';
 
 export const desktopMenu: desktopMenuInterface[] = [
   {
-    name: ['Open', 'Opróżnij kosz', 'Change name'],
+    name: ['Open', 'Empty Recycle Bin', 'Change name'],
     anchor: [true, false, true],
   },
   {
