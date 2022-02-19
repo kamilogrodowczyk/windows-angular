@@ -20,6 +20,6 @@ export class DesktopItemsValidator {
     this.getAllItems();
     const isTaken = this.allItems.includes(desktopItemName);
 
-    return of(isTaken).pipe(delay(400));
+    return of(isTaken);
   }
 }

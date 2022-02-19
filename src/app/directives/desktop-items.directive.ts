@@ -6,6 +6,8 @@ import {
   Output,
 } from '@angular/core';
 import { debounceTime, Observable, Subject, Subscription } from 'rxjs';
+import { DesktopMenuService } from '../services/desktop-menu.service';
+import { OverlayDesktopMenuService } from '../services/overlay-desktop-menu.service';
 
 @Directive({
   selector: '[appDesktopMenu]',
@@ -13,16 +15,22 @@ import { debounceTime, Observable, Subject, Subscription } from 'rxjs';
 })
 export class DesktopItemsDirective {
   @Input() debounceTime = 300;
+  @Input() desktopMenuIndex: number = 3;
   @Output() debounceClick = new EventEmitter(true);
   private clicks: Subject<MouseEvent> = new Subject<MouseEvent>();
   private subscription: Subscription = new Subscription();
 
-  constructor() {}
+  constructor(
+    private overlayRef: OverlayDesktopMenuService,
+    private service: DesktopMenuService
+  ) {}
 
   ngOnInit() {
-    this.subscription = this.getClickEvent$().subscribe((e) =>
-      this.debounceClick.emit(e)
-    );
+    this.subscription = this.getClickEvent$().subscribe((e) => {
+      this.overlayRef.showMenu(e);
+      this.service.getItems(this.desktopMenuIndex);
+      this.debounceClick.emit(e);
+    });
   }
 
   getClickEvent$(): Observable<MouseEvent> {
@@ -37,6 +45,7 @@ export class DesktopItemsDirective {
   @HostListener('contextmenu', ['$event'])
   clickEvent(e: any) {
     e.preventDefault();
+    e.stopPropagation();
     this.clicks.next(e);
   }
 }

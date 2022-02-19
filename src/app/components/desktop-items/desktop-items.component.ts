@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
@@ -17,7 +17,7 @@ export class DesktopItemsComponent implements OnInit {
   constructor(
     private desktopMenuService: DesktopMenuService,
     private desktopItemsService: DesktopItemsService,
-    private eventService: EventService
+    private eventService: EventService,
   ) {
     this.subscription = this.desktopMenuService.allItems$.subscribe(
       (items) => (this.iconItems = items)
@@ -38,11 +38,11 @@ export class DesktopItemsComponent implements OnInit {
     });
   }
 
-  setIndex(index: number, repeatIndex: number | null = null) {
+  setIndex(index: number, repeatIndex: number | null = null): number {
     if (repeatIndex && index > repeatIndex) {
-      this.desktopMenuService.getItems(repeatIndex);
+      return repeatIndex;
     } else {
-      this.desktopMenuService.getItems(index);
+      return index;
     }
   }
 

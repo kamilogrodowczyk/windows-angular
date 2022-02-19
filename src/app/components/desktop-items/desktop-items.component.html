@@ -2,7 +2,8 @@
   appDesktopMenu
   *ngFor="let item of iconItems; index as i"
   routerLink="{{ item.linkName }}"
-  (debounceClick)="setIndex(i, 2); getElementName(item.linkName)"
+  (debounceClick)="getElementName(item.linkName)"
+  [desktopMenuIndex]="setIndex(i, 2)"
 >
   <button>
     <fa-icon [icon]="item.icon"></fa-icon>

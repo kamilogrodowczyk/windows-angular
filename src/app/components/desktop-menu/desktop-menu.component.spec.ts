@@ -69,7 +69,7 @@ describe('DesktopMenuComponent', () => {
     expect(btnRefresh.textContent).toContain('Refresh');
   });
 
-  it('should find button `Refresh`', () => {
+  it('should find button `Remove`', () => {
     const steFnSpy = spyOn(component, 'setFn');
     const btnRemove = page.buttons[4];
     click(btnRemove);
@@ -113,22 +113,8 @@ function updateToNewPath() {
 }
 
 class Page {
-  get links() {
-    return this.queryAll<HTMLAnchorElement>('a');
-  }
-  get container() {
-    return this.queryAll<HTMLElement>('.container__elements');
-  }
-  get nameDisplay() {
-    return this.query<HTMLElement>('p');
-  }
-
   get buttons() {
     return this.queryAll<HTMLButtonElement>('button');
-  }
-
-  private query<T>(selector: string): T {
-    return fixture.nativeElement.querySelector(selector);
   }
 
   private queryAll<T>(selector: string): T[] {

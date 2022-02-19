@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { Location } from '@angular/common';
 import { SpyLocation } from '@angular/common/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -38,7 +39,7 @@ describe('DesktopItemsComponent', () => {
         DesktopItemsDirective,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [RouterTestingModule.withRoutes(routes)],
+      imports: [RouterTestingModule.withRoutes(routes), OverlayModule],
       providers: [
         {
           provide: DesktopItemsService,
@@ -112,18 +113,6 @@ describe('DesktopItemsComponent', () => {
       fixture.detectChanges();
 
       expect(DesktopMenuComponent).toBeTruthy();
-    }));
-
-    it('should be called `DesktopItemDirective` with `debounceClick` fn', fakeAsync(() => {
-      const firstElement = page.links[0]; // first item in DesktopItem
-      const setIndexSpy = spyOn(component, 'setIndex');
-
-      firstElement.dispatchEvent(new Event('contextmenu'));
-      tick(300);
-      fixture.detectChanges();
-
-      expect(setIndexSpy).toHaveBeenCalled();
-      expect(setIndexSpy).toHaveBeenCalledOnceWith(0, 2);
     }));
   });
 });

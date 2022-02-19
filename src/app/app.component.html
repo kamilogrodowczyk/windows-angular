@@ -1,8 +1,9 @@
 <div
   appDesktopMenu
-  (debounceClick)="showMenu($event); expandedFlag = false"
+  (debounceClick)="expandedFlag = false"
   (click)="hideMenu(); expandedFlag = true"
->
+  [desktopMenuIndex]=3
+  >
   <router-outlet></router-outlet>
   <app-taskbar></app-taskbar>
 </div>

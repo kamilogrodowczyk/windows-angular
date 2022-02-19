@@ -1,3 +1,5 @@
+import { OverlayModule } from '@angular/cdk/overlay';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, DebugElement } from '@angular/core';
 import {
   ComponentFixture,
@@ -6,9 +8,12 @@ import {
   tick,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { debounceTime } from 'rxjs';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { TestScheduler } from 'rxjs/testing';
+import { routes } from '../app-routing.module';
+import { DesktopMenuComponent } from '../components/desktop-menu/desktop-menu.component';
 import { DesktopItemsDirective } from './desktop-items.directive';
 
 @Component({
@@ -41,7 +46,8 @@ let scheduler: TestScheduler;
 describe('DesktopItemsDirective', () => {
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      declarations: [DesktopItemsDirective, TestComponent],
+      declarations: [DesktopItemsDirective, TestComponent, DesktopMenuComponent],
+      imports: [RouterTestingModule.withRoutes(routes), OverlayModule, HttpClientModule],
     }).createComponent(TestComponent);
     component = fixture.componentInstance;
 

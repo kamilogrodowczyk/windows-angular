@@ -20,14 +20,16 @@ export class DesktopMenuService {
   getItems(index: number) {
     this.menuItems = desktopMenu[index].name;
     this.anchorItems = desktopMenu[index].anchor;
-    this.getAllDesktopItems();
+    // this.getAllDesktopItems();
   }
 
   clearItems() {
     this.menuItems = [];
   }
 
-  constructor(private desktopItemsService: DesktopItemsService) {}
+  constructor(private desktopItemsService: DesktopItemsService) {
+    this.getAllDesktopItems();
+  }
 
   // Service
 

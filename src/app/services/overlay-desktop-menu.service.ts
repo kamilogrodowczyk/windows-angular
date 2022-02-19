@@ -71,9 +71,6 @@ export class OverlayDesktopMenuService {
 
   showMenu(event: any) {
     event.preventDefault();
-    if (event.target.nodeName !== 'A') {
-      this.menuService.getItems(3);
-    }
     if (this.overlayRef) {
       this.overlayRef.detach();
     }

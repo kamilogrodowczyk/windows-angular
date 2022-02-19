@@ -14,10 +14,6 @@ export class AppComponent {
 
   constructor(private overlayMenu: OverlayDesktopMenuService) {}
 
-  showMenu(event: MouseEvent) {
-    this.overlayMenu.showMenu(event);
-  }
-
   hideMenu() {
     this.overlayMenu.hideMenu();
   }
