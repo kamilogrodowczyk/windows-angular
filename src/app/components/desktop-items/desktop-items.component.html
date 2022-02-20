@@ -1,7 +1,7 @@
 <a
   appDesktopMenu
   *ngFor="let item of iconItems; index as i"
-  routerLink="{{ item.linkName }}"
+  (dblclick)="openDesktopItem(item.linkName)"
   (debounceClick)="getElementName(item.linkName)"
   [desktopMenuIndex]="setIndex(i, 2)"
 >

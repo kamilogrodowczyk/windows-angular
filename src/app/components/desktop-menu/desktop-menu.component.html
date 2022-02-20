@@ -2,13 +2,20 @@
   <button
     *ngFor="let item of service.menuItems; index as i"
     (click)="setFn(item)"
+    (mousemove)="setViewState(item); setSortByState(item)"
   >
-    <a
-      *ngIf="service.anchorItems[i]; else elseBlock"
-      >{{ item }}</a
-    >
-    <ng-template #elseBlock
-      >{{ item }}</ng-template
-    >
+    <a *ngIf="service.anchorItems[i]; else elseBlock">{{ item }}</a>
+    <ng-template #elseBlock>{{ item }}</ng-template>
   </button>
+  <div *ngIf="isView" class="view">
+    <button>Large icons</button>
+    <button>Medium icons</button>
+    <button>Small icons</button>
+  </div>
+  <div *ngIf="isSortBy" class="view">
+    <button>Name</button>
+    <button>Size</button>
+    <button>Type</button>
+    <button>Modification date</button>
+  </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
@@ -13,11 +14,13 @@ import { DesktopItem } from '../../types/desktopItems';
 export class DesktopItemsComponent implements OnInit {
   subscription: Subscription = new Subscription();
   iconItems: DesktopItem[] = [];
+  // isDoubleClick: boolean = false;
 
   constructor(
     private desktopMenuService: DesktopMenuService,
     private desktopItemsService: DesktopItemsService,
     private eventService: EventService,
+    private router: Router
   ) {
     this.subscription = this.desktopMenuService.allItems$.subscribe(
       (items) => (this.iconItems = items)
@@ -48,5 +51,18 @@ export class DesktopItemsComponent implements OnInit {
 
   getElementName(name: string): void {
     this.eventService.getAppElementName(name);
+  }
+
+  // removeDoubleClick() {
+  //   this.isDoubleClick = false;
+  //   setTimeout(() => {
+  //     if (this.isDoubleClick === false) {
+  //       console.log('click');
+  //     }
+  //   }, 400);
+  // }
+
+  openDesktopItem(linkName: string) {
+    this.router.navigate([linkName]);
   }
 }

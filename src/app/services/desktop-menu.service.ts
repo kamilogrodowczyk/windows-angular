@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, mergeMap, Observable, of, Subject } from 'rxjs';
+import { forkJoin, map, mergeMap, Observable, of, Subject } from 'rxjs';
+import { newItem } from '../components/add-element/newItem';
 import { desktopMenu } from '../mocks/desktopMenu';
 import { DesktopItem } from '../types/desktopItems';
 import { DesktopItemsService } from './desktop-items.service';
@@ -14,8 +15,10 @@ export class DesktopMenuService {
 
   menuItems: string[] = [];
   anchorItems: boolean[] = [];
+
   recycleBin!: DesktopItem;
   allElements: DesktopItem[] = [];
+  itemToCopy!: DesktopItem;
 
   getItems(index: number) {
     this.menuItems = desktopMenu[index].name;
@@ -46,11 +49,6 @@ export class DesktopMenuService {
     });
   }
 
-  clearRecycleBin() {
-    this.recycleBin.elements = [];
-    this.desktopItemsService.updateItem(this.recycleBin).subscribe();
-  }
-
   updateElementsinArray(item: DesktopItem): Observable<DesktopItem> {
     this.recycleBin?.elements.push(item);
     this.allElements = this.allElements.filter((el) => el.id !== item.id);
@@ -61,7 +59,7 @@ export class DesktopMenuService {
   }
 
   onRemoveClick(iconName: string) {
-    this.desktopItemsService
+    return this.desktopItemsService
       .getItem(iconName)
       .pipe(
         mergeMap((item) =>
@@ -72,6 +70,57 @@ export class DesktopMenuService {
           ])
         )
       )
-      .subscribe();
+  }
+
+  // Empty recycle bin
+
+  clearRecycleBin() {
+    this.recycleBin.elements = [];
+    this.desktopItemsService.updateItem(this.recycleBin).subscribe();
+  }
+
+  // Copy folder
+
+  copy(linkName: string) {
+    this.desktopItemsService
+      .getItem(linkName)
+      .subscribe((item) => {
+        delete item.id;
+        this.itemToCopy = item;
+      });
+  }
+
+  // Paste folder
+
+  findTheSameName(name: string): { [key: string]: string } {
+    const theSameName = this.allElements.filter((item) =>
+      item.name.includes(name)
+    );
+    const uniqueName = theSameName.length
+      ? `${name} ${theSameName.length + 1}`
+      : name;
+    const uniqueLinkName = uniqueName.replace(/\s/g, '').toLowerCase();
+    return { uniqueName, uniqueLinkName };
+  }
+
+  addElementsToArray(newElement: DesktopItem) {
+    this.allElements.push(newElement);
+    this.getAllItems(this.allElements);
+    return of(newElement);
+  }
+
+  paste(): Observable<DesktopItem> | undefined {
+    if(!this.itemToCopy) return;
+    const uniqueValues = this.findTheSameName(`${this.itemToCopy.name} — copy`);
+    const copiedElement: DesktopItem = {
+      icon: this.itemToCopy.icon,
+      name: uniqueValues['uniqueName'],
+      linkName: uniqueValues['uniqueLinkName'],
+      elements: this.itemToCopy.elements,
+    };
+
+    return this.desktopItemsService
+      .addDesktopItem(copiedElement)
+      .pipe(mergeMap((item) => this.addElementsToArray(item)))
   }
 }

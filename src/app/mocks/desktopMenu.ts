@@ -11,14 +11,15 @@ export const desktopMenu: desktopMenuInterface[] = [
     anchor: [true, true],
   },
   {
-    name: ['Open', 'Wytnij', 'Kopiuj', 'Remove', 'Change name'],
+    name: ['Open', 'Copy', 'Remove', 'Change name'],
     anchor: [true, false, false, false, true],
   },
   {
     name: [
-      'Widok',
-      'Sortuj według',
+      'View',
+      'Sort by',
       'Refresh',
+      'Paste',
       'New folder',
       'Ustawienia ekranu',
       'Personalizuj',

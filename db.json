@@ -5,7 +5,24 @@
       "icon": "dumpster",
       "name": "Recycle Bin",
       "linkName": "recyclebin",
-      "elements": []
+      "elements": [
+        {
+          "icon": "folder",
+          "name": "Folder 34 — copy",
+          "linkName": "folder34—copy",
+          "elements": [
+            {
+              "icon": "file",
+              "name": "Text 3",
+              "linkName": "text3",
+              "content": "Lorem Ipsum dolor",
+              "type": "Text document",
+              "characters": 17
+            }
+          ],
+          "id": 5
+        }
+      ]
     },
     {
       "id": 2,

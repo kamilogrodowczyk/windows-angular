@@ -2,13 +2,20 @@ div {
   display: grid;
   justify-content: start;
   align-content: start;
-  background-color: #ECE6E4;
+  background-color: #ece6e4;
   position: absolute;
   z-index: 3;
-  border: solid 1px #736D6B;
+  border: solid 1px #736d6b;
+
+  &.view {
+    position: absolute;
+    left: 95%;
+    top: -1px;
+  }
 }
 
-a, p {
+a,
+p {
   cursor: default;
   width: 100%;
 }
@@ -26,6 +33,6 @@ button {
   font-size: 1rem;
 
   &:hover {
-    background-color: #F9F5F4;
+    background-color: #f9f5f4;
   }
 }
