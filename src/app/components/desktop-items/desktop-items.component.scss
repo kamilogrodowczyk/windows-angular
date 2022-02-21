@@ -1,9 +1,45 @@
-:host {
+div {
   display: grid;
-  align-items: flex-start;
-  grid-template-rows: repeat(7, 120px);
+  justify-items: flex-start;
+  grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(auto-fill, 9rem);
   grid-auto-flow: column;
+}
+
+div.large {
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, 12rem);
+
+  fa-icon {
+    font-size: 3rem;
+  }
+  p {
+    font-size: 1.2rem;
+  }
+}
+
+div.medium {
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fill, 9rem);
+
+  fa-icon {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
+div.small {
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-columns: repeat(auto-fill, 9rem);
+
+  fa-icon {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: .8rem;
+  }
 }
 
 a {
@@ -36,3 +72,7 @@ button {
   background-color: transparent;
   padding: 1rem;
 }
+
+// p {
+//   font-size: 1.2rem;
+// }

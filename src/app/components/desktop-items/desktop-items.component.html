@@ -1,12 +1,14 @@
-<a
-  appDesktopMenu
-  *ngFor="let item of iconItems; index as i"
-  (dblclick)="openDesktopItem(item.linkName)"
-  (debounceClick)="getElementName(item.linkName)"
-  [desktopMenuIndex]="setIndex(i, 2)"
->
-  <button>
-    <fa-icon [icon]="item.icon"></fa-icon>
-    <p>{{ item.name }}</p>
-  </button>
-</a>
+<div [ngClass]="sizeOption">
+  <a
+    appDesktopMenu
+    *ngFor="let item of iconItems; index as i"
+    (dblclick)="openDesktopItem(item.linkName)"
+    (debounceClick)="getElementName(item.linkName)"
+    [desktopMenuIndex]="setIndex(i, 2)"
+  >
+    <button>
+      <fa-icon [icon]="item.icon"></fa-icon>
+      <p>{{ item.name }}</p>
+    </button>
+  </a>
+</div>

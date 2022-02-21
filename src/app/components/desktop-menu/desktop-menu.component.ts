@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { AdditionalDesktopMenuService } from 'src/app/services/additional-desktop-menu.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { OverlayDesktopMenuService } from 'src/app/services/overlay-desktop-menu.service';
 import { DesktopItem } from 'src/app/types/desktopItems';
@@ -12,20 +14,31 @@ import { DesktopItem } from 'src/app/types/desktopItems';
 export class DesktopMenuComponent implements OnInit {
   isView: boolean = false;
   isSortBy: boolean = false;
+  iconsSize: string[] = ['Large icons', 'Medium icons', 'Small icons'];
+  iconsSortBy: string[] = ['Name', 'Size', 'Type', 'Modification date'];
 
   ngOnInit(): void {}
 
   constructor(
     public service: DesktopMenuService,
     private router: Router,
-    private overlayMenu: OverlayDesktopMenuService
+    private overlayMenu: OverlayDesktopMenuService,
+    private additionalDesktopMenu: AdditionalDesktopMenuService
   ) {}
 
   setViewState(item: string) {
-    item === 'View' ? this.isView = true : this.isView = false;
+    item === 'View' ? (this.isView = true) : (this.isView = false);
   }
   setSortByState(item: string) {
-    item === 'Sort by' ? this.isSortBy = true : this.isSortBy = false;
+    item === 'Sort by' ? (this.isSortBy = true) : (this.isSortBy = false);
+  }
+
+  setIconSize(option: string) {
+    this.additionalDesktopMenu.setIconSize(option);
+  }
+
+  setIconSort(option: string) {
+    this.additionalDesktopMenu.setIconSort(option);
   }
 
   setFn(item: string) {

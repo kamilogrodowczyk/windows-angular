@@ -8,14 +8,15 @@
     <ng-template #elseBlock>{{ item }}</ng-template>
   </button>
   <div *ngIf="isView" class="view">
-    <button>Large icons</button>
-    <button>Medium icons</button>
-    <button>Small icons</button>
+    <ng-container *ngFor="let i of iconsSize">
+      <button (click)="setIconSize(i)">
+        {{ i }}
+      </button>
+    </ng-container>
   </div>
   <div *ngIf="isSortBy" class="view">
-    <button>Name</button>
-    <button>Size</button>
-    <button>Type</button>
-    <button>Modification date</button>
+    <ng-container *ngFor="let i of iconsSortBy">
+      <button (click)="setIconSort(i)">{{ i }}</button>
+    </ng-container>
   </div>
 </div>

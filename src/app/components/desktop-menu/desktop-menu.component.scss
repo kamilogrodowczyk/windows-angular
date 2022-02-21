@@ -36,3 +36,17 @@ button {
     background-color: #f9f5f4;
   }
 }
+
+button.active {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #222;
+    border-radius: 50%;
+  }
+}

@@ -19,6 +19,7 @@ import { AddElementComponent } from './components/add-element/add-element.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UniqueDesktopItemNameValidatorDirective } from './form-validator/unique-desktop-items-validator.directive';
 import { ForbiddenDesktopItemsValidatorDirective } from './form-validator/forbidden-desktop-items-validator.directive';
+import { ViewSizeDesktopItemsDirective } from './directives/view-size-desktop-items.directive';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ForbiddenDesktopItemsValidatorDirective } from './form-validator/forbid
     AddElementComponent,
     UniqueDesktopItemNameValidatorDirective,
     ForbiddenDesktopItemsValidatorDirective,
+    ViewSizeDesktopItemsDirective,
   ],
   imports: [
     BrowserModule,

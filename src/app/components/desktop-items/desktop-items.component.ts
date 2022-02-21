@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AdditionalDesktopMenuService } from 'src/app/services/additional-desktop-menu.service';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { EventService } from 'src/app/services/event.service';
@@ -13,18 +14,24 @@ import { DesktopItem } from '../../types/desktopItems';
 })
 export class DesktopItemsComponent implements OnInit {
   subscription: Subscription = new Subscription();
+  subscriptionAddiotionalMenu: Subscription = new Subscription();
   iconItems: DesktopItem[] = [];
-  // isDoubleClick: boolean = false;
+  sizeOption: string = localStorage.getItem('option') || '';
 
   constructor(
     private desktopMenuService: DesktopMenuService,
     private desktopItemsService: DesktopItemsService,
     private eventService: EventService,
-    private router: Router
+    private router: Router,
+    private additionalDesktopMenu: AdditionalDesktopMenuService
   ) {
     this.subscription = this.desktopMenuService.allItems$.subscribe(
       (items) => (this.iconItems = items)
     );
+    this.subscriptionAddiotionalMenu =
+      this.additionalDesktopMenu.sizeState$.subscribe(
+        (option) => (this.sizeOption = option)
+      );
   }
 
   ngOnInit(): void {
@@ -33,6 +40,7 @@ export class DesktopItemsComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.subscriptionAddiotionalMenu.unsubscribe();
   }
 
   getItems() {
@@ -52,15 +60,6 @@ export class DesktopItemsComponent implements OnInit {
   getElementName(name: string): void {
     this.eventService.getAppElementName(name);
   }
-
-  // removeDoubleClick() {
-  //   this.isDoubleClick = false;
-  //   setTimeout(() => {
-  //     if (this.isDoubleClick === false) {
-  //       console.log('click');
-  //     }
-  //   }, 400);
-  // }
 
   openDesktopItem(linkName: string) {
     this.router.navigate([linkName]);
