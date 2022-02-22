@@ -32,12 +32,20 @@ export class DesktopMenuService {
 
   constructor(private desktopItemsService: DesktopItemsService) {
     this.getAllDesktopItems();
+    this.sort();
   }
 
   // Service
 
   getAllItems(items: DesktopItem[]) {
     this.allItems.next(items);
+  }
+
+  sort() {
+    this.allElements.sort((a, b) =>
+      a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+    );
+    this.allItems.next(this.allElements);
   }
 
   // Remove element from desktop and add to recycle bin
@@ -69,7 +77,7 @@ export class DesktopMenuService {
             this.desktopItemsService.updateItem(this.recycleBin),
           ])
         )
-      )
+      );
   }
 
   // Empty recycle bin
@@ -82,12 +90,10 @@ export class DesktopMenuService {
   // Copy folder
 
   copy(linkName: string) {
-    this.desktopItemsService
-      .getItem(linkName)
-      .subscribe((item) => {
-        delete item.id;
-        this.itemToCopy = item;
-      });
+    this.desktopItemsService.getItem(linkName).subscribe((item) => {
+      delete item.id;
+      this.itemToCopy = item;
+    });
   }
 
   // Paste folder
@@ -110,7 +116,7 @@ export class DesktopMenuService {
   }
 
   paste(): Observable<DesktopItem> | undefined {
-    if(!this.itemToCopy) return;
+    if (!this.itemToCopy) return;
     const uniqueValues = this.findTheSameName(`${this.itemToCopy.name} — copy`);
     const copiedElement: DesktopItem = {
       icon: this.itemToCopy.icon,
@@ -121,6 +127,6 @@ export class DesktopMenuService {
 
     return this.desktopItemsService
       .addDesktopItem(copiedElement)
-      .pipe(mergeMap((item) => this.addElementsToArray(item)))
+      .pipe(mergeMap((item) => this.addElementsToArray(item)));
   }
 }

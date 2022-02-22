@@ -5,6 +5,7 @@ import { AdditionalDesktopMenuService } from 'src/app/services/additional-deskto
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { EventService } from 'src/app/services/event.service';
+import { DesktopSavedOptions } from 'src/app/types/desktopMenu';
 import { DesktopItem } from '../../types/desktopItems';
 
 @Component({
@@ -16,7 +17,8 @@ export class DesktopItemsComponent implements OnInit {
   subscription: Subscription = new Subscription();
   subscriptionAddiotionalMenu: Subscription = new Subscription();
   iconItems: DesktopItem[] = [];
-  sizeOption: string = localStorage.getItem('option') || '';
+  sizeOption: string = localStorage.getItem('options') || '';
+  test: string = localStorage.getItem('test') || '';
 
   constructor(
     private desktopMenuService: DesktopMenuService,
@@ -36,6 +38,7 @@ export class DesktopItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItems();
+    // console.log(JSON.parse(this.sizeOption)['size'])
   }
 
   ngOnDestroy() {
@@ -47,6 +50,10 @@ export class DesktopItemsComponent implements OnInit {
     this.desktopItemsService.getItems().subscribe((items) => {
       this.iconItems = items;
     });
+    if(this.sizeOption) {
+      const siema = JSON.parse(this.sizeOption)
+      this.sizeOption = siema['size']
+    }
   }
 
   setIndex(index: number, repeatIndex: number | null = null): number {

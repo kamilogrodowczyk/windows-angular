@@ -28,4 +28,7 @@ export const desktopMenu: desktopMenuInterface[] = [
   },
 ];
 
+export const viewMenu: string[] = ['Large icons', 'Medium icons', 'Small icons']
+export const sortByMenu: string[] = ['Name']
+
 definePropertyArray(desktopMenu);

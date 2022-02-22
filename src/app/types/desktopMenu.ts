@@ -3,3 +3,7 @@ export interface DesktopMenu {
   anchor: boolean[];
   [propName: string]: any;
 }
+
+export interface DesktopSavedOptions {
+  size: string;
+}

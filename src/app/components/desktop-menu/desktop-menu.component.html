@@ -9,7 +9,10 @@
   </button>
   <div *ngIf="isView" class="view">
     <ng-container *ngFor="let i of iconsSize">
-      <button (click)="setIconSize(i)">
+      <button
+        (click)="setIconSize(i)"
+        [ngClass]="{ active: currentOption === i }"
+      >
         {{ i }}
       </button>
     </ng-container>
