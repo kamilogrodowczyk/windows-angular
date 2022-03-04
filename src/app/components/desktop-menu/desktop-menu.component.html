@@ -2,24 +2,20 @@
   <button
     *ngFor="let item of service.menuItems; index as i"
     (click)="setFn(item)"
-    (mousemove)="setViewState(item); setSortByState(item)"
+    appViewSize="{{ item }}"
+    #test="test"
   >
+    <div *ngIf="test.currentItems.length" class="view">
+      <ng-container *ngFor="let i of test.currentItems">
+        <button
+          (click)="test.setFn(i)"
+          [ngClass]="{ active: test.selectedOption === i }"
+        >
+          {{ i }}
+        </button>
+      </ng-container>
+    </div>
     <a *ngIf="service.anchorItems[i]; else elseBlock">{{ item }}</a>
     <ng-template #elseBlock>{{ item }}</ng-template>
   </button>
-  <div *ngIf="isView" class="view">
-    <ng-container *ngFor="let i of iconsSize">
-      <button
-        (click)="setIconSize(i)"
-        [ngClass]="{ active: currentOption === i }"
-      >
-        {{ i }}
-      </button>
-    </ng-container>
-  </div>
-  <div *ngIf="isSortBy" class="view">
-    <ng-container *ngFor="let i of iconsSortBy">
-      <button (click)="setIconSort(i)">{{ i }}</button>
-    </ng-container>
-  </div>
 </div>

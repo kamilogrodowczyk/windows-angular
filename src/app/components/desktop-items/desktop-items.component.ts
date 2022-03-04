@@ -5,7 +5,7 @@ import { AdditionalDesktopMenuService } from 'src/app/services/additional-deskto
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { EventService } from 'src/app/services/event.service';
-import { DesktopSavedOptions } from 'src/app/types/desktopMenu';
+import { BrowserStorageService } from 'src/app/services/storage.service';
 import { DesktopItem } from '../../types/desktopItems';
 
 @Component({
@@ -17,15 +17,15 @@ export class DesktopItemsComponent implements OnInit {
   subscription: Subscription = new Subscription();
   subscriptionAddiotionalMenu: Subscription = new Subscription();
   iconItems: DesktopItem[] = [];
-  sizeOption: string = localStorage.getItem('options') || '';
-  test: string = localStorage.getItem('test') || '';
+  sizeOption: string = '';
 
   constructor(
     private desktopMenuService: DesktopMenuService,
     private desktopItemsService: DesktopItemsService,
     private eventService: EventService,
     private router: Router,
-    private additionalDesktopMenu: AdditionalDesktopMenuService
+    private additionalDesktopMenu: AdditionalDesktopMenuService,
+    private storage: BrowserStorageService
   ) {
     this.subscription = this.desktopMenuService.allItems$.subscribe(
       (items) => (this.iconItems = items)
@@ -38,7 +38,7 @@ export class DesktopItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItems();
-    // console.log(JSON.parse(this.sizeOption)['size'])
+    this.getStorageOptions();
   }
 
   ngOnDestroy() {
@@ -50,10 +50,12 @@ export class DesktopItemsComponent implements OnInit {
     this.desktopItemsService.getItems().subscribe((items) => {
       this.iconItems = items;
     });
-    if(this.sizeOption) {
-      const siema = JSON.parse(this.sizeOption)
-      this.sizeOption = siema['size']
-    }
+  }
+
+  getStorageOptions() {
+    const optionsJson = this.storage.get('options') || '{}';
+    this.sizeOption =
+      optionsJson !== null ? JSON.parse(optionsJson)['size'] : '';
   }
 
   setIndex(index: number, repeatIndex: number | null = null): number {

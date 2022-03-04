@@ -5,24 +5,7 @@
       "icon": "dumpster",
       "name": "Recycle Bin",
       "linkName": "recyclebin",
-      "elements": [
-        {
-          "icon": "folder",
-          "name": "Folder 34 — copy",
-          "linkName": "folder34—copy",
-          "elements": [
-            {
-              "icon": "file",
-              "name": "Text 3",
-              "linkName": "text3",
-              "content": "Lorem Ipsum dolor",
-              "type": "Text document",
-              "characters": 17
-            }
-          ],
-          "id": 5
-        }
-      ]
+      "elements": []
     },
     {
       "id": 2,
@@ -80,22 +63,6 @@
     },
     {
       "icon": "folder",
-      "name": "Folder 34 — copy 2",
-      "linkName": "folder34—copy2",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ],
-      "id": 6
-    },
-    {
-      "icon": "folder",
       "name": "Folder 34 — copy 3",
       "linkName": "folder34—copy3",
       "elements": [
@@ -125,22 +92,6 @@
         }
       ],
       "id": 8
-    },
-    {
-      "icon": "folder",
-      "name": "Folder 34 — copy 5",
-      "linkName": "folder34—copy5",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ],
-      "id": 9
     }
   ]
 }

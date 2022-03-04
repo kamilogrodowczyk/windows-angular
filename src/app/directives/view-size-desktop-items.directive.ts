@@ -1,17 +1,63 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core';
+import { sortByMenu, viewMenu } from '../mocks/desktopMenu';
+import { AdditionalDesktopMenuService } from '../services/additional-desktop-menu.service';
+import { DesktopMenuService } from '../services/desktop-menu.service';
+import { BrowserStorageService } from '../services/storage.service';
 
 @Directive({
   selector: '[appViewSize]',
+  exportAs: 'test',
 })
 export class ViewSizeDesktopItemsDirective {
-  fontSize = '1.5rem';
-  @Input('appViewSize') ex = "{'font-size': '1.5rem'}";
+  @Input('appViewSize') item = '';
+  currentItems: string[] = [];
+  selectedOption: string = '';
+  setFn: any;
 
-  constructor() {}
+  constructor(
+    private storage: BrowserStorageService,
+    private service: AdditionalDesktopMenuService,
+    private menuService: DesktopMenuService
+  ) {}
+
+  setViewState(items: string[], storageOption: string, option: string) {
+    this.currentItems = items;
+    if (!storageOption) return;
+    const storage = JSON.parse(storageOption);
+    const currentSize = this.currentItems.filter((size) =>
+      size.toLowerCase().includes(storage[option] || 'Creation date')
+    );
+    this.selectedOption = currentSize[0];
+  }
+
+  @HostListener('mousemove')
+  setOption() {
+    const optionsJson = this.storage.get('options') || '{}';
+    this.currentItems = [];
+    switch (this.item) {
+      case 'View':
+        this.setViewState(viewMenu, optionsJson, 'size');
+        this.setFn = this.setSize;
+        break;
+      case 'Sort by':
+        this.setViewState(sortByMenu, optionsJson, 'sortBy');
+        this.setFn = this.setSort;
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  @HostListener('mouseleave')
+  clearOptions() {
+    this.currentItems = [];
+  }
+
+  setSize(option: string) {
+    this.service.setIconSize(option);
+  }
+  setSort(option: string) {
+    this.menuService.sort(option.toLowerCase());
+  }
 }

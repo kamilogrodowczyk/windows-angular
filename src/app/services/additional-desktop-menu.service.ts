@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DesktopSavedOptions } from '../types/desktopMenu';
+import { BrowserStorageService } from './storage.service';
 
 const SMALL = 'small';
 const MEDIUM = 'medium';
@@ -11,32 +12,30 @@ const LARGE = 'large';
 })
 export class AdditionalDesktopMenuService {
   private sizeState: Subject<string> = new Subject<string>();
-  private sortByState: Subject<string> = new Subject<string>();
 
-  storageOptions!: DesktopSavedOptions;
+  storageSize!: Partial<DesktopSavedOptions>;
   currentOption: string = 'Medium icons';
   sizeState$ = this.sizeState.asObservable();
 
-  constructor() {}
+  constructor(private storage: BrowserStorageService) {}
 
   setIconSize(option: string) {
     switch (option) {
       case 'Large icons':
-        this.storageOptions = { ...this.storageOptions, size: LARGE };
+        this.storage.set('options', { size: LARGE });
         this.sizeState.next(LARGE);
         break;
       case 'Medium icons':
-        this.storageOptions = { ...this.storageOptions, size: MEDIUM };
+        this.storage.set('options', { size: MEDIUM });
         this.sizeState.next(MEDIUM);
         break;
       case 'Small icons':
-        this.storageOptions = { ...this.storageOptions, size: SMALL };
+        this.storage.set('options', { size: SMALL });
         this.sizeState.next(SMALL);
         break;
       default:
         break;
     }
-    localStorage.setItem('options', JSON.stringify(this.storageOptions));
   }
 
   setViewState(iconsSize: string[], sizeOption: string) {
@@ -46,9 +45,5 @@ export class AdditionalDesktopMenuService {
       size.toLowerCase().includes(storage['size'])
     );
     this.currentOption = currentSize[0];
-  }
-
-  setIconSort(option: string) {
-    this.sizeState.next(option);
   }
 }

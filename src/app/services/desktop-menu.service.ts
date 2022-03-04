@@ -4,6 +4,7 @@ import { newItem } from '../components/add-element/newItem';
 import { desktopMenu } from '../mocks/desktopMenu';
 import { DesktopItem } from '../types/desktopItems';
 import { DesktopItemsService } from './desktop-items.service';
+import { BrowserStorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,9 +31,9 @@ export class DesktopMenuService {
     this.menuItems = [];
   }
 
-  constructor(private desktopItemsService: DesktopItemsService) {
+  constructor(private desktopItemsService: DesktopItemsService, private storage: BrowserStorageService) {
     this.getAllDesktopItems();
-    this.sort();
+    // this.sort();
   }
 
   // Service
@@ -41,20 +42,21 @@ export class DesktopMenuService {
     this.allItems.next(items);
   }
 
-  sort() {
-    this.allElements.sort((a, b) =>
-      a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-    );
-    this.allItems.next(this.allElements);
+  sort(option: string) {
+    this.desktopItemsService
+      .sortItems(option)
+      .subscribe((items) => this.allItems.next(items));
   }
 
   // Remove element from desktop and add to recycle bin
 
   getAllDesktopItems() {
-    this.desktopItemsService.getItems().subscribe((items) => {
-      this.allElements = items;
-      this.recycleBin = items[0];
-    });
+    this.desktopItemsService
+      .getItems()
+      .subscribe((items) => (this.allElements = items));
+    this.desktopItemsService
+      .getItemById(1)
+      .subscribe((item) => (this.recycleBin = item));
   }
 
   updateElementsinArray(item: DesktopItem): Observable<DesktopItem> {
