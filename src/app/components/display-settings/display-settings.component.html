@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>Display</h2>
+  <div class="container__color">
+    <h4>Color</h4>
+    <p>Night light</p>
+    <span>
+      <button
+        class="container__toggle"
+        (click)="setDisplay()"
+        [ngClass]="{ active: isDisabled === false }"
+      >
+        <div class="container__toggle--dot"></div>
+      </button>
+      <p>{{ isDisabled ? "Off" : "On" }}</p>
+    </span>
+    <p>
+      Screens emit blue light, which can keep you up at night. Night light
+      displays warmer colors to help you sleep.
+    </p>
+    <div class="container__range">
+      <label for="night-strength">Strength</label>
+      <input
+        [ngClass]="{ active: range !== '' }"
+        [value]="range"
+        (input)="range = setNightDisplayRange($event)"
+        type="range"
+        id="night-strength"
+        min="0"
+        max="100"
+        [attr.data-range]="range"
+      />
+    </div>
+  </div>
+  <div class="container__scale">
+    <h4>Scale and layout</h4>
+    <p>Change the size of text, apps and other items</p>
+    <select name="" id="">
+      <option value="100">100% (recommended)</option>
+      <option value="125">125%</option>
+      <option value="150">150%</option>
+      <option value="175">175%</option>
+    </select>
+  </div>
+</div>

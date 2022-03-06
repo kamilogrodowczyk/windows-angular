@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AdditionalDesktopMenuService } from 'src/app/services/additional-desktop-menu.service';
+import { AdditionalDesktopMenuService } from 'src/app/directives/additional-desktop-menu.service';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { EventService } from 'src/app/services/event.service';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DesktopSavedOptions } from '../types/desktopMenu';
-import { BrowserStorageService } from './storage.service';
+import { BrowserStorageService } from '../services/storage.service';
 
 const SMALL = 'small';
 const MEDIUM = 'medium';
@@ -36,14 +36,5 @@ export class AdditionalDesktopMenuService {
       default:
         break;
     }
-  }
-
-  setViewState(iconsSize: string[], sizeOption: string) {
-    if (!sizeOption) return;
-    const storage = JSON.parse(sizeOption);
-    const currentSize = iconsSize.filter((size) =>
-      size.toLowerCase().includes(storage['size'])
-    );
-    this.currentOption = currentSize[0];
   }
 }

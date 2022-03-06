@@ -12,7 +12,7 @@ export const desktopMenu: desktopMenuInterface[] = [
   },
   {
     name: ['Open', 'Copy', 'Remove', 'Change name'],
-    anchor: [true, false, false, false, true],
+    anchor: [true, false, false, true],
   },
   {
     name: [
@@ -21,14 +21,14 @@ export const desktopMenu: desktopMenuInterface[] = [
       'Refresh',
       'Paste',
       'New folder',
-      'Ustawienia ekranu',
-      'Personalizuj',
+      'Display settings',
+      'Personalize',
     ],
-    anchor: [true, false, false, true, true, true],
+    anchor: [false, false, false, false, true, true, true],
   },
 ];
 
 export const viewMenu: string[] = ['Large icons', 'Medium icons', 'Small icons']
-export const sortByMenu: string[] = ['Name', 'Id']
+export const sortByMenu: string[] = ['Name', 'Creation date']
 
 definePropertyArray(desktopMenu);

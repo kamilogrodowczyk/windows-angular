@@ -1,6 +1,6 @@
 import { Directive, HostListener, Input } from '@angular/core';
 import { sortByMenu, viewMenu } from '../mocks/desktopMenu';
-import { AdditionalDesktopMenuService } from '../services/additional-desktop-menu.service';
+import { AdditionalDesktopMenuService } from './additional-desktop-menu.service';
 import { DesktopMenuService } from '../services/desktop-menu.service';
 import { BrowserStorageService } from '../services/storage.service';
 
@@ -8,7 +8,7 @@ import { BrowserStorageService } from '../services/storage.service';
   selector: '[appViewSize]',
   exportAs: 'test',
 })
-export class ViewSizeDesktopItemsDirective {
+export class AdditionalDesktopMenuDirective {
   @Input('appViewSize') item = '';
   currentItems: string[] = [];
   selectedOption: string = '';
@@ -25,7 +25,7 @@ export class ViewSizeDesktopItemsDirective {
     if (!storageOption) return;
     const storage = JSON.parse(storageOption);
     const currentSize = this.currentItems.filter((size) =>
-      size.toLowerCase().includes(storage[option] || 'Creation date')
+      size.toLowerCase().includes(storage[option])
     );
     this.selectedOption = currentSize[0];
   }
@@ -58,6 +58,9 @@ export class ViewSizeDesktopItemsDirective {
     this.service.setIconSize(option);
   }
   setSort(option: string) {
+    if(option === 'Creation date') {
+      option = 'id';
+    }
     this.menuService.sort(option.toLowerCase());
   }
 }

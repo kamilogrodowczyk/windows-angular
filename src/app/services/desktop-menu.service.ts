@@ -24,7 +24,6 @@ export class DesktopMenuService {
   getItems(index: number) {
     this.menuItems = desktopMenu[index].name;
     this.anchorItems = desktopMenu[index].anchor;
-    // this.getAllDesktopItems();
   }
 
   clearItems() {

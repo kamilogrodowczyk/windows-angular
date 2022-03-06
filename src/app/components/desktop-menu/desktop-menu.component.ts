@@ -45,6 +45,9 @@ export class DesktopMenuComponent implements OnInit {
       case 'Paste':
         this.service.paste()?.subscribe();
         break;
+      case 'Display settings':
+        this.router.navigate(['desktop', 'display']);
+        break;
       default:
         return;
     }

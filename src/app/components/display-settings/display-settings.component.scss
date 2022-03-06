@@ -1,0 +1,159 @@
+$gray: #b6b6b6;
+$blue: #00a2ed;
+$basic-black: #222;
+$hover-black: #000;
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+span {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+a {
+  color: $blue;
+
+  &:hover {
+    color: $gray;
+  }
+}
+
+.container {
+  width: 50%;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  display: grid;
+  align-items: flex-start;
+  gap: 3vh;
+  padding: 4vh 2vh;
+}
+
+.container__color {
+  & > * {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.container__scale {
+  & > * {
+    margin-bottom: 0.5rem;
+  }
+}
+
+select {
+  width: 13rem;
+  border-radius: 0;
+  border: 2px solid $basic-black;
+}
+
+.container__range {
+  display: grid;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+input {
+  -webkit-appearance: none;
+  padding: 0;
+  width: 50%;
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+input[data-range]:hover::after {
+  content: attr(data-range);
+  position: absolute;
+  top: -90%;
+  left: 50%;
+  color: white;
+  width: 30px;
+  height: 30px;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  font-weight: 300;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #222;
+  border-radius: 25px;
+  border: 0px solid #000101;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  //   margin-top: -3.6px;
+  appearance: none;
+  height: 24px;
+  width: 7px;
+  background-color: $blue;
+  border-radius: 50px;
+  margin-top: -10px;
+  position: relative;
+
+  &::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: black;
+  }
+}
+
+.container__toggle {
+  width: 47px;
+  height: 20px;
+  border-radius: 50px;
+  border: solid 2px $basic-black;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+
+  &.active {
+    background-color: $blue;
+    border: none;
+
+    &:hover {
+      border: none;
+    }
+
+    & > .container__toggle--dot {
+      transform: translateX(200%);
+    }
+  }
+
+  & > .container__toggle--dot {
+    background-color: $basic-black;
+    border-radius: 50%;
+    height: 13px;
+    width: 13px;
+  }
+
+  &:hover {
+    border: solid 2px $hover-black;
+
+    & > .container__toggle--dot {
+      background-color: $hover-black;
+    }
+  }
+
+  &:active {
+    background-color: $gray;
+    border: none;
+  }
+}

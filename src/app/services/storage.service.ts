@@ -18,7 +18,7 @@ export class BrowserStorageService {
   }
 
   set(key: string, value: Partial<DesktopSavedOptions>) {
-    const optionsJson = this.get('options') || '{}';
+    const optionsJson = this.get(key) || '{}';
     this.storageOptions =
       optionsJson !== null
         ? { ...JSON.parse(optionsJson), ...value }
