@@ -1,4 +1,5 @@
 $gray: #b6b6b6;
+$dark-gray: #928f8f;
 $blue: #00a2ed;
 $basic-black: #222;
 $hover-black: #000;
@@ -57,6 +58,30 @@ select {
   display: grid;
   align-items: center;
   margin-top: 1rem;
+
+  .container__range--info {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    position: relative;
+
+    .container__range--track {
+      height: 2px;
+      background-color: $blue;
+      position: absolute;
+      left: calc(1rem + 30px);
+      top: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    p {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      width: 30px;
+    }
+  }
 }
 
 input {
@@ -64,37 +89,35 @@ input {
   padding: 0;
   width: 50%;
   position: relative;
-  margin-top: 0.5rem;
-}
+  margin-left: 1rem;
 
-input[data-range]:hover::after {
-  content: attr(data-range);
-  position: absolute;
-  top: -90%;
-  left: 50%;
-  color: white;
-  width: 30px;
-  height: 30px;
-  background-color: #222;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateX(-50%);
-  font-weight: 300;
+  &[type="range"]:hover::-webkit-slider-runnable-track {
+    background-color: $basic-black;
+  }
+
+  &[type="range"]:hover::-webkit-slider-thumb {
+    background-color: $basic-black;
+  }
+
+  &[type="range"]:active::-webkit-slider-runnable-track {
+    background-color: $dark-gray;
+  }
+
+  &[type="range"]:active::-webkit-slider-thumb {
+    background-color: $dark-gray;
+  }
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 2px;
-  cursor: pointer;
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  background: #222;
+  background: $gray;
   border-radius: 25px;
   border: 0px solid #000101;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-  //   margin-top: -3.6px;
   appearance: none;
   height: 24px;
   width: 7px;
@@ -102,6 +125,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50px;
   margin-top: -10px;
   position: relative;
+  z-index: 2;
 
   &::after {
     content: "";

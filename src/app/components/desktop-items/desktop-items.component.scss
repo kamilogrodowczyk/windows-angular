@@ -4,10 +4,11 @@ div {
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(auto-fill, 9rem);
   grid-auto-flow: column;
+  height: calc(100% - 51px);
 }
 
 div.large {
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(auto-fill, minmax(12.5rem, 1fr));
   grid-template-columns: repeat(auto-fill, 12rem);
 
   fa-icon {

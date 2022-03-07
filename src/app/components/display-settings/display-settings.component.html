@@ -19,16 +19,25 @@
     </p>
     <div class="container__range">
       <label for="night-strength">Strength</label>
-      <input
-        [ngClass]="{ active: range !== '' }"
-        [value]="range"
-        (input)="range = setNightDisplayRange($event)"
-        type="range"
-        id="night-strength"
-        min="0"
-        max="100"
-        [attr.data-range]="range"
-      />
+      <span class="container__range--info">
+        <p>{{ range }}</p>
+        <input
+          [ngClass]="{ active: range !== undefined }"
+          [value]="range"
+          (input)="range = setNightDisplayRange($event)"
+          type="range"
+          id="night-strength"
+          min="0"
+          max="100"
+          (mousedown)="onMouseDown()"
+          (mouseup)="onMouseUp()"
+        />
+        <div
+          aria-hidden="true"
+          class="container__range--track"
+          [ngStyle]="{ 'width.%': range / 2 }"
+        ></div>
+      </span>
     </div>
   </div>
   <div class="container__scale">

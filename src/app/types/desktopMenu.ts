@@ -8,5 +8,5 @@ export interface DesktopSavedOptions {
   size: string;
   sortBy: string;
   nightDisplay: boolean;
-  nightDisplayValue: string;
+  nightDisplayValue: number;
 }

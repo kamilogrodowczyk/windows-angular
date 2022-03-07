@@ -43,7 +43,7 @@ export class DesktopItemsDirective {
   }
 
   @HostListener('contextmenu', ['$event'])
-  clickEvent(e: any) {
+  clickEvent(e: MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
     this.clicks.next(e);

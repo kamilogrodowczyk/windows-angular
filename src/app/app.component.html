@@ -2,8 +2,9 @@
   appDesktopMenu
   (debounceClick)="expandedFlag = false"
   (click)="hideMenu(); expandedFlag = true"
-  [desktopMenuIndex]=3
-  >
+  [desktopMenuIndex]="3"
+  [ngStyle]="{'filter': 'sepia(' + nightLightValue + '%)'}"
+>
   <router-outlet></router-outlet>
   <app-taskbar></app-taskbar>
 </div>
