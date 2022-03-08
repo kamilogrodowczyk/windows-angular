@@ -14,22 +14,6 @@
       "linkName": "thispc"
     },
     {
-      "id": 3,
-      "icon": "folder",
-      "name": "Test Folder",
-      "linkName": "testfolder",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 1",
-          "linkName": "text1",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ]
-    },
-    {
       "id": 4,
       "icon": "folder",
       "name": "Folder 34",
@@ -37,109 +21,53 @@
       "elements": [
         {
           "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
+          "name": "New document",
+          "linkName": "newdocument",
+          "content": "",
           "type": "Text document",
-          "characters": 17
+          "characters": 0
+        },
+        {
+          "icon": "file",
+          "name": "New document 2",
+          "linkName": "newdocument2",
+          "content": "",
+          "type": "Text document",
+          "characters": 0
+        },
+        {
+          "icon": "file",
+          "name": "New document 3",
+          "linkName": "newdocument3",
+          "content": "",
+          "type": "Text document",
+          "characters": 0
         }
       ]
     },
     {
       "icon": "folder",
-      "name": "Folder 34 — copy",
-      "linkName": "folder34—copy",
+      "name": "Test Folder — copy",
+      "linkName": "testfolder—copy",
       "elements": [
         {
           "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
+          "name": "Test",
+          "linkName": "test",
+          "content": "",
           "type": "Text document",
-          "characters": 17
+          "characters": 0
+        },
+        {
+          "icon": "file",
+          "name": "New document",
+          "linkName": "newdocument",
+          "content": "",
+          "type": "Text document",
+          "characters": 0
         }
       ],
       "id": 5
-    },
-    {
-      "icon": "folder",
-      "name": "Folder 34 — copy 3",
-      "linkName": "folder34—copy3",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ],
-      "id": 7
-    },
-    {
-      "icon": "folder",
-      "name": "Folder 34 — copy 4",
-      "linkName": "folder34—copy4",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ],
-      "id": 8
-    },
-    {
-      "icon": "folder",
-      "name": "Folder 34 — copy 4 — copy",
-      "linkName": "folder34—copy4—copy",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ],
-      "id": 9
-    },
-    {
-      "icon": "folder",
-      "name": "Folder 34 — copy 4 — copy 2",
-      "linkName": "folder34—copy4—copy2",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ],
-      "id": 10
-    },
-    {
-      "icon": "folder",
-      "name": "Folder 34 — copy 4 — copy 3",
-      "linkName": "folder34—copy4—copy3",
-      "elements": [
-        {
-          "icon": "file",
-          "name": "Text 3",
-          "linkName": "text3",
-          "content": "Lorem Ipsum dolor",
-          "type": "Text document",
-          "characters": 17
-        }
-      ],
-      "id": 11
     }
   ]
 }

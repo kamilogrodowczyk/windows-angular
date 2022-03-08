@@ -5,6 +5,7 @@ import { AppIconComponent } from './components/app-icon/app-icon.component';
 import { DesktopItemsComponent } from './components/desktop-items/desktop-items.component';
 import { AddElementComponent } from './components/add-element/add-element.component';
 import { DisplaySettingsComponent } from './components/display-settings/display-settings.component';
+import { NotepadComponent } from './components/notepad/notepad.component';
 
 export const routes: Routes = [
   { path: '', component: DesktopItemsComponent },
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: ':appIcon/:action',
     component: ActionsComponent,
+  },
+  {
+    path: ':appIcon/notepad/:document',
+    component: NotepadComponent,
   },
 ];
 

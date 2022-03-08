@@ -1,6 +1,6 @@
 $gray: #b6b6b6;
 
-:host {
+.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ $gray: #b6b6b6;
   width: 50%;
   height: 75%;
   background-color: white;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 
   & > *:not(.container__elements.header):hover {
     cursor: default;
@@ -25,8 +25,8 @@ $gray: #b6b6b6;
   justify-content: space-around;
 
   & > * {
-    flex:1;
-    padding-left: .5rem;
+    flex: 1;
+    padding-left: 0.5rem;
   }
 
   &.header > * {
@@ -47,5 +47,13 @@ span {
 
 fa-icon {
   font-size: 1rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
+}
+
+input {
+  border-radius: 0;
+  border: solid 1px black;
+  margin-left: -5px;
+  padding-left: 5px;
+  height: 100%;
 }

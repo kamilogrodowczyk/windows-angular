@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { forkJoin, map, mergeMap, Observable, of, Subject } from 'rxjs';
 import { newItem } from '../components/add-element/newItem';
 import { desktopMenu } from '../mocks/desktopMenu';
-import { DesktopItem } from '../types/desktopItems';
+import { DesktopItem, DesktopItemElement } from '../types/desktopItems';
 import { DesktopItemsService } from './desktop-items.service';
 import { BrowserStorageService } from './storage.service';
 
@@ -11,8 +11,10 @@ import { BrowserStorageService } from './storage.service';
 })
 export class DesktopMenuService {
   private allItems = new Subject<DesktopItem[]>();
+  private newTextDocument = new Subject<boolean>();
 
   allItems$ = this.allItems.asObservable();
+  newTextDocument$ = this.newTextDocument.asObservable();
 
   menuItems: string[] = [];
   anchorItems: boolean[] = [];
@@ -30,7 +32,10 @@ export class DesktopMenuService {
     this.menuItems = [];
   }
 
-  constructor(private desktopItemsService: DesktopItemsService, private storage: BrowserStorageService) {
+  constructor(
+    private desktopItemsService: DesktopItemsService,
+    private storage: BrowserStorageService
+  ) {
     this.getAllDesktopItems();
     // this.sort();
   }
@@ -99,10 +104,11 @@ export class DesktopMenuService {
 
   // Paste folder
 
-  findTheSameName(name: string): { [key: string]: string } {
-    const theSameName = this.allElements.filter((item) =>
-      item.name.includes(name)
-    );
+  findTheSameName<T extends { linkName: string }>(
+    name: string,
+    arr: T[]
+  ): { [key: string]: string } {
+    const theSameName = arr.filter((item) => item.linkName.includes(name.replace(/\s/g, '').toLowerCase()));
     const uniqueName = theSameName.length
       ? `${name} ${theSameName.length + 1}`
       : name;
@@ -118,7 +124,10 @@ export class DesktopMenuService {
 
   paste(): Observable<DesktopItem> | undefined {
     if (!this.itemToCopy) return;
-    const uniqueValues = this.findTheSameName(`${this.itemToCopy.name} — copy`);
+    const uniqueValues = this.findTheSameName<DesktopItem>(
+      `${this.itemToCopy.name} — copy`,
+      this.allElements
+    );
     const copiedElement: DesktopItem = {
       icon: this.itemToCopy.icon,
       name: uniqueValues['uniqueName'],
@@ -129,5 +138,11 @@ export class DesktopMenuService {
     return this.desktopItemsService
       .addDesktopItem(copiedElement)
       .pipe(mergeMap((item) => this.addElementsToArray(item)));
+  }
+
+  // New text document
+
+  createNewDocument(document: boolean) {
+    this.newTextDocument.next(document);
   }
 }

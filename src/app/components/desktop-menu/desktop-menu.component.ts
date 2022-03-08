@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
@@ -9,6 +10,7 @@ import { OverlayDesktopMenuService } from 'src/app/services/overlay-desktop-menu
   styleUrls: ['./desktop-menu.component.scss'],
 })
 export class DesktopMenuComponent implements OnInit {
+  test: any;
 
   ngOnInit(): void {}
 
@@ -16,7 +18,9 @@ export class DesktopMenuComponent implements OnInit {
     public service: DesktopMenuService,
     private router: Router,
     private overlayMenu: OverlayDesktopMenuService
-  ) {}
+  ) {
+    this.service.newTextDocument$.subscribe((item) => (this.test = item));
+  }
 
   setFn(item: string) {
     const iconName = this.overlayMenu.hideMenu();
@@ -47,6 +51,9 @@ export class DesktopMenuComponent implements OnInit {
         break;
       case 'Display settings':
         this.router.navigate(['desktop', 'display']);
+        break;
+      case 'New text document':
+        this.service.createNewDocument(true);
         break;
       default:
         return;

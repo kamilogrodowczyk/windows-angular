@@ -21,10 +21,14 @@ export const desktopMenu: desktopMenuInterface[] = [
       'Refresh',
       'Paste',
       'New folder',
-      'Display settings',
-      'Personalize',
+      // 'New text document',
+      // 'Personalize',
     ],
     anchor: [false, false, false, false, true, true, true],
+  },
+  {
+    name: ['New text document'],
+    anchor: [true, false, false, true],
   },
 ];
 

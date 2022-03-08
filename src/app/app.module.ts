@@ -21,6 +21,7 @@ import { UniqueDesktopItemNameValidatorDirective } from './form-validator/unique
 import { ForbiddenDesktopItemsValidatorDirective } from './form-validator/forbidden-desktop-items-validator.directive';
 import { AdditionalDesktopMenuDirective } from './directives/additional-desktop-menu.directive';
 import { DisplaySettingsComponent } from './components/display-settings/display-settings.component';
+import { NotepadComponent } from './components/notepad/notepad.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DisplaySettingsComponent } from './components/display-settings/display-
     ForbiddenDesktopItemsValidatorDirective,
     AdditionalDesktopMenuDirective,
     DisplaySettingsComponent,
+    NotepadComponent,
   ],
   imports: [
     BrowserModule,

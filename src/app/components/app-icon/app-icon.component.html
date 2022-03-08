@@ -1,15 +1,38 @@
-<div class="container">
-  <div class="container__elements header">
-    <p>Name</p>
-    <p>Type</p>
-    <p>Size</p>
-  </div>
-  <div class="container__elements" *ngFor="let item of selectedItem">
-    <span>
-      <fa-icon [icon]="item.icon"></fa-icon>
-      <p>{{ item.name }}</p>
-    </span>
-    <p>{{ item.type }}</p>
-    <p *ngIf="item.characters">{{ item.characters }} characters</p>
+<div class="wrapper" (click)="createNewDocument()" appDesktopMenu [desktopMenuIndex]="4">
+  <div class="container">
+    <div class="container__elements header">
+      <p>Name</p>
+      <p>Type</p>
+      <p>Size</p>
+    </div>
+    <div *ngFor="let item of selectedItem">
+      <a class="container__elements" (dblclick)="openDocument(item.linkName)">
+        <span>
+          <fa-icon [icon]="item.icon"></fa-icon>
+          <p>{{ item.name }}</p>
+        </span>
+        <p>{{ item.type }}</p>
+        <p *ngIf="item.characters; else elseBlock">
+          {{ item.characters }} characters
+        </p>
+        <ng-template #elseBlock>
+          <p>0 characters</p>
+        </ng-template>
+      </a>
+    </div>
+    <div *ngIf="newDocument" class="container__elements">
+      <span>
+        <fa-icon [icon]="file"></fa-icon>
+        <input
+          type="text"
+          #newDocument
+          [(ngModel)]="name"
+          autofocus="autofocus"
+          (focus)="test($event)"
+        />
+      </span>
+      <p>Text document</p>
+      <p>0 characters</p>
+    </div>
   </div>
 </div>
