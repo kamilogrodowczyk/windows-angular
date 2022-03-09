@@ -1,5 +1,6 @@
 @import "@angular/cdk/overlay-prebuilt.css";
 $base-color: #222;
+$red: #ff3333;
 
 html {
   font-size: 16px;
@@ -43,7 +44,7 @@ h4 {
   line-height: 1.5;
   color: $base-color;
   font-weight: 400;
-  margin-bottom: .75em;
+  margin-bottom: 0.75em;
 }
 
 a {
@@ -65,6 +66,19 @@ fa-icon {
 
 button {
   border: none;
+
+  &.exit-button {
+    height: 100%;
+    width: 2rem;
+    background-color: transparent;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  
+    &:hover {
+      background-color: $red;
+      color: white;
+      transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+  }
 }
 
 input {

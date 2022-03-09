@@ -1,5 +1,14 @@
-<div class="wrapper" (click)="createNewDocument()" appDesktopMenu [desktopMenuIndex]="4">
+<div
+  class="wrapper"
+  (click)="createNewDocument()"
+  appDesktopMenu
+  [desktopMenuIndex]="4"
+>
   <div class="container">
+    <div class="container__header">
+      <h4 *ngIf="mainItem">{{ mainItem.name }}</h4>
+      <button class="exit-button" (click)="goBack()">X</button>
+    </div>
     <div class="container__elements header">
       <p>Name</p>
       <p>Type</p>
@@ -21,15 +30,20 @@
       </a>
     </div>
     <div *ngIf="newDocument" class="container__elements">
-      <span>
+      <span class="container__elements--new">
         <fa-icon [icon]="file"></fa-icon>
         <input
           type="text"
-          #newDocument
+          #input
+          #nameClass="ngModel"
           [(ngModel)]="name"
-          autofocus="autofocus"
-          (focus)="test($event)"
+          [ngClass]="{ 'error-border': nameClass.touched && nameClass.invalid }"
+          appForbiddenName
+          (input)="isError = nameClass.errors"
         />
+        <p *ngIf="nameClass.errors?.['forbiddenChar']" class="error">
+          &gt; &lt; | : " \ / ? * are forbidden.
+        </p>
       </span>
       <p>Text document</p>
       <p>0 characters</p>

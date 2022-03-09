@@ -21,7 +21,7 @@
       "elements": [
         {
           "icon": "file",
-          "name": "New document",
+          "name": "New document.txt",
           "linkName": "newdocument",
           "content": "",
           "type": "Text document",
@@ -29,7 +29,7 @@
         },
         {
           "icon": "file",
-          "name": "New document 2",
+          "name": "New document 2.txt",
           "linkName": "newdocument2",
           "content": "",
           "type": "Text document",
@@ -37,8 +37,32 @@
         },
         {
           "icon": "file",
-          "name": "New document 3",
+          "name": "New document 3.txt",
           "linkName": "newdocument3",
+          "content": "",
+          "type": "Text document",
+          "characters": 0
+        },
+        {
+          "icon": "file",
+          "name": "New document 4.txt",
+          "linkName": "newdocument4",
+          "content": "",
+          "type": "Text document",
+          "characters": 0
+        },
+        {
+          "icon": "file",
+          "name": "New document 5.txt",
+          "linkName": "newdocument5",
+          "content": "",
+          "type": "Text document",
+          "characters": 0
+        },
+        {
+          "icon": "file",
+          "name": "p.txt",
+          "linkName": "p",
           "content": "",
           "type": "Text document",
           "characters": 0
@@ -54,17 +78,17 @@
           "icon": "file",
           "name": "Test",
           "linkName": "test",
-          "content": "",
+          "content": "11",
           "type": "Text document",
-          "characters": 0
+          "characters": 2
         },
         {
           "icon": "file",
           "name": "New document",
           "linkName": "newdocument",
-          "content": "",
+          "content": "ss",
           "type": "Text document",
-          "characters": 0
+          "characters": 2
         }
       ],
       "id": 5

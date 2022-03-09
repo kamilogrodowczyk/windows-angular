@@ -1,4 +1,7 @@
 $gray: #b6b6b6;
+$dirty-white: #fdfbfb;
+$light-gray: #cfcfcf;
+$error: #a3394c;
 
 .wrapper {
   display: flex;
@@ -12,9 +15,9 @@ $gray: #b6b6b6;
   width: 50%;
   height: 75%;
   background-color: white;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
 
-  & > *:not(.container__elements.header):hover {
+  & > *:not(.container__elements.header, .container__header):hover {
     cursor: default;
     background-color: lightblue;
   }
@@ -40,9 +43,59 @@ $gray: #b6b6b6;
   }
 }
 
+a {
+  user-select: none;
+}
+
 span {
   display: flex;
   align-items: center;
+}
+
+.container__elements--new {
+  position: relative;
+
+  p {
+    position: absolute;
+    left: 25%;
+    right: 0;
+    top: 190%;
+    height: 2rem;
+    background-color: $gray;
+    border: solid 1px #222;
+    border-radius: 15px;
+    font-size: .8rem;
+    color: $error;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: calc(20.4%);
+      top: -20px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-left: 10px solid $gray;
+      border-bottom: 10px solid $gray;
+      border-right: 10px solid transparent;
+      z-index: 1;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      left: 20%;
+      top: -22px;
+      width: 0;
+      height: 0;
+      border-top: 11px solid transparent;
+      border-left: 11px solid #222;
+      border-bottom: 11px solid #222;
+      border-right: 11px solid transparent;
+    }
+  }
 }
 
 fa-icon {
@@ -56,4 +109,27 @@ input {
   margin-left: -5px;
   padding-left: 5px;
   height: 100%;
+}
+
+.container__header {
+  width: 100%;
+  height: 2rem;
+  background-color: $dirty-white;
+  border-bottom: solid 2px $light-gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    margin: 0;
+    padding: 0.1rem 0.2rem;
+  }
+}
+
+button.exit-button {
+  margin-right: -1rem;
+}
+
+.error-border {
+  background-color: $error;
 }
