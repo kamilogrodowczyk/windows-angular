@@ -1,10 +1,7 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { DesktopItemsService } from 'src/app/services/desktop-items.service';
-import { DesktopItem } from '../../types/desktopItems';
-import { newItem } from './newItem';
+import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
+import { DesktopItem, DesktopItemElement } from '../../types/desktopItems';
 
 @Component({
   selector: 'app-add-element',
@@ -12,31 +9,49 @@ import { newItem } from './newItem';
   styleUrls: ['./add-element.component.scss'],
 })
 export class AddElementComponent implements OnInit {
-  iconTypes: IconProp[] = ['folder', 'file'];
-  newItem = new newItem(this.iconTypes[0], '', '', []);
-  form!: FormGroup;
+  @Input() name: string = 'New folder';
+  @Input() icon: IconProp = 'file';
+  
+  isError: any;
+  newDocument: boolean = false;
+  updatedDocument: boolean = false;
 
-  constructor(
-    private service: DesktopItemsService,
-    private location: Location
-  ) {}
+  @ViewChild('input', { static: false })
+  set input(element: ElementRef<HTMLInputElement>) {
+    if (element) {
+      element.nativeElement.value = this.name;
+      element.nativeElement.focus();
+      element.nativeElement.setSelectionRange(
+        0,
+        element.nativeElement.value.length
+      );
+    }
+  }
+
+  constructor(private desktopMenuService: DesktopMenuService) {
+    this.desktopMenuService.newTextDocument$.subscribe(
+      (newItem) => (this.newDocument = newItem)
+    );
+
+    this.desktopMenuService.updateTextDocument$.subscribe(
+      (newItem) => (this.updatedDocument = newItem)
+    );
+  }
 
   ngOnInit(): void {}
 
-  onSubmit(e: any) {
-    e.preventDefault();
-    if (!this.newItem.name.trim()) return;
+  createNewDocument() {
+    if (!this.newDocument || this.isError) return;
+    this.desktopMenuService.createNewDocumentPost(this.name).subscribe();
+  }
 
-    this.newItem.linkName = this.newItem.name.replace(/\s/g, '').toLowerCase();
-
-    const newElement: DesktopItem = {
-      icon: this.newItem.icon,
-      name: this.newItem.name.trim(),
-      linkName: this.newItem.linkName,
-      elements: this.newItem.elements,
-    };
-    this.service
-      .addDesktopItem(newElement)
-      .subscribe(() => this.location.back());
+  createNewDocumentUpdate(
+    appElement: DesktopItem,
+    documentElement: DesktopItemElement[]
+  ) {
+    if (!this.newDocument || this.isError) return;
+    this.desktopMenuService
+      .createNewDocumentUpdate(this.name, appElement, documentElement)
+      .subscribe();
   }
 }

@@ -10,10 +10,6 @@ import { NotepadComponent } from './components/notepad/notepad.component';
 export const routes: Routes = [
   { path: '', component: DesktopItemsComponent },
   {
-    path: 'desktop/newfolder',
-    component: AddElementComponent,
-  },
-  {
     path: 'desktop/display',
     component: DisplaySettingsComponent,
   },

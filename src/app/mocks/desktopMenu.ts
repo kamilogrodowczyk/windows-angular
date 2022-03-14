@@ -28,7 +28,11 @@ export const desktopMenu: desktopMenuInterface[] = [
   },
   {
     name: ['New text document'],
-    anchor: [true, false, false, true],
+    anchor: [false],
+  },
+  {
+    name: ['Open'],
+    anchor: [true],
   },
 ];
 

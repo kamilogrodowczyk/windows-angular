@@ -22,7 +22,7 @@ export class NotepadComponent implements OnInit {
   selectedItem!: DesktopItemElement;
   currentItem!: DesktopItem;
   private newContent = new Subject<string>();
-  test: string = 'Zapisane';
+  test: string = 'Saved';
 
   constructor(
     private route: ActivatedRoute,
@@ -47,13 +47,13 @@ export class NotepadComponent implements OnInit {
         switchMap((i) =>
           forkJoin([
             this.service.updateItem(this.currentItem),
-            (this.test = 'Zapisuje...'),
+            (this.test = 'Saving...'),
           ])
         )
       )
       .subscribe(() =>
         setTimeout(() => {
-          this.test = 'Zapisane';
+          this.test = 'Saved';
         }, 1500)
       );
   }

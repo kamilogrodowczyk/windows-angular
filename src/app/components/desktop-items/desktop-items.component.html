@@ -1,4 +1,4 @@
-<div [ngClass]="sizeOption">
+<div [ngClass]="sizeOption" (click)="addElementInput.createNewDocument()">
   <a
     appDesktopMenu
     *ngFor="let item of iconItems; index as i"
@@ -8,7 +8,14 @@
   >
     <button>
       <fa-icon [icon]="item.icon"></fa-icon>
-      <p>{{ item.name }}</p>
+      <p>
+        {{ item.name }}
+      </p>
     </button>
   </a>
+  <app-add-element
+    class="add-element__container desktop-items"
+    #addElementInput
+    [icon]="folder"
+  ></app-add-element>
 </div>

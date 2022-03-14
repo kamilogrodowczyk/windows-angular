@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { AdditionalDesktopMenuService } from 'src/app/directives/additional-desktop-menu.service';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
@@ -19,6 +20,11 @@ export class DesktopItemsComponent implements OnInit {
   iconItems: DesktopItem[] = [];
   sizeOption: string = '';
 
+  updatedDocument: boolean = false;
+  name: string = 'New folder';
+  folder = faFolder;
+  currentName: string = '';
+
   constructor(
     private desktopMenuService: DesktopMenuService,
     private desktopItemsService: DesktopItemsService,
@@ -34,6 +40,10 @@ export class DesktopItemsComponent implements OnInit {
       this.additionalDesktopMenu.sizeState$.subscribe(
         (option) => (this.sizeOption = option)
       );
+
+    this.desktopMenuService.updateTextDocument$.subscribe(
+      (newItem) => (this.updatedDocument = newItem)
+    );
   }
 
   ngOnInit(): void {
@@ -68,6 +78,8 @@ export class DesktopItemsComponent implements OnInit {
 
   getElementName(name: string): void {
     this.eventService.getAppElementName(name);
+    this.currentName = name;
+    console.log(this.updatedDocument)
   }
 
   openDesktopItem(linkName: string) {

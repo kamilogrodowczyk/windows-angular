@@ -1,5 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
+export type DesktopDoubleType = DesktopItem | DesktopItemElement
+
 export interface DesktopItem {
   id?: number;
   icon: IconProp;

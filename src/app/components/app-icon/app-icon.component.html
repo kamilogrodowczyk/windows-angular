@@ -1,12 +1,12 @@
 <div
   class="wrapper"
-  (click)="createNewDocument()"
+  (click)="addElementInput.createNewDocumentUpdate(appElement, documentElement)"
   appDesktopMenu
   [desktopMenuIndex]="4"
 >
   <div class="container">
     <div class="container__header">
-      <h4 *ngIf="mainItem">{{ mainItem.name }}</h4>
+      <h4 *ngIf="appElement">{{ appElement.name }}</h4>
       <button class="exit-button" (click)="goBack()">X</button>
     </div>
     <div class="container__elements header">
@@ -14,8 +14,14 @@
       <p>Type</p>
       <p>Size</p>
     </div>
-    <div *ngFor="let item of selectedItem">
-      <a class="container__elements" (dblclick)="openDocument(item.linkName)">
+    <div *ngFor="let item of documentElement">
+      <a
+        class="container__elements"
+        (dblclick)="openDocument(item.linkName)"
+        appDesktopMenu
+        (debounceClick)="getElementName(item.linkName)"
+        [desktopMenuIndex]="5"
+      >
         <span>
           <fa-icon [icon]="item.icon"></fa-icon>
           <p>{{ item.name }}</p>
@@ -29,24 +35,10 @@
         </ng-template>
       </a>
     </div>
-    <div *ngIf="newDocument" class="container__elements">
-      <span class="container__elements--new">
-        <fa-icon [icon]="file"></fa-icon>
-        <input
-          type="text"
-          #input
-          #nameClass="ngModel"
-          [(ngModel)]="name"
-          [ngClass]="{ 'error-border': nameClass.touched && nameClass.invalid }"
-          appForbiddenName
-          (input)="isError = nameClass.errors"
-        />
-        <p *ngIf="nameClass.errors?.['forbiddenChar']" class="error">
-          &gt; &lt; | : " \ / ? * are forbidden.
-        </p>
-      </span>
-      <p>Text document</p>
-      <p>0 characters</p>
-    </div>
+    <app-add-element
+      class="add-element__container app-icon"
+      #addElementInput
+      [name]="name"
+    ></app-add-element>
   </div>
 </div>

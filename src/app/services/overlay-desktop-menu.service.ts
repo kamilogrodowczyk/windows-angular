@@ -11,8 +11,10 @@ import { EventService } from './event.service';
 })
 export class OverlayDesktopMenuService {
   private overlayRef!: OverlayRef;
-  subscription: Subscription = new Subscription()
-  iconName: string = ''
+  subscription: Subscription = new Subscription();
+  subscription1: Subscription = new Subscription();
+  iconName: string = '';
+  documentName: string = '';
 
   constructor(
     private overlay: Overlay,
@@ -22,10 +24,14 @@ export class OverlayDesktopMenuService {
     this.subscription = this.eventService.appElement$.subscribe(
       (name) => (this.iconName = name.replace(/\s/g, '').toLowerCase())
     );
+    this.subscription1 = this.eventService.documentElement$.subscribe(
+      (name) => (this.documentName = name)
+    );
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.subscription1.unsubscribe();
   }
 
   setPosition(e: MouseEvent) {
@@ -66,7 +72,7 @@ export class OverlayDesktopMenuService {
     if (this.overlayRef) {
       this.overlayRef.detach();
     }
-    return this.iconName;
+    return { file: this.iconName, document: this.documentName };
   }
 
   showMenu(event: any) {

@@ -1,37 +1,15 @@
-<form #heroForm="ngForm" class="container" (ngSubmit)="onSubmit($event)" appIdentityRevealed>
-  <label for="icon"></label>
-  <select [(ngModel)]="newItem.icon" name="icon" id="icon">
-    <option *ngFor="let type of iconTypes" [ngValue]="type">{{ type }}</option>
-  </select>
-  <label for="name">Name: </label>
+<div *ngIf="newDocument || updatedDocument" class="container__elements">
+  <fa-icon *ngIf="newDocument" [icon]="icon"></fa-icon>
   <input
-    [(ngModel)]="newItem.name"
-    id="name"
-    name="name"
     type="text"
-    placeholder="New name"
-    required
+    #input
     #nameClass="ngModel"
-    minlength="3"
-    maxlength="12"
+    [(ngModel)]="name"
     [ngClass]="{ 'error-border': nameClass.touched && nameClass.invalid }"
-    appUniqueDesktopItemName
     appForbiddenName
+    (input)="isError = nameClass.errors"
   />
-  <div [hidden]="nameClass.valid || nameClass.untouched" class="error-container">
-    <p *ngIf="nameClass.errors?.['required']" class="error">Name is required.</p>
-    <p *ngIf="nameClass.errors?.['minlength']" class="error">
-      Name must be at least 3 characters long.
-    </p>
-    <p *ngIf="nameClass.errors?.['uniqueDesktopItemName']" class="error">
-      Name is already taken.
-    </p>
-    <p *ngIf="nameClass.errors?.['forbiddenName']" class="error">
-      This name is forbidden.
-    </p>
-    <p *ngIf="nameClass.errors?.['forbiddenChar']" class="error">
-      &gt; &lt; | : " \ / ? * are forbidden.
-    </p>
-  </div>
-  <button [disabled]="!newItem.name.trim().length || heroForm.invalid" type="submit">Add</button>
-</form>
+  <p *ngIf="nameClass.errors?.['forbiddenChar']" class="error">
+    &gt; &lt; | : " \ / ? * are forbidden.
+  </p>
+</div>

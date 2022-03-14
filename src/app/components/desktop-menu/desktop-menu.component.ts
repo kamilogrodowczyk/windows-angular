@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
@@ -23,28 +22,34 @@ export class DesktopMenuComponent implements OnInit {
   }
 
   setFn(item: string) {
-    const iconName = this.overlayMenu.hideMenu();
+    const linkName = this.overlayMenu.hideMenu();
     switch (item) {
       case 'Refresh':
         window.location.reload();
         break;
       case 'Open':
-        this.router.navigate([iconName]);
+        const linkNameDocument = linkName.document
+          ? ['notepad', linkName.document]
+          : '';
+        this.router.navigate([linkName.file, ...linkNameDocument]);
         break;
       case 'Change name':
-        this.router.navigate([iconName, 'changename']);
+        // this.router.navigate([linkName.file, 'changename']);
+        this.service.updateDocumentFlag(true);
+        console.log(linkName)
         break;
       case 'New folder':
-        this.router.navigate(['desktop', 'newfolder']);
+        // this.router.navigate(['desktop', 'newfolder']);
+        this.service.createNewDocumentFlag(true);
         break;
       case 'Remove':
-        this.service.onRemoveClick(iconName).subscribe();
+        this.service.onRemoveClick(linkName.file).subscribe();
         break;
       case 'Empty Recycle Bin':
         this.service.clearRecycleBin();
         break;
       case 'Copy':
-        this.service.copy(iconName);
+        this.service.copy(linkName.file);
         break;
       case 'Paste':
         this.service.paste()?.subscribe();
@@ -53,7 +58,7 @@ export class DesktopMenuComponent implements OnInit {
         this.router.navigate(['desktop', 'display']);
         break;
       case 'New text document':
-        this.service.createNewDocument(true);
+        this.service.createNewDocumentFlag(true);
         break;
       default:
         return;

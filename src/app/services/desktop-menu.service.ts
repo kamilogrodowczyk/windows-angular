@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { forkJoin, map, mergeMap, Observable, of, Subject } from 'rxjs';
 import { newItem } from '../components/add-element/newItem';
+import { desktopItem, desktopItemElement } from '../mocks/desktopItem';
 import { desktopMenu } from '../mocks/desktopMenu';
 import { DesktopItem, DesktopItemElement } from '../types/desktopItems';
 import { DesktopItemsService } from './desktop-items.service';
@@ -12,9 +13,11 @@ import { BrowserStorageService } from './storage.service';
 export class DesktopMenuService {
   private allItems = new Subject<DesktopItem[]>();
   private newTextDocument = new Subject<boolean>();
+  private updateTextDocument = new Subject<boolean>();
 
   allItems$ = this.allItems.asObservable();
   newTextDocument$ = this.newTextDocument.asObservable();
+  updateTextDocument$ = this.updateTextDocument.asObservable();
 
   menuItems: string[] = [];
   anchorItems: boolean[] = [];
@@ -104,11 +107,20 @@ export class DesktopMenuService {
 
   // Paste folder
 
+  gg(text: string) {
+    const test = new RegExp('' + text + 'd*', 'g');
+    return test;
+  }
+
   findTheSameName<T extends { linkName: string }>(
     name: string,
-    arr: T[]
+    arr: T[],
+    suffix: string = ''
   ): { [key: string]: string } {
-    const theSameName = arr.filter((item) => item.linkName.includes(name.replace(/\s/g, '').toLowerCase()));
+    const convertedName = name.replace(/\s/g, '').toLowerCase();
+    const regexName = new RegExp('^' + convertedName + '\\d*' + suffix + '$');
+
+    const theSameName = arr.filter((item) => regexName.test(item.linkName));
     const uniqueName = theSameName.length
       ? `${name} ${theSameName.length + 1}`
       : name;
@@ -142,7 +154,45 @@ export class DesktopMenuService {
 
   // New text document
 
-  createNewDocument(document: boolean) {
+  createNewDocumentFlag(document: boolean) {
     this.newTextDocument.next(document);
+  }
+
+  updateDocumentFlag(document: boolean) {
+    this.updateTextDocument.next(document);
+  }
+
+  createNewDocumentPost(nameValue: string): Observable<DesktopItem> {
+    const uniqueValues = this.findTheSameName(nameValue, this.allElements);
+
+    const name = `${uniqueValues['uniqueName']}`;
+    const linkName = `${uniqueValues['uniqueLinkName']}`;
+    const newItem = { ...desktopItem, name, linkName };
+
+    this.createNewDocumentFlag(false);
+    return this.desktopItemsService
+      .addDesktopItem(newItem)
+      .pipe(mergeMap((item) => this.addElementsToArray(item)));
+  }
+
+  createNewDocumentUpdate(
+    nameValue: string,
+    appElement: DesktopItem,
+    documentElement: DesktopItemElement[]
+  ): Observable<DesktopItem> {
+    const uniqueValues = this.findTheSameName(
+      nameValue,
+      documentElement,
+      '.txt'
+    );
+
+    const name = `${uniqueValues['uniqueName']}.txt`;
+    const linkName = `${uniqueValues['uniqueLinkName']}.txt`;
+    const newItem = { ...desktopItemElement, name, linkName };
+
+    documentElement.push(newItem);
+    this.createNewDocumentFlag(false);
+    return this.desktopItemsService.updateItem(appElement);
+    // .pipe(mergeMap((item) => this.addElementsToArray(item)));
   }
 }
