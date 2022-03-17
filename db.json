@@ -20,32 +20,24 @@
       "elements": [
         {
           "icon": "file",
-          "name": "New document.txt",
-          "linkName": "newdocument.txt",
+          "name": "Siema.txt",
+          "linkName": "siema.txt",
           "content": "",
           "type": "Text document",
           "characters": 0
         },
         {
           "icon": "file",
-          "name": "New document 2.txt",
-          "linkName": "newdocument2.txt",
+          "name": "Czesc.txt",
+          "linkName": "czesc.txt",
           "content": "",
           "type": "Text document",
           "characters": 0
         },
         {
           "icon": "file",
-          "name": "New document 3.txt",
-          "linkName": "newdocument3.txt",
-          "content": "",
-          "type": "Text document",
-          "characters": 0
-        },
-        {
-          "icon": "file",
-          "name": "New document 4.txt",
-          "linkName": "newdocument4.txt",
+          "name": "Folder.txt",
+          "linkName": "folder.txt",
           "content": "",
           "type": "Text document",
           "characters": 0
@@ -55,136 +47,17 @@
     },
     {
       "icon": "folder",
-      "name": "New folder",
-      "linkName": "newfolder",
+      "name": "Folder",
+      "linkName": "folder",
       "elements": [],
       "id": 4
     },
     {
       "icon": "folder",
-      "name": "New folder 2",
-      "linkName": "newfolder2",
+      "name": "Siema",
+      "linkName": "siema",
       "elements": [],
       "id": 5
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 3",
-      "linkName": "newfolder3",
-      "elements": [],
-      "id": 6
-    },
-    {
-      "icon": "folder",
-      "name": "New",
-      "linkName": "new",
-      "elements": [],
-      "id": 7
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 4",
-      "linkName": "newfolder4",
-      "elements": [],
-      "id": 8
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 5",
-      "linkName": "newfolder5",
-      "elements": [],
-      "id": 9
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 6",
-      "linkName": "newfolder6",
-      "elements": [],
-      "id": 10
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 7",
-      "linkName": "newfolder7",
-      "elements": [],
-      "id": 11
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 8",
-      "linkName": "newfolder8",
-      "elements": [],
-      "id": 12
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 9",
-      "linkName": "newfolder9",
-      "elements": [],
-      "id": 13
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 10",
-      "linkName": "newfolder10",
-      "elements": [],
-      "id": 14
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 11",
-      "linkName": "newfolder11",
-      "elements": [],
-      "id": 15
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 12",
-      "linkName": "newfolder12",
-      "elements": [],
-      "id": 16
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 13",
-      "linkName": "newfolder13",
-      "elements": [],
-      "id": 17
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 14",
-      "linkName": "newfolder14",
-      "elements": [],
-      "id": 18
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 15",
-      "linkName": "newfolder15",
-      "elements": [],
-      "id": 19
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 16",
-      "linkName": "newfolder16",
-      "elements": [],
-      "id": 20
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 17",
-      "linkName": "newfolder17",
-      "elements": [],
-      "id": 21
-    },
-    {
-      "icon": "folder",
-      "name": "New folder 18",
-      "linkName": "newfolder18",
-      "elements": [],
-      "id": 22
     }
   ]
 }

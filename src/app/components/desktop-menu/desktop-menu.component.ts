@@ -36,7 +36,6 @@ export class DesktopMenuComponent implements OnInit {
       case 'Change name':
         // this.router.navigate([linkName.file, 'changename']);
         this.service.updateDocumentFlag(true);
-        console.log(linkName)
         break;
       case 'New folder':
         // this.router.navigate(['desktop', 'newfolder']);

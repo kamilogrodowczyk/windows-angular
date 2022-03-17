@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { DesktopItemsService } from '../services/desktop-items.service';
 
 @Injectable({ providedIn: 'root' })
@@ -16,8 +15,20 @@ export class DesktopItemsValidator {
       );
   }
 
-  isDesktopItemNameTaken(desktopItemName: string): Observable<boolean> {
-    this.getAllItems();
+  getAllDocumentsInFolder(folder: string) {
+    this.service
+      .getItem(folder)
+      .subscribe((item) =>
+        item.elements.map((document) => this.allItems.push(document.linkName))
+      );
+  }
+
+  isDesktopItemNameTaken(desktopItemName: string, folder: string = ''): Observable<boolean> {
+    if(folder) {
+      this.getAllDocumentsInFolder(folder);
+    } else {
+      this.getAllItems();
+    }
     const isTaken = this.allItems.includes(desktopItemName);
 
     return of(isTaken);

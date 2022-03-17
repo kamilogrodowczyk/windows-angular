@@ -1,15 +1,25 @@
 <div *ngIf="newDocument || updatedDocument" class="container__elements">
   <fa-icon *ngIf="newDocument" [icon]="icon"></fa-icon>
+  <span></span>
   <input
     type="text"
     #input
     #nameClass="ngModel"
     [(ngModel)]="name"
-    [ngClass]="{ 'error-border': nameClass.touched && nameClass.invalid }"
+    [ngClass]="{ 'error-border': nameClass.invalid && nameClass.dirty }"
     appForbiddenName
-    (input)="isError = nameClass.errors"
+    appUniqueDesktopItemName
+    [folder]="appElementLinkName"
+    (input)="isError = nameClass.errors; test()"
+    (change)="createNewDocument(); update(); createNewDocumentUpdate()"
+    [suffix]="suffix"
+    required
   />
+  <p *ngIf="nameClass.errors?.['required']" class="error">Name is required.</p>
   <p *ngIf="nameClass.errors?.['forbiddenChar']" class="error">
     &gt; &lt; | : " \ / ? * are forbidden.
+  </p>
+  <p *ngIf="nameClass.errors?.['uniqueDesktopItemName']" class="error">
+    Name is already taken.
   </p>
 </div>

@@ -58,67 +58,8 @@ a {
   height: 100%;
 }
 
-.container__elements {
-  width: 9rem;
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  user-select: none;
-  height: 100%;
-
-  p.error {
-    width: 15rem;
-    position: absolute;
-    left: 25%;
-    right: 0;
-    top: 90%;
-    height: 2rem;
-    background-color: $dirty-white;
-    border: solid 1px #222;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    color: $error;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: calc(20.4%);
-      top: -20px;
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-left: 10px solid $dirty-white;
-      border-bottom: 10px solid $dirty-white;
-      border-right: 10px solid transparent;
-      z-index: 1;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      left: 20%;
-      top: -22px;
-      width: 0;
-      height: 0;
-      border-top: 11px solid transparent;
-      border-left: 11px solid #222;
-      border-bottom: 11px solid #222;
-      border-right: 11px solid transparent;
-    }
-  }
-}
-
-input {
-  border-radius: 0;
-  border: solid 1px black;
-  margin-left: -5px;
-  padding-left: 5px;
-  width: 80%;
-  height: 20%;
+.test {
+  display: none;
 }
 
 button {

@@ -107,11 +107,6 @@ export class DesktopMenuService {
 
   // Paste folder
 
-  gg(text: string) {
-    const test = new RegExp('' + text + 'd*', 'g');
-    return test;
-  }
-
   findTheSameName<T extends { linkName: string }>(
     name: string,
     arr: T[],
@@ -121,6 +116,7 @@ export class DesktopMenuService {
     const regexName = new RegExp('^' + convertedName + '\\d*' + suffix + '$');
 
     const theSameName = arr.filter((item) => regexName.test(item.linkName));
+    // console.log(theSameName)
     const uniqueName = theSameName.length
       ? `${name} ${theSameName.length + 1}`
       : name;
@@ -132,6 +128,15 @@ export class DesktopMenuService {
     this.allElements.push(newElement);
     this.getAllItems(this.allElements);
     return of(newElement);
+  }
+
+  updateElementInArray(element: DesktopItem) {
+    let elToUpdate = this.allElements.findIndex(
+      (item) => item.id === element.id
+    );
+    this.allElements[elToUpdate] = element;
+    this.getAllItems(this.allElements);
+    return of(element);
   }
 
   paste(): Observable<DesktopItem> | undefined {
@@ -163,16 +168,25 @@ export class DesktopMenuService {
   }
 
   createNewDocumentPost(nameValue: string): Observable<DesktopItem> {
-    const uniqueValues = this.findTheSameName(nameValue, this.allElements);
-
-    const name = `${uniqueValues['uniqueName']}`;
-    const linkName = `${uniqueValues['uniqueLinkName']}`;
+    const name = nameValue;
+    const linkName = nameValue.replace(/\s/g, '').toLowerCase();
     const newItem = { ...desktopItem, name, linkName };
 
-    this.createNewDocumentFlag(false);
+    // this.createNewDocumentFlag(false);
     return this.desktopItemsService
       .addDesktopItem(newItem)
       .pipe(mergeMap((item) => this.addElementsToArray(item)));
+  }
+
+  testUpdate(nameValue: string, selectedItem: DesktopItem) {
+    const name = nameValue;
+    const linkName = nameValue.replace(/\s/g, '').toLowerCase();
+    selectedItem = { ...selectedItem, name, linkName };
+
+    this.updateDocumentFlag(false);
+    return this.desktopItemsService
+      .updateItem(selectedItem)
+      .pipe(mergeMap((item) => this.updateElementInArray(item)));
   }
 
   createNewDocumentUpdate(
@@ -180,16 +194,11 @@ export class DesktopMenuService {
     appElement: DesktopItem,
     documentElement: DesktopItemElement[]
   ): Observable<DesktopItem> {
-    const uniqueValues = this.findTheSameName(
-      nameValue,
-      documentElement,
-      '.txt'
-    );
-
-    const name = `${uniqueValues['uniqueName']}.txt`;
-    const linkName = `${uniqueValues['uniqueLinkName']}.txt`;
+    const name = `${nameValue}.txt`;
+    const linkName = `${name.replace(/\s/g, '').toLowerCase()}`;
     const newItem = { ...desktopItemElement, name, linkName };
 
+    console.log(newItem)
     documentElement.push(newItem);
     this.createNewDocumentFlag(false);
     return this.desktopItemsService.updateItem(appElement);

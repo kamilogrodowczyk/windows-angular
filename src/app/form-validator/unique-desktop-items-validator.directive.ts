@@ -1,4 +1,4 @@
-import { Directive, forwardRef, Injectable } from '@angular/core';
+import { Directive, forwardRef, Injectable, Input } from '@angular/core';
 import {
   AsyncValidator,
   AbstractControl,
@@ -14,10 +14,12 @@ export class UniqueDesktopItemNameValidator implements AsyncValidator {
   constructor(private service: DesktopItemsValidator) {}
 
   validate(
-    control: AbstractControl
+    control: AbstractControl,
+    folder: string = '',
+    suffix: string = ''
   ): Observable<ValidationErrors | null> {
-    const value = control.value.replace(/\s/g, '').toLowerCase();
-    return this.service.isDesktopItemNameTaken(value).pipe(
+    const value = control.value ? control.value.replace(/\s/g, '').toLowerCase() : '';
+    return this.service.isDesktopItemNameTaken(`${value}${suffix}`, folder).pipe(
       map(isTaken => (isTaken ? { uniqueDesktopItemName: true } : null)),
       catchError(() => of(null))
     );
@@ -35,12 +37,14 @@ export class UniqueDesktopItemNameValidator implements AsyncValidator {
   ]
 })
 export class UniqueDesktopItemNameValidatorDirective implements AsyncValidator {
+  @Input() folder: string = ''
+  @Input() suffix: string = ''
   constructor(private validator: UniqueDesktopItemNameValidator) {}
 
   validate(
     control: AbstractControl
   ): Observable<ValidationErrors | null> {
-    return this.validator.validate(control);
+    return this.validator.validate(control, this.folder, this.suffix);
   }
 }
 

@@ -1,4 +1,4 @@
-<div [ngClass]="sizeOption" (click)="addElementInput.createNewDocument()">
+<div (click)="addDesktopItem.changeFlag($event)" [ngClass]="sizeOption">
   <a
     appDesktopMenu
     *ngFor="let item of iconItems; index as i"
@@ -8,14 +8,25 @@
   >
     <button>
       <fa-icon [icon]="item.icon"></fa-icon>
-      <p>
-        {{ item.name }}
-      </p>
+      <app-add-element
+        *ngIf="currentName === item.linkName && updatedDocument; else elseBlock"
+        class="add-element__container desktop-items update"
+        [initialValueToUpdate]="item.name"
+        [updatedDocument]="updatedDocument"
+        [selectedApp]="selectedApp"
+      >
+      </app-add-element>
+      <ng-template #elseBlock>
+        <p>
+          {{ item.name }}
+        </p>
+      </ng-template>
     </button>
   </a>
   <app-add-element
     class="add-element__container desktop-items"
-    #addElementInput
+    [ngClass]="{ test: updatedDocument }"
     [icon]="folder"
+    #addDesktopItem
   ></app-add-element>
 </div>

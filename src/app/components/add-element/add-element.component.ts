@@ -9,12 +9,18 @@ import { DesktopItem, DesktopItemElement } from '../../types/desktopItems';
   styleUrls: ['./add-element.component.scss'],
 })
 export class AddElementComponent implements OnInit {
-  @Input() name: string = 'New folder';
+  @Input() initialValueToUpdate: string = '';
+  @Input() suffix: string = '';
+  appElementLinkName: string = '';
+  name: string = '';
   @Input() icon: IconProp = 'file';
-  
+  @Input() selectedApp!: DesktopItem;
+  @Input() appElement!: DesktopItem;
+  @Input() documentElement: DesktopItemElement[] = [];
+
   isError: any;
   newDocument: boolean = false;
-  updatedDocument: boolean = false;
+  @Input() updatedDocument: boolean = false;
 
   @ViewChild('input', { static: false })
   set input(element: ElementRef<HTMLInputElement>) {
@@ -38,20 +44,48 @@ export class AddElementComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
-
-  createNewDocument() {
-    if (!this.newDocument || this.isError) return;
-    this.desktopMenuService.createNewDocumentPost(this.name).subscribe();
+  ngOnInit(): void {
+    if (this.updatedDocument) {
+      this.name = this.initialValueToUpdate;
+    }
   }
 
-  createNewDocumentUpdate(
-    appElement: DesktopItem,
-    documentElement: DesktopItemElement[]
-  ) {
+  test() {
+    if (!this.appElement) return;
+    this.appElementLinkName = this.appElement.linkName;
+    return;
+  }
+
+  createNewDocument() {
+    if (this.appElement !== undefined) return;
+    if (!this.newDocument || this.isError) return;
+    this.desktopMenuService.createNewDocumentPost(this.name).subscribe();
+    this.desktopMenuService.createNewDocumentFlag(false);
+    this.name = '';
+  }
+
+  createNewDocumentUpdate() {
     if (!this.newDocument || this.isError) return;
     this.desktopMenuService
-      .createNewDocumentUpdate(this.name, appElement, documentElement)
+      .createNewDocumentUpdate(this.name, this.appElement, this.documentElement)
       .subscribe();
+    this.desktopMenuService.createNewDocumentFlag(false);
+    this.name = '';
+  }
+
+  update() {
+    if (!this.updatedDocument || this.isError) return;
+    this.desktopMenuService.testUpdate(`${this.name}.txt`, this.selectedApp).subscribe();
+
+    this.desktopMenuService.updateDocumentFlag(false);
+    this.name = '';
+  }
+
+  changeFlag(e: MouseEvent) {
+    if (!this.updatedDocument && !this.newDocument) return;
+    if (e.clientX === 0 && e.clientY === 0) return;
+    if (this.name.trim() === '' || this.name === this.initialValueToUpdate)
+      this.desktopMenuService.createNewDocumentFlag(false);
+    this.desktopMenuService.updateDocumentFlag(false);
   }
 }

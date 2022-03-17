@@ -1,6 +1,6 @@
 <div
   class="wrapper"
-  (click)="addElementInput.createNewDocumentUpdate(appElement, documentElement)"
+  (click)="addDocument.changeFlag($event)"
   appDesktopMenu
   [desktopMenuIndex]="4"
 >
@@ -37,8 +37,10 @@
     </div>
     <app-add-element
       class="add-element__container app-icon"
-      #addElementInput
-      [name]="name"
+      #addDocument
+      [appElement]="appElement"
+      [documentElement]="documentElement"
+      [suffix]="suffix"
     ></app-add-element>
   </div>
 </div>

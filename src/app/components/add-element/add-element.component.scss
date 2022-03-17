@@ -63,6 +63,16 @@ $error: #a3394c;
   height: 100%;
 }
 
+.add-element__container.desktop-items.update:host > .container__elements {
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+
+  p.error {
+    top: 200%;
+  }
+}
+
 .add-element__container.app-icon:host > .container__elements {
   width: 13rem;
 

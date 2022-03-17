@@ -16,6 +16,7 @@ export class AppIconComponent implements OnInit {
   name: string = 'New document';
   documentElement: DesktopItemElement[] = [];
   appElement!: DesktopItem;
+  suffix: string = '.txt'
 
   constructor(
     private service: DesktopItemsService,

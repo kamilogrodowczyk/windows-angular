@@ -24,6 +24,7 @@ export class DesktopItemsComponent implements OnInit {
   name: string = 'New folder';
   folder = faFolder;
   currentName: string = '';
+  selectedApp!: DesktopItem
 
   constructor(
     private desktopMenuService: DesktopMenuService,
@@ -79,10 +80,10 @@ export class DesktopItemsComponent implements OnInit {
   getElementName(name: string): void {
     this.eventService.getAppElementName(name);
     this.currentName = name;
-    console.log(this.updatedDocument)
+    this.desktopItemsService.getItem(name).subscribe(name => this.selectedApp = name)
   }
 
   openDesktopItem(linkName: string) {
     this.router.navigate([linkName]);
   }
-}
+ }
