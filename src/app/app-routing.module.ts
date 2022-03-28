@@ -6,12 +6,17 @@ import { DesktopItemsComponent } from './components/desktop-items/desktop-items.
 import { AddElementComponent } from './components/add-element/add-element.component';
 import { DisplaySettingsComponent } from './components/display-settings/display-settings.component';
 import { NotepadComponent } from './components/notepad/notepad.component';
+import { ThispcComponent } from './components/thispc/thispc.component';
 
 export const routes: Routes = [
   { path: '', component: DesktopItemsComponent },
   {
     path: 'desktop/display',
     component: DisplaySettingsComponent,
+  },
+  {
+    path: 'thispc',
+    component: ThispcComponent,
   },
   {
     path: ':appIcon',

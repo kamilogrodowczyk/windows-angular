@@ -45,6 +45,17 @@ h4 {
   color: $base-color;
   font-weight: 400;
   margin-bottom: 0.75em;
+  cursor: default;
+  user-select: none;
+}
+h5 {
+  font-size: 1.05em;
+  line-height: 1.5;
+  color: $base-color;
+  font-weight: 700;
+  margin-bottom: 0.75em;
+  cursor: default;
+  user-select: none;
 }
 
 a {

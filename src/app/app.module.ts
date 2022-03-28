@@ -22,6 +22,7 @@ import { ForbiddenDesktopItemsValidatorDirective } from './form-validator/forbid
 import { AdditionalDesktopMenuDirective } from './directives/additional-desktop-menu.directive';
 import { DisplaySettingsComponent } from './components/display-settings/display-settings.component';
 import { NotepadComponent } from './components/notepad/notepad.component';
+import { ThispcComponent } from './components/thispc/thispc.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NotepadComponent } from './components/notepad/notepad.component';
     AdditionalDesktopMenuDirective,
     DisplaySettingsComponent,
     NotepadComponent,
+    ThispcComponent,
   ],
   imports: [
     BrowserModule,

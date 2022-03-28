@@ -44,20 +44,6 @@
         }
       ],
       "id": 3
-    },
-    {
-      "icon": "folder",
-      "name": "Folder",
-      "linkName": "folder",
-      "elements": [],
-      "id": 4
-    },
-    {
-      "icon": "folder",
-      "name": "Siema",
-      "linkName": "siema",
-      "elements": [],
-      "id": 5
     }
   ]
 }

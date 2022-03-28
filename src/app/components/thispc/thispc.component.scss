@@ -1,0 +1,96 @@
+@use "../../../styles";
+
+$gray: #b6b6b6;
+$dirty-white: #fdfbfb;
+$light-gray: #cfcfcf;
+$error: #a3394c;
+$blue: #06628d;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  width: 40%;
+  height: 60%;
+  background-color: white;
+  padding: 0 1rem;
+}
+
+.container__header {
+  width: 100%;
+  height: 2rem;
+  background-color: $dirty-white;
+  border-bottom: solid 2px $light-gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    margin: 0;
+    padding: 0.1rem 0.2rem;
+  }
+}
+
+.container__header--apps {
+  margin-top: 1rem;
+
+  .container__header--button {
+    background-color: transparent;
+    @extend h5;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+.container__app {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  padding: 0 1rem;
+
+  &.hover:hover {
+    background: $gray;
+  }
+
+  fa-icon {
+    margin-right: 1rem;
+  }
+
+  .container__progress {
+    display: grid;
+    align-items: center;
+
+    label,
+    p {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.container__buttons {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: column;
+
+  &.isClosed {
+    display: none;
+  }
+
+  button {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+  }
+}
+
+button.exit-button {
+  margin-right: -1rem;
+}
