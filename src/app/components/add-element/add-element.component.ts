@@ -35,11 +35,11 @@ export class AddElementComponent implements OnInit {
   }
 
   constructor(private desktopMenuService: DesktopMenuService) {
-    this.desktopMenuService.newTextDocument$.subscribe(
+    this.desktopMenuService.textDocumentToCreate$.subscribe(
       (newItem) => (this.newDocument = newItem)
     );
 
-    this.desktopMenuService.updateTextDocument$.subscribe(
+    this.desktopMenuService.textDocumentToUpdate$.subscribe(
       (newItem) => (this.updatedDocument = newItem)
     );
   }
@@ -50,32 +50,32 @@ export class AddElementComponent implements OnInit {
     }
   }
 
-  test() {
+  saveSelectedFolder() {
     if (!this.appElement) return;
     this.appElementLinkName = this.appElement.linkName;
     return;
   }
 
-  createNewDocument() {
+  createNewApp() {
     if (this.appElement !== undefined) return;
     if (!this.newDocument || this.isError) return;
-    this.desktopMenuService.createNewDocumentPost(this.name).subscribe();
+    this.desktopMenuService.createNewApp(this.name).subscribe();
     this.desktopMenuService.createNewDocumentFlag(false);
     this.name = '';
   }
 
-  createNewDocumentUpdate() {
+  createNewTextDocument() {
     if (!this.newDocument || this.isError) return;
     this.desktopMenuService
-      .createNewDocumentUpdate(this.name, this.appElement, this.documentElement)
+      .createNewTextDocument(this.name, this.appElement, this.documentElement)
       .subscribe();
     this.desktopMenuService.createNewDocumentFlag(false);
     this.name = '';
   }
 
-  update() {
+  updateApp() {
     if (!this.updatedDocument || this.isError) return;
-    this.desktopMenuService.testUpdate(`${this.name}.txt`, this.selectedApp).subscribe();
+    this.desktopMenuService.updateApp(`${this.name}.txt`, this.selectedApp).subscribe();
 
     this.desktopMenuService.updateDocumentFlag(false);
     this.name = '';

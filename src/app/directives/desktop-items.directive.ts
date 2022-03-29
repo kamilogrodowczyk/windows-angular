@@ -16,6 +16,7 @@ import { OverlayDesktopMenuService } from '../services/overlay-desktop-menu.serv
 export class DesktopItemsDirective {
   @Input() debounceTime = 300;
   @Input() desktopMenuIndex: number = 3;
+  @Input() disableEvent: boolean = false;
   @Output() debounceClick = new EventEmitter(true);
   private clicks: Subject<MouseEvent> = new Subject<MouseEvent>();
   private subscription: Subscription = new Subscription();
@@ -46,6 +47,7 @@ export class DesktopItemsDirective {
   clickEvent(e: MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
+    if (this.disableEvent) return;
     this.clicks.next(e);
   }
 }

@@ -10,8 +10,8 @@
     appForbiddenName
     appUniqueDesktopItemName
     [folder]="appElementLinkName"
-    (input)="isError = nameClass.errors; test()"
-    (change)="createNewDocument(); update(); createNewDocumentUpdate()"
+    (input)="isError = nameClass.errors; saveSelectedFolder()"
+    (change)="createNewApp(); updateApp(); createNewTextDocument()"
     [suffix]="suffix"
     required
   />

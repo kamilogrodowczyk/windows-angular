@@ -5,6 +5,7 @@ import { DesktopItem, DesktopItemElement } from 'src/app/types/desktopItems';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { Location } from '@angular/common';
 import { EventService } from 'src/app/services/event.service';
+import { OverlayDesktopMenuService } from 'src/app/services/overlay-desktop-menu.service';
 
 @Component({
   selector: 'app-app-icon',
@@ -16,7 +17,8 @@ export class AppIconComponent implements OnInit {
   name: string = 'New document';
   documentElement: DesktopItemElement[] = [];
   appElement!: DesktopItem;
-  suffix: string = '.txt'
+  suffix: string = '.txt';
+  forbiddenApp: string = 'recyclebin'
 
   constructor(
     private service: DesktopItemsService,
@@ -24,10 +26,14 @@ export class AppIconComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private eventService: EventService
+    private eventService: EventService,
+    private overlay: OverlayDesktopMenuService
   ) {
-    this.menuService.newTextDocument$.subscribe(
+    this.menuService.textDocumentToCreate$.subscribe(
       (newItem) => (this.newDocument = newItem)
+    );
+    this.menuService.allDocuments$.subscribe(
+      (items) => (this.documentElement = items)
     );
   }
 
@@ -51,6 +57,13 @@ export class AppIconComponent implements OnInit {
   openDocument(file: string) {
     if (this.appElement.linkName === 'recyclebin') return;
     this.router.navigate([this.appElement.linkName, 'notepad', file]);
+  }
+
+  contextMenu(e: any) {
+    e.preventDefault();
+    if (this.appElement.linkName === 'recyclebin')
+      this.menuService.clearItems();
+      this.overlay.hideMenu();
   }
 
   getElementName(name: string): void {

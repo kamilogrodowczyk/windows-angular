@@ -18,7 +18,7 @@ export class DesktopMenuComponent implements OnInit {
     private router: Router,
     private overlayMenu: OverlayDesktopMenuService
   ) {
-    this.service.newTextDocument$.subscribe((item) => (this.test = item));
+    this.service.textDocumentToCreate$.subscribe((item) => (this.test = item));
   }
 
   setFn(item: string) {
@@ -34,11 +34,9 @@ export class DesktopMenuComponent implements OnInit {
         this.router.navigate([linkName.file, ...linkNameDocument]);
         break;
       case 'Change name':
-        // this.router.navigate([linkName.file, 'changename']);
         this.service.updateDocumentFlag(true);
         break;
       case 'New folder':
-        // this.router.navigate(['desktop', 'newfolder']);
         this.service.createNewDocumentFlag(true);
         break;
       case 'Remove':
@@ -58,6 +56,12 @@ export class DesktopMenuComponent implements OnInit {
         break;
       case 'New text document':
         this.service.createNewDocumentFlag(true);
+        break;
+      case 'Remove document':
+        this.service.removeDocument(
+          linkName.file,
+          linkName.document
+        ).subscribe()
         break;
       default:
         return;

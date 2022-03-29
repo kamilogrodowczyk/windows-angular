@@ -2,6 +2,7 @@
   class="wrapper"
   (click)="addDocument.changeFlag($event)"
   appDesktopMenu
+  [disableEvent]="appElement?.linkName === forbiddenApp"
   [desktopMenuIndex]="4"
 >
   <div class="container">
@@ -19,6 +20,7 @@
         class="container__elements"
         (dblclick)="openDocument(item.linkName)"
         appDesktopMenu
+        [disableEvent]="appElement?.linkName === forbiddenApp"
         (debounceClick)="getElementName(item.linkName)"
         [desktopMenuIndex]="5"
       >

@@ -31,7 +31,7 @@ export const desktopMenu: desktopMenuInterface[] = [
     anchor: [false],
   },
   {
-    name: ['Open'],
+    name: ['Open', 'Remove document'],
     anchor: [true],
   },
 ];

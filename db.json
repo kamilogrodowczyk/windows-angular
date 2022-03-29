@@ -15,35 +15,26 @@
     },
     {
       "icon": "folder",
-      "name": "Folder34",
-      "linkName": "folder34",
+      "name": "Folder",
+      "linkName": "folder",
+      "elements": [],
+      "id": 3
+    },
+    {
+      "icon": "folder",
+      "name": "Test",
+      "linkName": "test",
       "elements": [
         {
           "icon": "file",
-          "name": "Siema.txt",
-          "linkName": "siema.txt",
-          "content": "",
+          "name": "Text122.txt",
+          "linkName": "text122.txt",
+          "content": "Siema",
           "type": "Text document",
-          "characters": 0
-        },
-        {
-          "icon": "file",
-          "name": "Czesc.txt",
-          "linkName": "czesc.txt",
-          "content": "",
-          "type": "Text document",
-          "characters": 0
-        },
-        {
-          "icon": "file",
-          "name": "Folder.txt",
-          "linkName": "folder.txt",
-          "content": "",
-          "type": "Text document",
-          "characters": 0
+          "characters": 5
         }
       ],
-      "id": 3
+      "id": 4
     }
   ]
 }

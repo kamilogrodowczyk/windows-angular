@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, map, mergeMap, Observable, of, Subject } from 'rxjs';
-import { newItem } from '../components/add-element/newItem';
+import { forkJoin, mergeMap, Observable, of, Subject } from 'rxjs';
 import { desktopItem, desktopItemElement } from '../mocks/desktopItem';
 import { desktopMenu } from '../mocks/desktopMenu';
 import { DesktopItem, DesktopItemElement } from '../types/desktopItems';
@@ -11,20 +10,10 @@ import { BrowserStorageService } from './storage.service';
   providedIn: 'root',
 })
 export class DesktopMenuService {
-  private allItems = new Subject<DesktopItem[]>();
-  private newTextDocument = new Subject<boolean>();
-  private updateTextDocument = new Subject<boolean>();
 
-  allItems$ = this.allItems.asObservable();
-  newTextDocument$ = this.newTextDocument.asObservable();
-  updateTextDocument$ = this.updateTextDocument.asObservable();
-
+  // Desktop Menu
   menuItems: string[] = [];
   anchorItems: boolean[] = [];
-
-  recycleBin!: DesktopItem;
-  allElements: DesktopItem[] = [];
-  itemToCopy!: DesktopItem;
 
   getItems(index: number) {
     this.menuItems = desktopMenu[index].name;
@@ -35,42 +24,64 @@ export class DesktopMenuService {
     this.menuItems = [];
   }
 
-  constructor(
-    private desktopItemsService: DesktopItemsService,
-    private storage: BrowserStorageService
-  ) {
-    this.getAllDesktopItems();
-    // this.sort();
-  }
-
-  // Service
+  // Desktop Items — Subjects 
+  private allApps = new Subject<DesktopItem[]>();
+  private allDocuments = new Subject<DesktopItemElement[]>();
+  private textDocumentToCreate = new Subject<boolean>();
+  private textDocumentToUpdate = new Subject<boolean>();
 
   getAllItems(items: DesktopItem[]) {
-    this.allItems.next(items);
+    this.allApps.next(items);
   }
 
-  sort(option: string) {
-    this.desktopItemsService
-      .sortItems(option)
-      .subscribe((items) => this.allItems.next(items));
+  getAllDocuments(items: DesktopItemElement[]) {
+    this.allDocuments.next(items);
   }
 
-  // Remove element from desktop and add to recycle bin
+  createNewDocumentFlag(document: boolean) {
+    this.textDocumentToCreate.next(document);
+  }
+
+  updateDocumentFlag(document: boolean) {
+    this.textDocumentToUpdate.next(document);
+  }
+
+  // Desktop Items — Observables
+  allApps$ = this.allApps.asObservable();
+  allDocuments$ = this.allDocuments.asObservable();
+  textDocumentToCreate$ = this.textDocumentToCreate.asObservable();
+  textDocumentToUpdate$ = this.textDocumentToUpdate.asObservable();
+
+  // Desktop Items — Variables
+  recycleBin!: DesktopItem;
+  allAppsInArray: DesktopItem[] = [];
+  itemToCopy!: DesktopItem;
+
+
+  constructor(
+    private desktopItemsService: DesktopItemsService,
+  ) {
+    this.getAllDesktopItems();
+  }
+
+  // Remove element and add to recycle bin
 
   getAllDesktopItems() {
     this.desktopItemsService
       .getItems()
-      .subscribe((items) => (this.allElements = items));
+      .subscribe((items) => (this.allAppsInArray = items));
     this.desktopItemsService
       .getItemById(1)
       .subscribe((item) => (this.recycleBin = item));
   }
 
-  updateElementsinArray(item: DesktopItem): Observable<DesktopItem> {
-    this.recycleBin?.elements.push(item);
-    this.allElements = this.allElements.filter((el) => el.id !== item.id);
+  // --- 1 --- Remove app from desktop
 
-    this.getAllItems(this.allElements);
+  updateElementsOnDesktop(item: DesktopItem): Observable<DesktopItem> {
+    this.recycleBin?.elements.push(item);
+    this.allAppsInArray = this.allAppsInArray.filter((el) => el.id !== item.id);
+
+    this.getAllItems(this.allAppsInArray);
 
     return of(item);
   }
@@ -81,8 +92,39 @@ export class DesktopMenuService {
       .pipe(
         mergeMap((item) =>
           forkJoin([
-            this.updateElementsinArray(item),
+            this.updateElementsOnDesktop(item),
             this.desktopItemsService.deleteItem(item.id),
+            this.desktopItemsService.updateItem(this.recycleBin),
+          ])
+        )
+      );
+  }
+
+  // --- 2 --- Remove text document from folder
+
+  updateElementsinFolder(
+    item: DesktopItem,
+    linkName: string
+  ): Observable<DesktopItem> {
+    const elementToRecycleBin = item.elements.filter((el) => el.linkName === linkName)[0];
+    this.recycleBin?.elements.push(elementToRecycleBin);
+    item.elements = item.elements.filter((el) => el.linkName !== linkName);
+    let elToUpdate = this.allAppsInArray.findIndex(
+      (i) => i.id === item.id
+    );
+    this.allAppsInArray[elToUpdate] = item;
+    this.getAllDocuments(this.allAppsInArray[elToUpdate].elements);
+    return of(item);
+  }
+
+  removeDocument(iconName: string, linkName: string) {
+    return this.desktopItemsService
+      .getItem(iconName)
+      .pipe(
+        mergeMap((item) =>
+          forkJoin([
+            this.updateElementsinFolder(item, linkName),
+            this.desktopItemsService.updateItem(item),
             this.desktopItemsService.updateItem(this.recycleBin),
           ])
         )
@@ -116,7 +158,6 @@ export class DesktopMenuService {
     const regexName = new RegExp('^' + convertedName + '\\d*' + suffix + '$');
 
     const theSameName = arr.filter((item) => regexName.test(item.linkName));
-    // console.log(theSameName)
     const uniqueName = theSameName.length
       ? `${name} ${theSameName.length + 1}`
       : name;
@@ -125,17 +166,17 @@ export class DesktopMenuService {
   }
 
   addElementsToArray(newElement: DesktopItem) {
-    this.allElements.push(newElement);
-    this.getAllItems(this.allElements);
+    this.allAppsInArray.push(newElement);
+    this.getAllItems(this.allAppsInArray);
     return of(newElement);
   }
 
   updateElementInArray(element: DesktopItem) {
-    let elToUpdate = this.allElements.findIndex(
+    let elToUpdate = this.allAppsInArray.findIndex(
       (item) => item.id === element.id
     );
-    this.allElements[elToUpdate] = element;
-    this.getAllItems(this.allElements);
+    this.allAppsInArray[elToUpdate] = element;
+    this.getAllItems(this.allAppsInArray);
     return of(element);
   }
 
@@ -143,7 +184,7 @@ export class DesktopMenuService {
     if (!this.itemToCopy) return;
     const uniqueValues = this.findTheSameName<DesktopItem>(
       `${this.itemToCopy.name} — copy`,
-      this.allElements
+      this.allAppsInArray
     );
     const copiedElement: DesktopItem = {
       icon: this.itemToCopy.icon,
@@ -159,26 +200,17 @@ export class DesktopMenuService {
 
   // New text document
 
-  createNewDocumentFlag(document: boolean) {
-    this.newTextDocument.next(document);
-  }
-
-  updateDocumentFlag(document: boolean) {
-    this.updateTextDocument.next(document);
-  }
-
-  createNewDocumentPost(nameValue: string): Observable<DesktopItem> {
+  createNewApp(nameValue: string): Observable<DesktopItem> {
     const name = nameValue;
     const linkName = nameValue.replace(/\s/g, '').toLowerCase();
     const newItem = { ...desktopItem, name, linkName };
 
-    // this.createNewDocumentFlag(false);
     return this.desktopItemsService
       .addDesktopItem(newItem)
       .pipe(mergeMap((item) => this.addElementsToArray(item)));
   }
 
-  testUpdate(nameValue: string, selectedItem: DesktopItem) {
+  updateApp(nameValue: string, selectedItem: DesktopItem) {
     const name = nameValue;
     const linkName = nameValue.replace(/\s/g, '').toLowerCase();
     selectedItem = { ...selectedItem, name, linkName };
@@ -189,7 +221,7 @@ export class DesktopMenuService {
       .pipe(mergeMap((item) => this.updateElementInArray(item)));
   }
 
-  createNewDocumentUpdate(
+  createNewTextDocument(
     nameValue: string,
     appElement: DesktopItem,
     documentElement: DesktopItemElement[]
@@ -198,10 +230,16 @@ export class DesktopMenuService {
     const linkName = `${name.replace(/\s/g, '').toLowerCase()}`;
     const newItem = { ...desktopItemElement, name, linkName };
 
-    console.log(newItem)
     documentElement.push(newItem);
     this.createNewDocumentFlag(false);
     return this.desktopItemsService.updateItem(appElement);
-    // .pipe(mergeMap((item) => this.addElementsToArray(item)));
+  }
+
+  // Sort
+
+  sort(option: string) {
+    this.desktopItemsService
+      .sortItems(option)
+      .subscribe((items) => this.allApps.next(items));
   }
 }

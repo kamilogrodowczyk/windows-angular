@@ -34,7 +34,7 @@ export class DesktopItemsComponent implements OnInit {
     private additionalDesktopMenu: AdditionalDesktopMenuService,
     private storage: BrowserStorageService
   ) {
-    this.subscription = this.desktopMenuService.allItems$.subscribe(
+    this.subscription = this.desktopMenuService.allApps$.subscribe(
       (items) => (this.iconItems = items)
     );
     this.subscriptionAddiotionalMenu =
@@ -42,7 +42,7 @@ export class DesktopItemsComponent implements OnInit {
         (option) => (this.sizeOption = option)
       );
 
-    this.desktopMenuService.updateTextDocument$.subscribe(
+    this.desktopMenuService.textDocumentToUpdate$.subscribe(
       (newItem) => (this.updatedDocument = newItem)
     );
   }
