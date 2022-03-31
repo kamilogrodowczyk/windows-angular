@@ -21,6 +21,7 @@ export const desktopMenu: desktopMenuInterface[] = [
       'Refresh',
       'Paste',
       'New folder',
+      'Display settings'
       // 'New text document',
       // 'Personalize',
     ],

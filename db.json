@@ -35,6 +35,20 @@
         }
       ],
       "id": 4
+    },
+    {
+      "icon": "folder",
+      "name": "witryna",
+      "linkName": "witryna",
+      "elements": [],
+      "id": 5
+    },
+    {
+      "icon": "folder",
+      "name": "Test1",
+      "linkName": "test1",
+      "elements": [],
+      "id": 6
     }
   ]
 }

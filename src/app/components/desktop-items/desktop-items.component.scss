@@ -9,6 +9,12 @@ div {
   grid-auto-flow: column;
   height: calc(100% - 51px);
   padding-top: 0.5rem;
+
+  p {
+    color: white;
+    text-shadow: 2px 2px 2px #222;
+    font-weight: 300;
+  }
 }
 
 div.large {
@@ -84,5 +90,9 @@ button {
   &:hover::before {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  fa-icon.active {
+    color: #F8D775;
   }
 }
