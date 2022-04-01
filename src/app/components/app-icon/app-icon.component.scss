@@ -126,8 +126,14 @@ input {
   }
 }
 
-button.exit-button {
+.container__buttons{
+  height: 100%;
+  display: flex;
   margin-right: -1rem;
+
+  .exit-button:not(.exit-button:last-child):hover {
+    background-color: $light-gray;
+  }
 }
 
 .error-border {

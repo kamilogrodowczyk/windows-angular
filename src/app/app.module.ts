@@ -23,6 +23,7 @@ import { AdditionalDesktopMenuDirective } from './directives/additional-desktop-
 import { DisplaySettingsComponent } from './components/display-settings/display-settings.component';
 import { NotepadComponent } from './components/notepad/notepad.component';
 import { ThispcComponent } from './components/thispc/thispc.component';
+import { TaskbarMenuComponent } from './components/taskbar/taskbar-menu/taskbar-menu.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ThispcComponent } from './components/thispc/thispc.component';
     DisplaySettingsComponent,
     NotepadComponent,
     ThispcComponent,
+    TaskbarMenuComponent,
   ],
   imports: [
     BrowserModule,

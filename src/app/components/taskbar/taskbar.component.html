@@ -1,47 +1,21 @@
 <div class="taskbar">
-  <fa-icon
-    [icon]="faWindows"
-    title="Start"
-    (click)="isOpen = !isOpen"
-  ></fa-icon>
+  <div class="taskbar__buttons">
+    <button title="Start" (click)="isOpen = !isOpen;">
+      <fa-icon [icon]="faWindows"></fa-icon>
+    </button>
+    <div class="taskbar__container">
+      <div class="taskbar__buttons--active" *ngFor="let app of selectedApps">
+        <a routerLink="{{app.linkName === selectedApp.linkName ? '/' : app.linkName}}">
+          <button title="{{app.name}}" [ngClass]="{'active': app.linkName === selectedApp.linkName}">
+            <fa-icon [icon]="app.icon"></fa-icon>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
   <div title="{{ today | date: 'cccc, d LLLL yyyy' }}">
     <p>{{ today | date: "HH:mm" }}</p>
     <p>{{ today | date: "dd.MM.yyyy" }}</p>
   </div>
 </div>
-<div
-  class="taskbar__menu"
-  [ngClass]="{ active: isOpen, 'taskbar__left--active': isOpenLeftbar }"
->
-  <div class="taskbar__left">
-    <div class="taskbar__top">
-      <button (click)="isOpenLeftbar = !isOpenLeftbar" title="Expand" attr.aria-expanded="{{isOpenLeftbar}}" class="btn">
-        <fa-icon [icon]="faBars" data-name="START"></fa-icon>
-      </button>
-    </div>
-    <div class="taskbar__bottom">
-      <button title="Documents" class="btn">
-        <fa-icon [icon]="faFile" data-name="Documents"></fa-icon>
-      </button>
-      <a routerLink="desktop/display" (click)="isOpen = false" class="btn">
-        <button title="Settings">
-          <fa-icon [icon]="faCog" data-name="Settings"></fa-icon>
-        </button>
-      </a>
-      <button title="Power" class="btn">
-        <fa-icon [icon]="faPowerOff" data-name="Power"></fa-icon>
-      </button>
-    </div>
-  </div>
-  <div class="taskbar__right">
-    <div class="taskbar__elements" (click)="isOpen = false" *ngFor="let app of apps; let i = index">
-      <p *ngIf="firstLetterOfApp[i] !== firstLetterOfApp[i-1]">{{ firstLetterOfApp[i] }}</p>
-      <a routerLink="{{app.linkName}}">
-        <button>
-          <fa-icon [icon]="app.icon"></fa-icon>
-          {{ app.name }}
-        </button>
-      </a>
-    </div>
-  </div>
-</div>
+<app-taskbar-menu [isOpen]="isOpen"></app-taskbar-menu>

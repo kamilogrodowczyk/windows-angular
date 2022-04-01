@@ -1,6 +1,6 @@
 <div
   class="wrapper"
-  (click)="addDocument.changeFlag($event)"
+  (click)="addDocument.changeFlag($event);"
   appDesktopMenu
   [disableEvent]="appElement?.linkName === forbiddenApp"
   [desktopMenuIndex]="4"
@@ -8,7 +8,10 @@
   <div class="container">
     <div class="container__header">
       <h4 *ngIf="appElement">{{ appElement.name }}</h4>
-      <button class="exit-button" (click)="goBack()">X</button>
+      <div class="container__buttons">
+        <button class="exit-button" (click)="minimalize()">_</button>
+        <button class="exit-button" (click)="goBack()">X</button>
+      </div>
     </div>
     <div class="container__elements header">
       <p>Name</p>

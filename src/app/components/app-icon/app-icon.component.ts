@@ -51,6 +51,8 @@ export class AppIconComponent implements OnInit {
     this.service.getItem(linkName).subscribe((item) => {
       this.appElement = item;
       this.documentElement = item.elements;
+      this.menuService.getSelectedApps(item)
+      this.menuService.getSelectedApp(item)
     });
   }
 
@@ -70,7 +72,12 @@ export class AppIconComponent implements OnInit {
     this.eventService.getAppElementName(this.appElement.linkName, name);
   }
 
+  minimalize() {
+    this.location.back();
+  }
+
   goBack() {
     this.location.back();
+    this.menuService.removeSelectedApp(this.appElement)
   }
 }

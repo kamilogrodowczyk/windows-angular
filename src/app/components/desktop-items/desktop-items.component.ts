@@ -50,6 +50,7 @@ export class DesktopItemsComponent implements OnInit {
   ngOnInit(): void {
     this.getItems();
     this.getStorageOptions();
+    this.desktopMenuService.getSelectedApp({} as DesktopItem)
   }
 
   ngOnDestroy() {

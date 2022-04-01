@@ -1,13 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faWindows } from '@fortawesome/free-brands-svg-icons';
-import {
-  faPowerOff,
-  faBars,
-  faCog,
-  faFile,
-  faFolder,
-} from '@fortawesome/free-solid-svg-icons';
-import { DesktopItemsService } from 'src/app/services/desktop-items.service';
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { DesktopItem } from 'src/app/types/desktopItems';
 
 @Component({
@@ -16,36 +11,18 @@ import { DesktopItem } from 'src/app/types/desktopItems';
   styleUrls: ['./taskbar.component.scss'],
 })
 export class TaskbarComponent implements OnInit {
-  faWindows = faWindows;
-  faPowerOff = faPowerOff;
-  faBars = faBars;
-  faCog = faCog;
-  faFile = faFile;
+  faWindows = faWindows as IconProp;
   faFolder = faFolder;
-
   today: number = Date.now();
 
-  apps: DesktopItem[] = [];
-  firstLetterOfApp: string[] = []
   isOpen: boolean = false;
-  isOpenLeftbar: boolean = false;
+  selectedApps: DesktopItem[] = []
+  selectedApp!: DesktopItem
 
-  constructor(private desktopItemsService: DesktopItemsService) {}
-
-  ngOnInit(): void {
-    this.getItems();
+  constructor(private menuService: DesktopMenuService) {
+    this.menuService.selectedApps$.subscribe(app => this.selectedApps = app);
+    this.menuService.selectedApp$.subscribe(app => this.selectedApp = app);
   }
 
-  getItems() {
-    this.desktopItemsService
-      .getItems()
-      .subscribe(
-        (i) => {
-          (this.apps = i.sort((a, b) =>
-            a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-          ));
-          ((i.map(l => this.firstLetterOfApp.push(l.name[0].toUpperCase()))));
-        }
-      );
-  }
+  ngOnInit(): void {}
 }

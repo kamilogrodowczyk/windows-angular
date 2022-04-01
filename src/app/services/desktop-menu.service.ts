@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, mergeMap, Observable, of, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  forkJoin,
+  mergeMap,
+  Observable,
+  of,
+  Subject,
+  take,
+} from 'rxjs';
 import { desktopItem, desktopItemElement } from '../mocks/desktopItem';
 import { desktopMenu } from '../mocks/desktopMenu';
 import { DesktopItem, DesktopItemElement } from '../types/desktopItems';
 import { DesktopItemsService } from './desktop-items.service';
-import { BrowserStorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DesktopMenuService {
-
   // Desktop Menu
   menuItems: string[] = [];
   anchorItems: boolean[] = [];
@@ -24,14 +30,39 @@ export class DesktopMenuService {
     this.menuItems = [];
   }
 
-  // Desktop Items — Subjects 
+  // Desktop Items — Subjects
   private allApps = new Subject<DesktopItem[]>();
+  private selectedApps: BehaviorSubject<DesktopItem[]> = new BehaviorSubject<
+    DesktopItem[]
+  >([]);
+  private selectedApp: Subject<DesktopItem> = new Subject<DesktopItem>();
   private allDocuments = new Subject<DesktopItemElement[]>();
   private textDocumentToCreate = new Subject<boolean>();
   private textDocumentToUpdate = new Subject<boolean>();
 
   getAllItems(items: DesktopItem[]) {
     this.allApps.next(items);
+  }
+
+  getSelectedApps(item: DesktopItem) {
+    this.selectedApps$.pipe(take(1)).subscribe((app) => {
+      const updatedArray =
+        app.length && app.some((a) => a.linkName === item.linkName)
+          ? [...app]
+          : [...app, item];
+      this.selectedApps.next(updatedArray);
+    });
+  }
+
+  getSelectedApp(item: DesktopItem) {
+    this.selectedApp.next(item);
+  }
+
+  removeSelectedApp(item: DesktopItem) {
+    this.selectedApps$.pipe(take(1)).subscribe((app) => {
+      const updatedArray = app.filter((a) => a.linkName !== item.linkName);
+      this.selectedApps.next(updatedArray);
+    });
   }
 
   getAllDocuments(items: DesktopItemElement[]) {
@@ -48,6 +79,8 @@ export class DesktopMenuService {
 
   // Desktop Items — Observables
   allApps$ = this.allApps.asObservable();
+  selectedApps$ = this.selectedApps.asObservable();
+  selectedApp$ = this.selectedApp.asObservable();
   allDocuments$ = this.allDocuments.asObservable();
   textDocumentToCreate$ = this.textDocumentToCreate.asObservable();
   textDocumentToUpdate$ = this.textDocumentToUpdate.asObservable();
@@ -57,10 +90,7 @@ export class DesktopMenuService {
   allAppsInArray: DesktopItem[] = [];
   itemToCopy!: DesktopItem;
 
-
-  constructor(
-    private desktopItemsService: DesktopItemsService,
-  ) {
+  constructor(private desktopItemsService: DesktopItemsService) {
     this.getAllDesktopItems();
   }
 
@@ -106,12 +136,12 @@ export class DesktopMenuService {
     item: DesktopItem,
     linkName: string
   ): Observable<DesktopItem> {
-    const elementToRecycleBin = item.elements.filter((el) => el.linkName === linkName)[0];
+    const elementToRecycleBin = item.elements.filter(
+      (el) => el.linkName === linkName
+    )[0];
     this.recycleBin?.elements.push(elementToRecycleBin);
     item.elements = item.elements.filter((el) => el.linkName !== linkName);
-    let elToUpdate = this.allAppsInArray.findIndex(
-      (i) => i.id === item.id
-    );
+    let elToUpdate = this.allAppsInArray.findIndex((i) => i.id === item.id);
     this.allAppsInArray[elToUpdate] = item;
     this.getAllDocuments(this.allAppsInArray[elToUpdate].elements);
     return of(item);
