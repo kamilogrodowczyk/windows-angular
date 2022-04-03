@@ -8,7 +8,7 @@
   <div class="container">
     <div class="container__header">
       <h4 *ngIf="appElement">{{ appElement.name }}</h4>
-      <div class="container__buttons">
+      <div class="header__buttons">
         <button class="exit-button" (click)="minimalize()">_</button>
         <button class="exit-button" (click)="goBack()">X</button>
       </div>
@@ -27,7 +27,7 @@
         (debounceClick)="getElementName(item.linkName)"
         [desktopMenuIndex]="5"
       >
-        <span>
+        <span class="container__element--name">
           <fa-icon [icon]="item.icon"></fa-icon>
           <p>{{ item.name }}</p>
         </span>

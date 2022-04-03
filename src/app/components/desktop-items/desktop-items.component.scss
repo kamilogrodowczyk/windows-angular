@@ -1,7 +1,4 @@
-$gray: #b6b6b6;
-$dirty-white: #fdfbfb;
-$light-gray: #cfcfcf;
-$error: #a3394c;
+@use '../../../assets/helpers.scss' as *;
 
 div {
   display: grid;
@@ -12,7 +9,7 @@ div {
 
   p {
     color: white;
-    text-shadow: 2px 2px 2px #222;
+    text-shadow: 2px 2px 2px $base-color;
     font-weight: 300;
   }
 }
@@ -60,11 +57,10 @@ a {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  user-select: none;
   height: 100%;
 }
 
-.test {
+.updatedDocument {
   display: none;
 }
 
@@ -90,9 +86,5 @@ button {
   &:hover::before {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
-  }
-
-  fa-icon.active {
-    color: #F8D775;
   }
 }

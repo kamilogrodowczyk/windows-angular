@@ -32,6 +32,14 @@
           "content": "Siema",
           "type": "Text document",
           "characters": 5
+        },
+        {
+          "icon": "file",
+          "name": "Test.txt",
+          "linkName": "test.txt",
+          "content": "",
+          "type": "Text document",
+          "characters": 0
         }
       ],
       "id": 4

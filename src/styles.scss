@@ -48,7 +48,7 @@ h4 {
   cursor: default;
   user-select: none;
 }
-h5 {
+h5, .h5 {
   font-size: 1.05em;
   line-height: 1.5;
   color: $base-color;
@@ -60,6 +60,7 @@ h5 {
 
 a {
   text-decoration: none;
+  user-select: none;
 }
 
 a,
@@ -73,6 +74,10 @@ p {
 fa-icon {
   font-size: 2rem;
   line-height: 1.6;
+
+  .fa-folder {
+    color: #F8D775;
+  }
 }
 
 button {

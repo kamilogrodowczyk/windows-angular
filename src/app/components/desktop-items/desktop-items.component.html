@@ -7,7 +7,7 @@
     [desktopMenuIndex]="setIndex(i, 2)"
   >
     <button>
-      <fa-icon [icon]="item.icon" [ngClass]="{'active': item.icon === 'folder'}"></fa-icon>
+      <fa-icon [icon]="item.icon"></fa-icon>
       <app-add-element
         *ngIf="currentName === item.linkName && updatedDocument; else elseBlock"
         class="add-element__container desktop-items update"
@@ -25,7 +25,7 @@
   </a>
   <app-add-element
     class="add-element__container desktop-items"
-    [ngClass]="{ test: updatedDocument }"
+    [ngClass]="{ updatedDocument: updatedDocument }"
     [icon]="folder"
     #addDesktopItem
   ></app-add-element>

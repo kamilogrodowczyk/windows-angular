@@ -1,26 +1,23 @@
-$gray: #b6b6b6;
-$dirty-white: #fdfbfb;
-$light-gray: #cfcfcf;
-$error: #a3394c;
+@use '../../../assets/helpers.scss' as *;
 
 .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
+  @extend .wrapper;
 }
 
 .container {
   width: 50%;
   height: 75%;
-  background-color: white;
+  background-color: $white;
   padding: 0 1rem;
 
   & > *:not(.container__elements.header, .container__header):hover {
     cursor: default;
-    background-color: lightblue;
+    @include white(20%);
   }
+}
+
+.container__header {
+  @extend .wrapper__header;
 }
 
 .container__elements {
@@ -33,9 +30,10 @@ $error: #a3394c;
   }
 
   &.header > * {
-    border-right: solid 1px $gray;
+    border-right: solid 1px;
+    @include white(20%, border-right-color);
     margin-bottom: 1rem;
-    color: $gray;
+    @include white(20%, color);
   }
 
   & > *:first-child {
@@ -43,99 +41,12 @@ $error: #a3394c;
   }
 }
 
-a {
-  user-select: none;
-}
-
-span {
+.container__element--name {
   display: flex;
   align-items: center;
-}
-
-.container__elements--new {
-  position: relative;
-
-  p {
-    position: absolute;
-    left: 25%;
-    right: 0;
-    top: 190%;
-    height: 2rem;
-    background-color: $gray;
-    border: solid 1px #222;
-    border-radius: 15px;
-    font-size: .8rem;
-    color: $error;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: calc(20.4%);
-      top: -20px;
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-left: 10px solid $gray;
-      border-bottom: 10px solid $gray;
-      border-right: 10px solid transparent;
-      z-index: 1;
-    }
-    &::after {
-      content: '';
-      position: absolute;
-      left: 20%;
-      top: -22px;
-      width: 0;
-      height: 0;
-      border-top: 11px solid transparent;
-      border-left: 11px solid #222;
-      border-bottom: 11px solid #222;
-      border-right: 11px solid transparent;
-    }
-  }
 }
 
 fa-icon {
   font-size: 1rem;
   margin-right: 0.5rem;
-}
-
-input {
-  border-radius: 0;
-  border: solid 1px black;
-  margin-left: -5px;
-  padding-left: 5px;
-  height: 100%;
-}
-
-.container__header {
-  width: 100%;
-  height: 2rem;
-  background-color: $dirty-white;
-  border-bottom: solid 2px $light-gray;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h4 {
-    margin: 0;
-    padding: 0.1rem 0.2rem;
-  }
-}
-
-.container__buttons{
-  height: 100%;
-  display: flex;
-  margin-right: -1rem;
-
-  .exit-button:not(.exit-button:last-child):hover {
-    background-color: $light-gray;
-  }
-}
-
-.error-border {
-  background-color: $error;
 }

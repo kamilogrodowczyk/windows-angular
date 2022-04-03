@@ -1,26 +1,21 @@
-$dark-black: #222;
-$black: #333;
-$light-black: #444;
-$very-light-black: #555;
-$blue: #00a2ed;
-$light-blue: #87CEEB;
+@use "../../../assets/helpers.scss" as *;
 
 @keyframes press-button {
   0% {
-    background-color: $very-light-black;
+    @include black(20%);
   }
 
   100% {
-    background-color: $light-black;
+    @include black(10%);
   }
 }
 
 .taskbar {
-  background-color: $black;
+  @include black(5%);
   position: absolute;
   left: 0;
-  right: 0;
   bottom: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,7 +35,7 @@ $light-blue: #87CEEB;
 
 .taskbar__buttons--active {
   height: 100%;
-  margin-right: .7rem;
+  margin-right: 0.7rem;
   a {
     height: 100%;
     display: block;
@@ -50,45 +45,44 @@ $light-blue: #87CEEB;
     border-bottom: solid 2px $light-blue;
 
     &.active {
-      background-color: $very-light-black;
+      @include black(20%);
+
+      &:hover {
+        @include black(25%);
+      }
 
       &:active {
-        background-color: darken($very-light-black, 2%);
+        @include black(15%);
       }
-    }
-
-    &:hover > fa-icon {
-      color: white;
     }
   }
 }
 
 button {
-  background-color: $black;
+  background-color: inherit;
   padding: 0 1.5rem;
   height: 100%;
 
   fa-icon {
-    color: white;
+    color: $white;
     font-size: 1.1rem;
   }
 
   &:hover {
-    background-color: $light-black;
+    @include black(15%);
 
     fa-icon {
       color: $blue;
     }
-
   }
 
   &:active {
-    background-color: darken($light-black, 4%);
+    @include black(10%);
   }
 }
 
 p {
-  color: white;
+  color: $white;
   cursor: default;
   text-align: center;
 }

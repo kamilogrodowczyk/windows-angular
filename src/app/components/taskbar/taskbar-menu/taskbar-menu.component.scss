@@ -1,14 +1,14 @@
-$dark-black: #222;
-$black: #333;
-$light-black: #444;
-$very-light-black: #555;
-$blue: #00a2ed;
+@use "../../../../assets/helpers.scss" as *;
 
 p {
-    color: white;
-    cursor: default;
-    text-align: center;
-  }
+  color: $white;
+  cursor: default;
+  text-align: center;
+}
+
+fa-icon {
+  color: $white;
+}
 
 .taskbar__menu {
   position: absolute;
@@ -16,7 +16,7 @@ p {
   bottom: 0;
   height: 40rem;
   width: 25rem;
-  background-color: $dark-black;
+  background-color: $base-color;
   z-index: 1;
   display: none;
   padding-bottom: 2.9rem;
@@ -27,10 +27,6 @@ p {
 
   button {
     background-color: inherit;
-  }
-
-  fa-icon {
-    color: white;
   }
 }
 
@@ -54,7 +50,7 @@ p {
     padding: 1.5rem 0;
 
     &:hover {
-      background-color: $light-black;
+      @include black(15%);
     }
 
     &:active {
@@ -95,7 +91,7 @@ p {
 
   button {
     background-color: inherit;
-    color: white;
+    color: $white;
     display: flex;
     align-items: center;
     width: 100%;
@@ -113,7 +109,7 @@ p {
     }
 
     &:hover {
-      background-color: $light-black;
+      @include black(15%);
     }
 
     &:active {
@@ -150,8 +146,8 @@ p {
         top: 50%;
         width: 100%;
         transform: translateY(-50%);
-        color: white;
-        background-color: #222;
+        color: $white;
+        background-color: $base-color;
         margin-left: 2rem;
       }
     }

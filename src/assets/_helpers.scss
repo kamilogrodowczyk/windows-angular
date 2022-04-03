@@ -1,0 +1,48 @@
+$white: #fff;
+
+$light-blue: #87ceeb;
+$blue: #00a2ed;
+$error: #a3394c;
+
+$base-color: #222;
+
+@mixin black($hue, $property: background-color) {
+  #{$property}: lighten($base-color, $hue);
+}
+
+@mixin white($hue, $property: background-color) {
+  #{$property}: darken($white, $hue);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.wrapper__header {
+  width: 100%;
+  height: 2rem;
+  border-bottom: solid 2px;
+  @include white(20%, border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    margin: 0;
+    padding: 0.1rem 0.2rem;
+  }
+
+  .header__buttons {
+    height: 100%;
+    display: flex;
+    margin-right: -1rem;
+
+    .exit-button:not(.exit-button:last-child):hover {
+      @include white(20%);
+    }
+  }
+}

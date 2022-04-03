@@ -1,15 +1,7 @@
-$gray: #b6b6b6;
-$dark-gray: #928f8f;
-$blue: #00a2ed;
-$basic-black: #222;
-$hover-black: #000;
+@use '../../../assets/helpers.scss' as *;
 
 :host {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
+  @extend .wrapper;
 }
 
 span {
@@ -18,17 +10,9 @@ span {
   align-items: center;
 }
 
-a {
-  color: $blue;
-
-  &:hover {
-    color: $gray;
-  }
-}
-
 .container {
   width: 50%;
-  background-color: white;
+  background-color: $white;
   padding: 0.5rem 1rem;
   display: grid;
   align-items: flex-start;
@@ -51,7 +35,7 @@ a {
 select {
   width: 13rem;
   border-radius: 0;
-  border: 2px solid $basic-black;
+  border: 2px solid $base-color;
 }
 
 .container__range {
@@ -76,8 +60,8 @@ select {
     }
 
     p {
-      background-color: #222;
-      color: white;
+      background-color: $base-color;
+      color: $white;
       text-align: center;
       width: 30px;
     }
@@ -92,19 +76,19 @@ input {
   margin-left: 1rem;
 
   &[type="range"]:hover::-webkit-slider-runnable-track {
-    background-color: $basic-black;
+    background-color: $base-color;
   }
 
   &[type="range"]:hover::-webkit-slider-thumb {
-    background-color: $basic-black;
+    background-color: $base-color;
   }
 
   &[type="range"]:active::-webkit-slider-runnable-track {
-    background-color: $dark-gray;
+    @include white(50%);
   }
 
   &[type="range"]:active::-webkit-slider-thumb {
-    background-color: $dark-gray;
+    @include white(50%);
   }
 }
 
@@ -112,7 +96,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 2px;
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  background: $gray;
+  @include white(30%);
   border-radius: 25px;
   border: 0px solid #000101;
 }
@@ -134,7 +118,7 @@ input[type="range"]::-webkit-slider-thumb {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: black;
+    background-color: $base-color;
   }
 }
 
@@ -142,7 +126,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 47px;
   height: 20px;
   border-radius: 50px;
-  border: solid 2px $basic-black;
+  border: solid 2px $base-color;
   padding: 0 2px;
   display: flex;
   align-items: center;
@@ -162,22 +146,22 @@ input[type="range"]::-webkit-slider-thumb {
   }
 
   & > .container__toggle--dot {
-    background-color: $basic-black;
+    background-color: $base-color;
     border-radius: 50%;
     height: 13px;
     width: 13px;
   }
 
   &:hover {
-    border: solid 2px $hover-black;
+    border: solid 2px $base-color;
 
     & > .container__toggle--dot {
-      background-color: $hover-black;
+      background-color: $base-color;
     }
   }
 
   &:active {
-    background-color: $gray;
+    @include white(30%);
     border: none;
   }
 }

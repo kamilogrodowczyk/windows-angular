@@ -2,13 +2,16 @@
   <div class="container">
     <div class="container__header">
       <h4>This PC</h4>
-      <button class="exit-button" (click)="goBack()">X</button>
+      <div class="header__buttons">
+        <button class="exit-button" (click)="minimalize()">_</button>
+        <button class="exit-button" (click)="goBack()">X</button>
+      </div>
     </div>
     <div class="container__header--apps" [attr.aria-expanded]="isOpen">
-      <button class="container__header--button" (click)="isOpen = !isOpen">
+      <button class="container__header--button h5" (click)="isOpen = !isOpen">
         Folders
       </button>
-      <div class="container__buttons" [ngClass]="{ isClosed: !isOpen }">
+      <div class="container__apps" [ngClass]="{ isClosed: !isOpen }">
         <a
           (dblclick)="openDesktopItem(a.linkName)"
           *ngFor="let a of apps.slice(0, 8)"

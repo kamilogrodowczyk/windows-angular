@@ -1,11 +1,14 @@
+@use '../../../assets/helpers.scss' as *;
+
 div {
   display: grid;
   justify-content: start;
   align-content: start;
-  background-color: #ece6e4;
+  @include white(10%);
   position: absolute;
   z-index: 3;
-  border: solid 1px #736d6b;
+  border: solid 1px;
+  @include white(50%, border-color);
 
   &.view {
     position: absolute;
@@ -33,7 +36,7 @@ button {
   font-size: 1rem;
 
   &:hover {
-    background-color: #f9f5f4;
+    @include white(5%);
   }
 }
 
@@ -46,7 +49,7 @@ button.active {
     right: 10%;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #222;
+    background-color: $base-color;
     border-radius: 50%;
   }
 }

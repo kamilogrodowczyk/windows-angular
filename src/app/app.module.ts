@@ -13,7 +13,6 @@ import { DesktopItemsComponent } from './components/desktop-items/desktop-items.
 import { DesktopItemsDirective } from './directives/desktop-items.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { AppIconComponent } from './components/app-icon/app-icon.component';
-import { ActionsComponent } from './components/actions/actions.component';
 import { faDumpster, faDesktop, faFolder, faFile } from '@fortawesome/free-solid-svg-icons';
 import { AddElementComponent } from './components/add-element/add-element.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,7 +32,6 @@ import { TaskbarMenuComponent } from './components/taskbar/taskbar-menu/taskbar-
     DesktopItemsComponent,
     DesktopItemsDirective,
     AppIconComponent,
-    ActionsComponent,
     AddElementComponent,
     UniqueDesktopItemNameValidatorDirective,
     ForbiddenDesktopItemsValidatorDirective,

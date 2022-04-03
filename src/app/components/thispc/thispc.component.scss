@@ -1,39 +1,18 @@
-@use "../../../styles";
-
-$gray: #b6b6b6;
-$dirty-white: #fdfbfb;
-$light-gray: #cfcfcf;
-$error: #a3394c;
-$blue: #06628d;
+@use '../../../assets/helpers.scss' as *;
 
 .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
+  @extend .wrapper;
 }
 
 .container {
   width: 40%;
   height: 60%;
-  background-color: white;
+  background-color: $white;
   padding: 0 1rem;
 }
 
 .container__header {
-  width: 100%;
-  height: 2rem;
-  background-color: $dirty-white;
-  border-bottom: solid 2px $light-gray;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h4 {
-    margin: 0;
-    padding: 0.1rem 0.2rem;
-  }
+  @extend .wrapper__header;
 }
 
 .container__header--apps {
@@ -41,7 +20,6 @@ $blue: #06628d;
 
   .container__header--button {
     background-color: transparent;
-    @extend h5;
 
     &:hover {
       color: $blue;
@@ -56,7 +34,7 @@ $blue: #06628d;
   padding: 0 1rem;
 
   &.hover:hover {
-    background: $gray;
+    @include white(20%);
   }
 
   fa-icon {
@@ -74,7 +52,7 @@ $blue: #06628d;
   }
 }
 
-.container__buttons {
+.container__apps {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(2, 1fr);
@@ -89,8 +67,4 @@ $blue: #06628d;
     display: flex;
     align-items: center;
   }
-}
-
-button.exit-button {
-  margin-right: -1rem;
 }
