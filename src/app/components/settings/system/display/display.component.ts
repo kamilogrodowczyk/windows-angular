@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { BrowserStorageService } from 'src/app/services/storage.service';
 
 @Component({
-  selector: 'app-display-settings',
-  templateUrl: './display-settings.component.html',
-  styleUrls: ['./display-settings.component.scss'],
+  selector: 'app-display',
+  templateUrl: './display.component.html',
+  styleUrls: ['./display.component.scss']
 })
-export class DisplaySettingsComponent implements OnInit {
+export class DisplayComponent implements OnInit {
   isDisabled: boolean = false;
   range!: number;
   isMouseEnter: boolean = false;
 
-  constructor(private storage: BrowserStorageService) {}
+  constructor(private storage: BrowserStorageService) { }
 
   ngOnInit(): void {
-    this.getDisplay();
+    this.getDisplay()
   }
 
   setDisplay() {
@@ -46,4 +46,5 @@ export class DisplaySettingsComponent implements OnInit {
     const test = this.isDisabled === true ? !this.isDisabled : true;
     this.storage.set('options', { nightDisplay: test }, true);
   }
+
 }

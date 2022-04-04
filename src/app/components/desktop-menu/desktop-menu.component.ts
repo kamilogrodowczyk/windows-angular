@@ -52,7 +52,7 @@ export class DesktopMenuComponent implements OnInit {
         this.service.paste()?.subscribe();
         break;
       case 'Display settings':
-        this.router.navigate(['desktop', 'display']);
+        this.router.navigate(['settings', 'system']);
         break;
       case 'New text document':
         this.service.createNewDocumentFlag(true);

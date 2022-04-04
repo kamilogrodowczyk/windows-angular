@@ -11,6 +11,7 @@ import {
 import { desktopItem, desktopItemElement } from '../mocks/desktopItem';
 import { desktopMenu } from '../mocks/desktopMenu';
 import { DesktopItem, DesktopItemElement } from '../types/desktopItems';
+import { WindowsSettings } from '../types/windowsSettings';
 import { DesktopItemsService } from './desktop-items.service';
 
 @Injectable({
@@ -32,10 +33,9 @@ export class DesktopMenuService {
 
   // Desktop Items — Subjects
   private allApps = new Subject<DesktopItem[]>();
-  private selectedApps: BehaviorSubject<DesktopItem[]> = new BehaviorSubject<
-    DesktopItem[]
-  >([]);
-  private selectedApp: Subject<DesktopItem> = new Subject<DesktopItem>();
+  private selectedApps: BehaviorSubject<DesktopItem[] | WindowsSettings[]> =
+    new BehaviorSubject<DesktopItem[] | WindowsSettings[]>([]);
+  private selectedApp: Subject<DesktopItem | WindowsSettings> = new Subject<DesktopItem | WindowsSettings>();
   private allDocuments = new Subject<DesktopItemElement[]>();
   private textDocumentToCreate = new Subject<boolean>();
   private textDocumentToUpdate = new Subject<boolean>();
@@ -44,7 +44,7 @@ export class DesktopMenuService {
     this.allApps.next(items);
   }
 
-  getSelectedApps(item: DesktopItem) {
+  getSelectedApps(item: DesktopItem | WindowsSettings) {
     this.selectedApps$.pipe(take(1)).subscribe((app) => {
       const updatedArray =
         app.length && app.some((a) => a.linkName === item.linkName)
@@ -54,13 +54,15 @@ export class DesktopMenuService {
     });
   }
 
-  getSelectedApp(item: DesktopItem) {
+  getSelectedApp(item: DesktopItem | WindowsSettings) {
     this.selectedApp.next(item);
   }
 
-  removeSelectedApp(item: DesktopItem) {
+  removeSelectedApp(item: DesktopItem | WindowsSettings) {
     this.selectedApps$.pipe(take(1)).subscribe((app) => {
-      const updatedArray = app.filter((a) => a.linkName !== item.linkName);
+      const updatedArray = (app as (DesktopItem | WindowsSettings)[]).filter(
+        (a: DesktopItem | WindowsSettings) => a.linkName !== item.linkName
+      ) as (DesktopItem | WindowsSettings)[];
       this.selectedApps.next(updatedArray);
     });
   }

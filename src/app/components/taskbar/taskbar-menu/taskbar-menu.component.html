@@ -9,15 +9,12 @@
       </button>
     </div>
     <div class="taskbar__bottom">
-      <button title="Documents" class="btn">
-        <fa-icon [icon]="faFile" data-name="Documents"></fa-icon>
-      </button>
-      <a routerLink="desktop/display" (click)="isOpen = false" class="btn">
+      <a routerLink="settings" (click)="isOpen = false" class="btn">
         <button title="Settings">
           <fa-icon [icon]="faCog" data-name="Settings"></fa-icon>
         </button>
       </a>
-      <button title="Power" class="btn">
+      <button title="Power - NOT WORK!" class="btn">
         <fa-icon [icon]="faPowerOff" data-name="Power"></fa-icon>
       </button>
     </div>

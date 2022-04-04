@@ -1,8 +1,8 @@
-@use '../../../assets/helpers.scss' as *;
+@use "../../../../../assets/helpers.scss" as *;
 
-:host {
-  @extend .wrapper;
-}
+// :host {
+//   width: 100%;
+// }
 
 span {
   width: 100%;
@@ -11,13 +11,11 @@ span {
 }
 
 .container {
-  width: 50%;
+  width: 100%;
   background-color: $white;
-  padding: 0.5rem 1rem;
   display: grid;
   align-items: flex-start;
   gap: 3vh;
-  padding: 4vh 2vh;
 }
 
 .container__color {

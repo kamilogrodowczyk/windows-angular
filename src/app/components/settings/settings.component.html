@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="container__header">
+    <h4>Settings</h4>
+    <div class="header__buttons">
+      <button class="exit-button" (click)="minimalize()">_</button>
+      <button class="exit-button" (click)="goBack()">X</button>
+    </div>
+  </div>
+  <div class="header">
+    <h3>Windows settings</h3>
+  </div>
+  <div class="container__settings">
+    <a routerLink="/{{ set.linkName }}" *ngFor="let set of settings">
+      <button class="container__setting">
+        <fa-icon [icon]="set.icon"></fa-icon>
+        <div class="container__text">
+          <h5>{{ set.name }}</h5>
+          <p>{{ set.text }}</p>
+        </div>
+      </button>
+    </a>
+  </div>
+</div>

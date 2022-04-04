@@ -4,6 +4,7 @@ import { faWindows } from '@fortawesome/free-brands-svg-icons';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { DesktopItem } from 'src/app/types/desktopItems';
+import { WindowsSettings } from 'src/app/types/windowsSettings';
 
 @Component({
   selector: 'app-taskbar',
@@ -16,8 +17,8 @@ export class TaskbarComponent implements OnInit {
   today: number = Date.now();
 
   isOpen: boolean = false;
-  selectedApps: DesktopItem[] = []
-  selectedApp!: DesktopItem
+  selectedApps: (DesktopItem | WindowsSettings)[] = []
+  selectedApp!: DesktopItem | WindowsSettings
 
   constructor(private menuService: DesktopMenuService) {
     this.menuService.selectedApps$.subscribe(app => this.selectedApps = app);

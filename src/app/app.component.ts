@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnChanges } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { OverlayDesktopMenuService } from './services/overlay-desktop-menu.service';
 import { BrowserStorageService } from './services/storage.service';
 
