@@ -21,6 +21,7 @@ export class AddElementComponent implements OnInit {
   isError: any;
   newDocument: boolean = false;
   @Input() updatedDocument: boolean = false;
+  newItem: any;
 
   @ViewChild('input', { static: false })
   set input(element: ElementRef<HTMLInputElement>) {

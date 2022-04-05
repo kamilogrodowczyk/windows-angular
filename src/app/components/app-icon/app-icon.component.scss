@@ -4,25 +4,14 @@
   @extend .wrapper;
 }
 
-.container {
-  width: 50%;
-  height: 75%;
-  background-color: $white;
-  padding: 0 1rem;
-
-  & > *:not(.container__elements.header, .container__header):hover {
-    cursor: default;
-    @include white(20%);
-  }
-}
-
-.container__header {
-  @extend .wrapper__header;
-}
-
 .container__elements {
   display: flex;
   justify-content: space-around;
+
+  &:not(.container__elements.header, .container__header):hover {
+    cursor: default;
+    @include white(20%);
+  }
 
   & > * {
     flex: 1;

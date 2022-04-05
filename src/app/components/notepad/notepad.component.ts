@@ -9,6 +9,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { DesktopItemsService } from 'src/app/services/desktop-items.service';
+import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { DesktopItem, DesktopItemElement } from 'src/app/types/desktopItems';
 
 @Component({
@@ -22,12 +23,13 @@ export class NotepadComponent implements OnInit {
   selectedItem!: DesktopItemElement;
   currentItem!: DesktopItem;
   private newContent = new Subject<string>();
-  test: string = 'Saved';
+  isSavedText: string = 'Saved';
 
   constructor(
     private route: ActivatedRoute,
     private service: DesktopItemsService,
-    private location: Location
+    private location: Location,
+    private menuService: DesktopMenuService
   ) {}
 
   ngOnInit(): void {
@@ -47,13 +49,13 @@ export class NotepadComponent implements OnInit {
         switchMap((i) =>
           forkJoin([
             this.service.updateItem(this.currentItem),
-            (this.test = 'Saving...'),
+            (this.isSavedText = 'Saving...'),
           ])
         )
       )
       .subscribe(() =>
         setTimeout(() => {
-          this.test = 'Saved';
+          this.isSavedText = 'Saved';
         }, 1500)
       );
   }
@@ -67,12 +69,17 @@ export class NotepadComponent implements OnInit {
     }
     this.service.getItem(appLinkName).subscribe((item) => {
       this.currentItem = item;
-      const element = item.elements.filter(
+      const element = item.elements.length && item.elements.filter(
         (i) => i.linkName === textLinkName
       )[0];
-      this.selectedItem = element
+      this.selectedItem = element;
       this.text = element.content;
-      this.name = element.name;
+      this.name = `${element.name}`;
+      this.menuService.getSelectedApps({
+        icon: element.icon,
+        name: element.name,
+        linkName: `${item.linkName}/notepad/${element.linkName}`,
+      });
     });
   }
 

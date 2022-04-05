@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractControl, FormsModule, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { DesktopItemsService } from '../services/desktop-items.service';
-import { TestDesktopItemsService } from '../services/tests/test-desktop-items.service';
+import { DesktopItemsService } from '../../services/desktop-items.service';
+import { TestDesktopItemsService } from '../../services/tests/test-desktop-items.service';
 import { DesktopItemsValidator } from './desktop-items-validator.service';
 import {
   UniqueDesktopItemNameValidator,

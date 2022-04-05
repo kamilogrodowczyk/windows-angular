@@ -19,7 +19,6 @@ export class ThispcComponent implements OnInit {
   thisPc!: DesktopItem
 
   constructor(
-    private location: Location,
     private desktopItemsService: DesktopItemsService,
     private desktopMenuService: DesktopMenuService,
     private router: Router
@@ -34,7 +33,6 @@ export class ThispcComponent implements OnInit {
     this.desktopItemsService.getItem('thispc').subscribe((item) => {
       this.thisPc = item;
       this.desktopMenuService.getSelectedApps(item)
-      this.desktopMenuService.getSelectedApp(item)
     });
   }
 
@@ -46,14 +44,5 @@ export class ThispcComponent implements OnInit {
 
   openDesktopItem(linkName: string) {
     this.router.navigate([linkName]);
-  }
-
-  minimalize() {
-    this.location.back();
-  }
-
-  goBack() {
-    this.location.back();
-    this.desktopMenuService.removeSelectedApp(this.thisPc)
   }
 }

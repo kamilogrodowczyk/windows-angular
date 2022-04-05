@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DesktopItemsService } from '../services/desktop-items.service';
+import { DesktopItemsService } from '../../services/desktop-items.service';
 
 @Injectable({ providedIn: 'root' })
 export class DesktopItemsValidator {

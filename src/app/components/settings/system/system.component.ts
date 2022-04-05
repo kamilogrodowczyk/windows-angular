@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { windowsSettings } from 'src/app/mocks/windowsSettings';
+import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
 import { SettingOptions, WindowsSettings } from 'src/app/types/windowsSettings';
 
 @Component({
@@ -12,15 +13,28 @@ import { SettingOptions, WindowsSettings } from 'src/app/types/windowsSettings';
 })
 export class SystemComponent implements OnInit {
   faHome = faHome;
+  settings: WindowsSettings = {
+    icon: 'cog',
+    name: 'Settings',
+    linkName: 'settings',
+  };
   selectedSetting!: WindowsSettings;
   settingOptions?: SettingOptions[] = [];
   selectedOption?: string = '';
 
-  constructor(private location: Location, private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private menuService: DesktopMenuService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((p) =>
       this.getSelectedItem(p.get('setting'))
+    );
+    this.menuService.updateSelectedApp(
+      'Settings',
+      this.selectedSetting.linkName,
+      this.settings
     );
   }
 
@@ -40,9 +54,5 @@ export class SystemComponent implements OnInit {
 
   selectSetting(setting: string) {
     this.selectedOption = setting;
-  }
-
-  goBack() {
-    this.location.back();
   }
 }

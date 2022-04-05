@@ -1,41 +1,32 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="container__header">
-      <h4>This PC</h4>
-      <div class="header__buttons">
-        <button class="exit-button" (click)="minimalize()">_</button>
-        <button class="exit-button" (click)="goBack()">X</button>
-      </div>
+<app-title-bar [app]="thisPc">
+  <div class="container__header--apps" [attr.aria-expanded]="isOpen">
+    <button class="container__header--button h5" (click)="isOpen = !isOpen">
+      Folders
+    </button>
+    <div class="container__apps" [ngClass]="{ isClosed: !isOpen }">
+      <a
+        (dblclick)="openDesktopItem(a.linkName)"
+        *ngFor="let a of apps.slice(0, 8)"
+        class="container__app hover"
+      >
+        <button>
+          <fa-icon [icon]="faFolder"></fa-icon>
+          <p>{{ a.name }}</p>
+        </button>
+      </a>
     </div>
-    <div class="container__header--apps" [attr.aria-expanded]="isOpen">
-      <button class="container__header--button h5" (click)="isOpen = !isOpen">
-        Folders
-      </button>
-      <div class="container__apps" [ngClass]="{ isClosed: !isOpen }">
-        <a
-          (dblclick)="openDesktopItem(a.linkName)"
-          *ngFor="let a of apps.slice(0, 8)"
-          class="container__app hover"
-        >
-          <button>
-            <fa-icon [icon]="faFolder"></fa-icon>
-            <p>{{ a.name }}</p>
-          </button>
-        </a>
-      </div>
-    </div>
-    <div class="container__header--apps">
-      <h5>Discs</h5>
-      <div class="container__app">
-        <fa-icon [icon]="faComputer"></fa-icon>
-        <div class="container__progress">
-          <label for="file">Local disk (C:)</label>
-          <progress id="file" max="25" value="{{ apps.length }}">
-            {{ apps.length }}%
-          </progress>
-          <p>{{ apps.length }} apps</p>
-        </div>
+  </div>
+  <div class="container__header--apps">
+    <h5>Discs</h5>
+    <div class="container__app">
+      <fa-icon [icon]="faComputer"></fa-icon>
+      <div class="container__progress">
+        <label for="file">Local disk (C:)</label>
+        <progress id="file" max="25" value="{{ apps.length }}">
+          {{ apps.length }}%
+        </progress>
+        <p>{{ apps.length }} apps</p>
       </div>
     </div>
   </div>
-</div>
+</app-title-bar>

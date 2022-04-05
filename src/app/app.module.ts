@@ -16,8 +16,8 @@ import { AppIconComponent } from './components/app-icon/app-icon.component';
 import { faDumpster, faDesktop, faFolder, faFile, faCog, faPaintBrush } from '@fortawesome/free-solid-svg-icons';
 import { AddElementComponent } from './components/add-element/add-element.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UniqueDesktopItemNameValidatorDirective } from './form-validator/unique-desktop-items-validator.directive';
-import { ForbiddenDesktopItemsValidatorDirective } from './form-validator/forbidden-desktop-items-validator.directive';
+import { UniqueDesktopItemNameValidatorDirective } from './shared/form-validator/unique-desktop-items-validator.directive';
+import { ForbiddenDesktopItemsValidatorDirective } from './shared/form-validator/forbidden-desktop-items-validator.directive';
 import { AdditionalDesktopMenuDirective } from './directives/additional-desktop-menu.directive';
 import { NotepadComponent } from './components/notepad/notepad.component';
 import { ThispcComponent } from './components/thispc/thispc.component';
@@ -25,6 +25,7 @@ import { TaskbarMenuComponent } from './components/taskbar/taskbar-menu/taskbar-
 import { SettingsComponent } from './components/settings/settings.component';
 import { SystemComponent } from './components/settings/system/system.component';
 import { DisplayComponent } from './components/settings/system/display/display.component';
+import { TitleBarComponent } from './shared/title-bar/title-bar.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DisplayComponent } from './components/settings/system/display/display.c
     SettingsComponent,
     SystemComponent,
     DisplayComponent,
+    TitleBarComponent,
   ],
   imports: [
     BrowserModule,

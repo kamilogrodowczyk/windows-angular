@@ -35,7 +35,9 @@ export class DesktopMenuService {
   private allApps = new Subject<DesktopItem[]>();
   private selectedApps: BehaviorSubject<DesktopItem[] | WindowsSettings[]> =
     new BehaviorSubject<DesktopItem[] | WindowsSettings[]>([]);
-  private selectedApp: Subject<DesktopItem | WindowsSettings> = new Subject<DesktopItem | WindowsSettings>();
+  private selectedApp: Subject<DesktopItem | WindowsSettings> = new Subject<
+    DesktopItem | WindowsSettings
+  >();
   private allDocuments = new Subject<DesktopItemElement[]>();
   private textDocumentToCreate = new Subject<boolean>();
   private textDocumentToUpdate = new Subject<boolean>();
@@ -44,13 +46,38 @@ export class DesktopMenuService {
     this.allApps.next(items);
   }
 
+  test(app: any[], item: DesktopItem | WindowsSettings) {
+    const updatedArray =
+      app.length && app.some((a) => a.linkName === item.linkName)
+        ? [...app]
+        : [...app, item];
+    this.selectedApps.next(updatedArray);
+    this.selectedApp.next(item);
+  }
+
   getSelectedApps(item: DesktopItem | WindowsSettings) {
     this.selectedApps$.pipe(take(1)).subscribe((app) => {
-      const updatedArray =
-        app.length && app.some((a) => a.linkName === item.linkName)
-          ? [...app]
-          : [...app, item];
-      this.selectedApps.next(updatedArray);
+      this.test(app, item)
+    });
+  }
+
+  updateSelectedApp(
+    name: string,
+    linkName: string,
+    item: DesktopItem | WindowsSettings
+  ) {
+    this.selectedApps$.pipe(take(1)).subscribe((app) => {
+      const specificItemIndex = (
+        app as (DesktopItem | WindowsSettings)[]
+      ).findIndex((a) => a.name === name);
+      if (specificItemIndex !== -1) {
+        app[specificItemIndex].linkName = linkName;
+        this.selectedApps.next([...app]);
+        this.getSelectedApp(app[specificItemIndex])
+      } else {
+        this.test(app, item);
+      }
+      console.log(app)
     });
   }
 
@@ -61,8 +88,8 @@ export class DesktopMenuService {
   removeSelectedApp(item: DesktopItem | WindowsSettings) {
     this.selectedApps$.pipe(take(1)).subscribe((app) => {
       const updatedArray = (app as (DesktopItem | WindowsSettings)[]).filter(
-        (a: DesktopItem | WindowsSettings) => a.linkName !== item.linkName
-      ) as (DesktopItem | WindowsSettings)[];
+        (a: DesktopItem | WindowsSettings) => a.name !== item.name
+      );
       this.selectedApps.next(updatedArray);
     });
   }

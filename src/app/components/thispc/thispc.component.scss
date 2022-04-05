@@ -1,18 +1,7 @@
 @use '../../../assets/helpers.scss' as *;
 
-.wrapper {
+:host {
   @extend .wrapper;
-}
-
-.container {
-  width: 40%;
-  height: 60%;
-  background-color: $white;
-  padding: 0 1rem;
-}
-
-.container__header {
-  @extend .wrapper__header;
 }
 
 .container__header--apps {

@@ -1,11 +1,4 @@
-<div class="container">
-  <div class="container__header">
-    <h4>Settings</h4>
-    <div class="header__buttons">
-      <button class="exit-button" (click)="minimalize()">_</button>
-      <button class="exit-button" (click)="goBack()">X</button>
-    </div>
-  </div>
+<app-title-bar class="margin-right" [app]="settingsApp">
   <div class="header">
     <h3>Windows settings</h3>
   </div>
@@ -20,4 +13,4 @@
       </button>
     </a>
   </div>
-</div>
+</app-title-bar>

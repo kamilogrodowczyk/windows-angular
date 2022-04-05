@@ -4,13 +4,6 @@
   @extend .wrapper;
 }
 
-.container {
-  width: 50%;
-  background-color: $white;
-  border: solid 1px;
-  @include white(50%, border-color);
-}
-
 textarea {
   resize: none;
   width: 100%;
@@ -18,24 +11,9 @@ textarea {
   height: auto;
 }
 
-.container__header {
-  @extend .wrapper__header;
+::ng-deep .container app-title-bar.margin-right > .container__header {
 
   .header__buttons {
     margin-right: 0;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-  }
-
-  h4 {
-    margin-right: 2rem;
-  }
-
-  p {
-    font-size: 0.8rem;
-    font-style: italic;
   }
 }

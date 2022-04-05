@@ -25,7 +25,6 @@ export class AppIconComponent implements OnInit {
     private menuService: DesktopMenuService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
     private eventService: EventService,
     private overlay: OverlayDesktopMenuService
   ) {
@@ -52,7 +51,6 @@ export class AppIconComponent implements OnInit {
       this.appElement = item;
       this.documentElement = item.elements;
       this.menuService.getSelectedApps(item)
-      this.menuService.getSelectedApp(item)
     });
   }
 
@@ -70,14 +68,5 @@ export class AppIconComponent implements OnInit {
 
   getElementName(name: string): void {
     this.eventService.getAppElementName(this.appElement.linkName, name);
-  }
-
-  minimalize() {
-    this.location.back();
-  }
-
-  goBack() {
-    this.location.back();
-    this.menuService.removeSelectedApp(this.appElement)
   }
 }

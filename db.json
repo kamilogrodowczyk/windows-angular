@@ -29,17 +29,17 @@
           "icon": "file",
           "name": "Text122.txt",
           "linkName": "text122.txt",
-          "content": "Siema",
+          "content": "Elo",
           "type": "Text document",
-          "characters": 5
+          "characters": 3
         },
         {
           "icon": "file",
           "name": "Test.txt",
           "linkName": "test.txt",
-          "content": "",
+          "content": "Siema",
           "type": "Text document",
-          "characters": 0
+          "characters": 5
         }
       ],
       "id": 4

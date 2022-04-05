@@ -1,14 +1,9 @@
-<div class="container">
-  <div class="container__header">
-    <span>
-      <h4>{{ name }} — notepad</h4>
-      <p>{{ test }}</p>
-    </span>
-    <div class="header__buttons">
-      <button class="exit-button">_</button>
-      <button class="exit-button" (click)="goBack()">X</button>
-    </div>
-  </div>
+<app-title-bar
+  [app]="selectedItem"
+  [additionalName]="'— notepad'"
+  [isSavedText]="isSavedText"
+  class="margin-right"
+>
   <textarea
     #tt
     rows="30"
@@ -16,4 +11,4 @@
     (input)="addNewContent()"
     spellcheck="false"
   ></textarea>
-</div>
+</app-title-bar>

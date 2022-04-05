@@ -4,23 +4,30 @@
   @extend .wrapper;
 }
 
-.container {
-  width: 70%;
-  height: 50%;
-}
-
-.container__header {
-  @extend .wrapper__header;
-  background-color: $white;
+::ng-deep app-title-bar.margin-right > .container__header {
 
   .header__buttons {
-    margin-right: 0;
+    margin: 0;
+  }
+}
+
+::ng-deep app-title-bar.margin-right {
+  padding: 0;
+  background-color: transparent;
+
+  .container__header {
+    background-color: $white;
+
+    .header__buttons {
+      position: relative;
+      left: -1rem;
+    }
   }
 }
 
 .container__elements {
   display: flex;
-  height: 100%;
+  height: calc(100% - 2rem);
 
   & > * {
     padding-top: 2vh;

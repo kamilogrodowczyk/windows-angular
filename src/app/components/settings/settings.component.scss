@@ -4,15 +4,7 @@
   @extend .wrapper;
 }
 
-.container {
-  width: 50%;
-  // height: 50%;
-  background-color: $white;
-}
-
-.container__header {
-  @extend .wrapper__header;
-  margin-bottom: 2rem;
+::ng-deep .container app-title-bar.margin-right > .container__header {
 
   .header__buttons {
     margin-right: 0;
@@ -73,6 +65,10 @@
       text-align: start;
     }
   }
+}
+
+h3 {
+  margin-top: 2rem;
 }
 
 a {

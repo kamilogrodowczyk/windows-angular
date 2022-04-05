@@ -10,7 +10,7 @@ import { SpyLocation } from '@angular/common/testing';
 
 import { AddElementComponent } from './add-element.component';
 import { Location } from '@angular/common';
-import { UniqueDesktopItemNameValidatorDirective } from 'src/app/form-validator/unique-desktop-items-validator.directive';
+import { UniqueDesktopItemNameValidatorDirective } from 'src/app/shared/form-validator/unique-desktop-items-validator.directive';
 
 export * from "@fortawesome/angular-fontawesome";
 export * from "@fortawesome/fontawesome-svg-core";

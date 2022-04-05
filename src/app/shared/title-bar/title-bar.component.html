@@ -1,0 +1,14 @@
+<div class="container__header">
+  <span *ngIf="isSavedText; else elseBlock">
+    <h4 *ngIf="app">{{ app.name }} {{ additionalName }}</h4>
+    <p>{{ isSavedText }}</p>
+  </span>
+  <ng-template #elseBlock
+    ><h4 *ngIf="app">{{ app.name }}</h4></ng-template
+  >
+  <div class="header__buttons">
+    <button class="exit-button" (click)="minimalize()">_</button>
+    <button class="exit-button" (click)="goBack()">X</button>
+  </div>
+</div>
+<ng-content></ng-content>

@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { windowsSettings } from 'src/app/mocks/windowsSettings';
 import { DesktopMenuService } from 'src/app/services/desktop-menu.service';
@@ -18,21 +17,14 @@ export class SettingsComponent implements OnInit {
   };
 
   constructor(
-    private location: Location,
     private menuService: DesktopMenuService
   ) {}
 
   ngOnInit(): void {
-    this.menuService.getSelectedApps(this.settingsApp);
-    this.menuService.getSelectedApp(this.settingsApp);
-  }
-
-  minimalize() {
-    this.location.back();
-  }
-
-  goBack() {
-    this.location.back();
-    this.menuService.removeSelectedApp(this.settingsApp)
+    this.menuService.updateSelectedApp(
+      'Settings',
+      'settings',
+      this.settingsApp
+    );
   }
 }

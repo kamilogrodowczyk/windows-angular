@@ -25,5 +25,9 @@ export class TaskbarComponent implements OnInit {
     this.menuService.selectedApp$.subscribe(app => this.selectedApp = app);
   }
 
+  test(app: (DesktopItem | WindowsSettings)) {
+    console.log(app.linkName)
+  }
+
   ngOnInit(): void {}
 }

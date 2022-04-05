@@ -6,7 +6,7 @@
     <div class="taskbar__container">
       <div class="taskbar__buttons--active" *ngFor="let app of selectedApps">
         <a routerLink="{{app.linkName === selectedApp.linkName ? '/' : app.linkName}}">
-          <button title="{{app.name}}" [ngClass]="{'active': app.linkName === selectedApp.linkName}">
+          <button title="{{app.name}}" [ngClass]="{'active': app.linkName === selectedApp.linkName}" (click)="test(app)">
             <fa-icon [icon]="app.icon"></fa-icon>
           </button>
         </a>
