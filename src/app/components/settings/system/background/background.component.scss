@@ -1,0 +1,42 @@
+@use "../shared";
+
+.container__backgrounds,
+.container__colors {
+  @extend .container__elements_grid;
+}
+
+.container__background,
+.container__color {
+  @extend .container__element_grid;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.container__background {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.container__color {
+  &:first-child {
+    background-color: goldenrod;
+  }
+  &:nth-child(2) {
+    background-color: lightcoral;
+  }
+  &:nth-child(3) {
+    background-color: #00a2ed;
+  }
+  &:nth-child(4) {
+    background-color: mediumseagreen;
+  }
+}
+
+.picture-grid {
+  display: grid;
+  gap: 1rem;
+}

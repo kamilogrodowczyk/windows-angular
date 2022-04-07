@@ -77,7 +77,6 @@ export class DesktopMenuService {
       } else {
         this.test(app, item);
       }
-      console.log(app)
     });
   }
 

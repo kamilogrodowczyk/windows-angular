@@ -9,4 +9,7 @@ export interface DesktopSavedOptions {
   sortBy: string;
   nightDisplay: boolean;
   nightDisplayValue: number;
+  colorAccent: string,
+  isTransparent: boolean,
+  theme: string
 }

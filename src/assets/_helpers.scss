@@ -1,10 +1,35 @@
-$white: #fff;
+@use 'sass:color';
 
-$light-blue: #87ceeb;
-$blue: #00a2ed;
+// $background: url(var(--background));
+
+$white: #fff;
+$alpha: var(--alpha);
+$blue: var(--accent-color);
+$light-blue: var(--accent-color-lighten);
 $error: #a3394c;
 
 $base-color: #222;
+$black: #222;
+
+$bg-color: var(--bg-color);
+$bg-color-rgb: var(--bg-color-rgb);
+
+$bg-color-hue1: var(--bg-color-hue1);
+$bg-color-hue1-rgb: var(--bg-color-hue1-rgb);
+
+$bg-color-hue2: var(--bg-color-hue2);
+$bg-color-hue2-rgb: var(--bg-color-hue2-rgb);
+
+$bg-color-hue3: var(--bg-color-hue3);
+$bg-color-hue3-rgb: var(--bg-color-hue3-rgb);
+
+$bg-color-hue5: var(--bg-color-hue5);
+
+$txt-color: var(--txt-color);
+$txt-color-hue1: var(--txt-color-hue1);
+$txt-color-hue2: var(--txt-color-hue2);
+$txt-color-hue5: var(--txt-color-hue5);
+
 
 @mixin black($hue, $property: background-color) {
   #{$property}: lighten($base-color, $hue);
@@ -12,6 +37,12 @@ $base-color: #222;
 
 @mixin white($hue, $property: background-color) {
   #{$property}: darken($white, $hue);
+}
+
+@mixin transparent($color, $alpha, $blur) {
+  background-color: rgba($color, $alpha);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
 }
 
 .wrapper {

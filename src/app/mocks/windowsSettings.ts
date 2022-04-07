@@ -23,6 +23,10 @@ export const windowsSettings: WindowsSettings[] = [
         icon: 'paint-brush',
         name: 'Background',
       },
+      {
+        icon: 'palette',
+        name: 'Colors',
+      },
     ],
   },
 ];

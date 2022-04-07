@@ -9,6 +9,8 @@ textarea {
   width: 100%;
   padding: 0.1rem 0.2rem;
   height: auto;
+  background-color: $bg-color;
+  color: $txt-color;
 }
 
 ::ng-deep .container app-title-bar.margin-right > .container__header {

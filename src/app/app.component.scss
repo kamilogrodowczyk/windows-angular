@@ -1,7 +1,7 @@
 // @import "@angular/cdk/overlay-prebuilt.css";
 
 div {
-  background-image: url("../assets/images/windows10.jpg");
+  background-image: var(--background);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

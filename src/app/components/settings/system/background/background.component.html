@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Background</h2>
+  <div class="container__image">
+    <div class="container__image--left">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
+  </div>
+  <div class="container__select">
+    <p>Background</p>
+    <label for="your-background">
+      <select
+        name="your-background"
+        id="your-background"
+        (change)="selectBackgroundType($event)"
+      >
+        <option
+          *ngFor="let bckg of background"
+          [ngValue]="bckg"
+          [selected]="selectedBackgroundType === bckg"
+        >
+          {{ bckg }}
+        </option>
+      </select>
+    </label>
+  </div>
+  <div [ngSwitch]="selectedBackgroundType">
+    <div *ngSwitchCase="'Picture'" class="picture-grid">
+      <div>
+        <p>Choose picture</p>
+        <div class="container__backgrounds">
+          <button
+            *ngFor="let bckg of backgroundLinks"
+            class="container__background"
+            [title]="bckg.altText"
+            (click)="setBackground(bckg.link)"
+          >
+            <img src="{{ bckg.link }}" alt="{{ bckg.altText }}" />
+          </button>
+        </div>
+      </div>
+      <div class="container__select">
+        <p>Choose a fit</p>
+        <label for="your-background-fit">
+          <select name="your-background-fit" id="your-background-fit">
+            <option *ngFor="let bckg of backgroundFit" [ngValue]="bckg">
+              {{ bckg }}
+            </option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div *ngSwitchCase="'Solid color'">
+      <p>Choose background color</p>
+      <div class="container__colors">
+        <button #btn1 class="container__color" title="Goldenrod"></button>
+        <button #btn2 class="container__color" title="Lightcoral"></button>
+        <button #btn3 class="container__color" title="Blue"></button>
+        <button #btn4 class="container__color" title="Mediumseagreen"></button>
+      </div>
+    </div>
+  </div>
+</div>

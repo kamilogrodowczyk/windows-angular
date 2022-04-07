@@ -1,44 +1,45 @@
 <div class="container">
-    <h2>Display</h2>
-    <div class="container__color">
-      <h4>Color</h4>
-      <p>Night light</p>
-      <span>
+  <h2>Display</h2>
+  <div class="container__color">
+    <h4>Color</h4>
+    <p>Night light</p>
+    <div class="container__toggle">
+      <div class="container__button">
         <button
-          class="container__toggle"
+          class="toggle-button"
           (click)="setDisplay()"
           [ngClass]="{ active: isDisabled === false }"
         >
-          <div class="container__toggle--dot"></div>
+          <div class="toggle-button-dot"></div>
         </button>
         <p>{{ isDisabled ? "Off" : "On" }}</p>
-      </span>
-      <p>
-        Screens emit blue light, which can keep you up at night. Night light
-        displays warmer colors to help you sleep.
-      </p>
-      <div class="container__range">
-        <label for="night-strength">Strength</label>
-        <span class="container__range--info">
-          <p>{{ range }}</p>
-          <input
-            [ngClass]="{ active: range !== undefined }"
-            [value]="range"
-            (input)="range = setNightDisplayRange($event)"
-            type="range"
-            id="night-strength"
-            min="0"
-            max="100"
-            (mousedown)="onMouseDown()"
-            (mouseup)="onMouseUp()"
-          />
-          <div
-            aria-hidden="true"
-            class="container__range--track"
-            [ngStyle]="{ 'width.%': range / 2 }"
-          ></div>
-        </span>
       </div>
     </div>
+    <p>
+      Screens emit blue light, which can keep you up at night. Night light
+      displays warmer colors to help you sleep.
+    </p>
+    <div class="container__range">
+      <label for="night-strength">Strength</label>
+      <span class="container__range--info">
+        <p>{{ range }}</p>
+        <input
+          [ngClass]="{ active: range !== undefined }"
+          [value]="range"
+          (input)="range = setNightDisplayRange($event)"
+          type="range"
+          id="night-strength"
+          min="0"
+          max="100"
+          (mousedown)="onMouseDown()"
+          (mouseup)="onMouseUp()"
+        />
+        <div
+          aria-hidden="true"
+          class="container__range--track"
+          [ngStyle]="{ 'width.%': range / 2 }"
+        ></div>
+      </span>
+    </div>
   </div>
-  
+</div>

@@ -4,19 +4,18 @@
   @extend .wrapper;
 }
 
-::ng-deep app-title-bar.margin-right > .container__header {
-
+::ng-deep app-title-bar.color > .container__header {
   .header__buttons {
     margin: 0;
   }
 }
 
-::ng-deep app-title-bar.margin-right {
+::ng-deep app-title-bar.color {
   padding: 0;
   background-color: transparent;
 
   .container__header {
-    background-color: $white;
+    background-color: $bg-color;
 
     .header__buttons {
       position: relative;
@@ -38,9 +37,9 @@
   display: grid;
   align-content: flex-start;
   height: 100%;
-  flex: 1;
+  flex: 1.5;
   width: 100%;
-  background-color: rgba($color: #222, $alpha: 0.3);
+  background-color: rgba($bg-color-rgb, $alpha);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 
@@ -61,17 +60,18 @@
 
   button {
     background-color: transparent;
+    color: $txt-color;
     text-align: start;
-    color: $white;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
 
     &:hover {
-      background-color: rgba($color: #222, $alpha: 0.4);
+      background-color: rgba($white, $alpha: 0.4);
     }
 
     &.selected {
       position: relative;
-      display: flex;
-      align-items: center;
 
       &::before {
         content: "";
@@ -87,7 +87,7 @@
 
 .container__right {
   flex: 3;
-  background-color: $white;
+  background-color: $bg-color;
   padding: 0 2vh 2vh;
 }
 
@@ -95,10 +95,8 @@ fa-icon {
   line-height: 0;
   font-size: 1.2rem;
   margin-right: 1rem;
-  color: $white;
 }
 
 h5 {
-  color: $white;
   font-weight: 400;
 }

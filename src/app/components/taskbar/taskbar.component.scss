@@ -2,16 +2,16 @@
 
 @keyframes press-button {
   0% {
-    @include black(20%);
+    background-color: $bg-color-hue3;
   }
 
   100% {
-    @include black(10%);
+    background-color: $bg-color-hue2;
   }
 }
 
 .taskbar {
-  @include black(5%);
+  background-color: rgb($bg-color-rgb);
   position: absolute;
   left: 0;
   bottom: 0;
@@ -19,7 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 2;
+  z-index: 20;
   height: 3.25rem;
 }
 
@@ -45,14 +45,14 @@
     border-bottom: solid 2px $light-blue;
 
     &.active {
-      @include black(20%);
+      background-color: rgba($bg-color-hue2-rgb, $alpha);
 
       &:hover {
-        @include black(25%);
+        background-color: rgba($bg-color-hue3-rgb, $alpha);
       }
 
       &:active {
-        @include black(15%);
+        background-color: rgba($bg-color-hue2-rgb, 1);
       }
     }
   }
@@ -64,12 +64,12 @@ button {
   height: 100%;
 
   fa-icon {
-    color: $white;
+    color: $txt-color;
     font-size: 1.1rem;
   }
 
   &:hover {
-    @include black(15%);
+    background-color: rgba($bg-color-hue2-rgb, $alpha);
 
     fa-icon {
       color: $blue;
@@ -77,12 +77,12 @@ button {
   }
 
   &:active {
-    @include black(10%);
+    background-color: rgba($bg-color-hue1-rgb, $alpha);
   }
 }
 
 p {
-  color: $white;
+  color: $txt-color;
   cursor: default;
   text-align: center;
 }

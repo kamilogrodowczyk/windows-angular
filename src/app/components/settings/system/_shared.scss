@@ -1,0 +1,175 @@
+@use "../../../../assets/helpers" as *;
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+.container {
+  background-color: $bg-color;
+  display: grid;
+  align-items: flex-start;
+  gap: 3vh;
+}
+
+.container__toggle {
+  width: 100%;
+  display: grid;
+  align-items: center;
+}
+
+.container__button {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+.toggle-button {
+  width: 47px;
+  height: 20px;
+  border-radius: 50px;
+  border: solid 2px $txt-color-hue1;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  background-color: transparent;
+
+  &.active {
+    background-color: $blue;
+    border: none;
+
+    &:hover {
+      border: none;
+    }
+
+    & > .toggle-button-dot {
+      transform: translateX(200%);
+    }
+  }
+
+  & > .toggle-button-dot {
+    background-color: $txt-color;
+    border-radius: 50%;
+    height: 13px;
+    width: 13px;
+  }
+
+  &:hover {
+    border: solid 2px $txt-color;
+
+    & > .toggle-button-dot {
+      background-color: $txt-color;
+    }
+  }
+
+  &:active {
+    background-color: $txt-color-hue2;
+    border: none;
+  }
+}
+
+.container__image {
+  background-image: var(--background);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  width: 22rem;
+  position: relative;
+}
+
+.container__image--left {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 70%;
+  width: 6rem;
+  background-color: $bg-color-hue1;
+  padding-left: 0.5rem;
+  display: grid;
+  align-content: flex-end;
+  justify-content: flex-start;
+  gap: 1px;
+
+  .square {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: $blue;
+    position: relative;
+
+    &:first-child::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -7px;
+      width: calc(1rem + 2px + 1.5rem);
+      height: 2px;
+      background-color: $txt-color;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: calc(1rem + 2px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.5rem;
+      height: 2px;
+      background-color: $txt-color;
+    }
+  }
+}
+
+.container__select {
+  width: 40%;
+
+  label {
+    width: 100%;
+    border: 2px solid;
+    border-color: $bg-color-hue5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    select {
+      background-color: transparent;
+      color: $txt-color;
+      width: 100%;
+      border-radius: 0;
+
+      option {
+        background-color: $bg-color;
+      }
+    }
+
+    &:hover {
+      @include black(50%, border-color);
+    }
+  }
+}
+
+.container__elements_grid {
+  display: grid;
+  justify-content: flex-start;
+  align-items: center;
+  grid-template-columns: repeat(8);
+  gap: 0.25rem;
+  grid-auto-flow: column;
+}
+
+.container__element_grid {
+  width: 3rem;
+  height: 3rem;
+  background-color: $blue;
+
+  &:hover {
+    border: 2px solid $txt-color;
+  }
+}

@@ -4,11 +4,10 @@ div {
   display: grid;
   justify-content: start;
   align-content: start;
-  @include white(10%);
+  background-color: $bg-color-hue1;
   position: absolute;
   z-index: 3;
-  border: solid 1px;
-  @include white(50%, border-color);
+  border: solid 1px $bg-color-hue5;
 
   &.view {
     position: absolute;
@@ -34,9 +33,10 @@ button {
   position: relative;
   padding: 1vh;
   font-size: 1rem;
+  color: $txt-color;
 
   &:hover {
-    @include white(5%);
+    background-color: $bg-color-hue2;
   }
 }
 
@@ -49,7 +49,7 @@ button.active {
     right: 10%;
     top: 50%;
     transform: translateY(-50%);
-    background-color: $base-color;
+    background-color: $txt-color;
     border-radius: 50%;
   }
 }

@@ -1,0 +1,69 @@
+<div class="container">
+  <h2>Colors</h2>
+  <div class="container__image">
+    <div class="container__image--left">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
+    <div class="container__image--right">
+      <p>Sample text</p>
+    </div>
+  </div>
+  <div class="container__select">
+    <p>Choose your color</p>
+    <label for="your-color">
+      <select name="your-color" id="your-color" (change)="setTheme($event)">
+        <option *ngFor="let thm of themeOptions" [ngValue]="thm" [selected]="theme === thm">
+          {{ thm }}
+        </option>
+      </select>
+    </label>
+  </div>
+  <div class="container__toggle">
+    <p>Transparency effects</p>
+    <div class="container__button">
+      <button
+        class="toggle-button"
+        [ngClass]="{ active: isTransparent === true }"
+        (click)="setTransparency()"
+      >
+        <div class="toggle-button-dot"></div>
+      </button>
+      <p>{{ isTransparent ? "On" : "Off" }}</p>
+    </div>
+  </div>
+  <div>
+    <h4>Choose your accent color</h4>
+    <p>Windows colors</p>
+    <div class="container__colors">
+      <button
+        #btn1
+        class="container__color"
+        (click)="color(btn1.title)"
+        title="Goldenrod"
+      ></button>
+      <button
+        #btn2
+        class="container__color"
+        (click)="color(btn2.title)"
+        title="Lightcoral"
+      ></button>
+      <button
+        #btn3
+        class="container__color"
+        (click)="color(btn3.title)"
+        title="Blue"
+      ></button>
+      <button
+        #btn4
+        class="container__color"
+        (click)="color(btn4.title)"
+        title="Mediumseagreen"
+      ></button>
+    </div>
+  </div>
+</div>

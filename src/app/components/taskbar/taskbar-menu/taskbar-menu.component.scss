@@ -7,7 +7,7 @@ p {
 }
 
 fa-icon {
-  color: $white;
+  color: $txt-color;
 }
 
 .taskbar__menu {
@@ -16,7 +16,7 @@ fa-icon {
   bottom: 0;
   height: 40rem;
   width: 25rem;
-  background-color: $base-color;
+  background-color: $bg-color-hue1;
   z-index: 1;
   display: none;
   padding-bottom: 2.9rem;
@@ -34,6 +34,7 @@ fa-icon {
   display: grid;
   align-content: space-between;
   justify-items: center;
+  background-color: $bg-color-hue1;
 
   & > * {
     width: 4.2rem;
@@ -50,7 +51,7 @@ fa-icon {
     padding: 1.5rem 0;
 
     &:hover {
-      @include black(15%);
+      background-color: $bg-color-hue2;
     }
 
     &:active {
@@ -80,6 +81,7 @@ fa-icon {
     text-align: start;
     font-size: 1rem;
     margin-top: 1.2rem;
+    color: $txt-color;
   }
 
   a {
@@ -91,11 +93,11 @@ fa-icon {
 
   button {
     background-color: inherit;
-    color: $white;
     display: flex;
     align-items: center;
     width: 100%;
     padding: 0 0.3rem;
+    color: $txt-color;
 
     fa-icon {
       margin-right: 0.5rem;
@@ -109,7 +111,7 @@ fa-icon {
     }
 
     &:hover {
-      @include black(15%);
+      background-color: $bg-color-hue2;
     }
 
     &:active {
@@ -122,11 +124,10 @@ fa-icon {
   .taskbar__left {
     padding-right: 15rem;
     position: absolute;
-    z-index: 10;
+    z-index: 1;
     height: 100%;
     padding-bottom: 2.9rem;
-    background-color: rgba($color: #222, $alpha: 0.7);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background-color: rgba($bg-color, $alpha);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
@@ -146,7 +147,7 @@ fa-icon {
         top: 50%;
         width: 100%;
         transform: translateY(-50%);
-        color: $white;
+        color: $txt-color;
         background-color: $base-color;
         margin-left: 2rem;
       }

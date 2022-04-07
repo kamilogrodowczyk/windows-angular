@@ -1,6 +1,6 @@
-<app-title-bar class="margin-right" [app]="settings">
+<app-title-bar class="color" [app]="settings" [backButton]="true">
   <div class="container__elements">
-    <div class="container__left" *ngFor="let option of settingOptions">
+    <div class="container__left">
       <a routerLink="/settings">
         <button>
           <fa-icon [icon]="faHome"></fa-icon>
@@ -9,6 +9,7 @@
       </a>
       <h5>{{ selectedSetting.name }}</h5>
       <button
+        *ngFor="let option of settingOptions"
         (click)="selectSetting(option.name)"
         [ngClass]="{ selected: option.name === selectedOption }"
       >
@@ -18,7 +19,8 @@
     </div>
     <div class="container__right" [ngSwitch]="selectedOption">
       <app-display *ngSwitchCase="'Display'"></app-display>
+      <app-personalize *ngSwitchCase="'Colors'"></app-personalize>
+      <app-background *ngSwitchCase="'Background'"></app-background>
     </div>
   </div>
 </app-title-bar>
-

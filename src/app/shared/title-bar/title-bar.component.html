@@ -3,12 +3,17 @@
     <h4 *ngIf="app">{{ app.name }} {{ additionalName }}</h4>
     <p>{{ isSavedText }}</p>
   </span>
-  <ng-template #elseBlock
-    ><h4 *ngIf="app">{{ app.name }}</h4></ng-template
-  >
+  <ng-template #elseBlock>
+    <div class="header__title">
+      <button *ngIf="backButton" title="Back" class="exit-button" (click)="back()">
+        <fa-icon [icon]="arrowLeft"></fa-icon>
+      </button>
+      <h4 *ngIf="app">{{ app.name }}</h4>
+    </div>
+  </ng-template>
   <div class="header__buttons">
-    <button class="exit-button" (click)="minimalize()">_</button>
-    <button class="exit-button" (click)="goBack()">X</button>
+    <button class="exit-button" title="Minimalize" (click)="minimalize()">_</button>
+    <button class="exit-button" title="Close" (click)="close()">X</button>
   </div>
 </div>
 <ng-content></ng-content>

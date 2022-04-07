@@ -8,9 +8,9 @@ div {
   padding-top: 0.5rem;
 
   p {
-    color: white;
-    text-shadow: 2px 2px 2px $base-color;
+    text-shadow: 2px 2px 2px $black;
     font-weight: 300;
+    color: $white;
   }
 }
 

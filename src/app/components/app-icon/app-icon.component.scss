@@ -10,7 +10,7 @@
 
   &:not(.container__elements.header, .container__header):hover {
     cursor: default;
-    @include white(20%);
+    background-color: $bg-color-hue2;
   }
 
   & > * {
@@ -19,10 +19,9 @@
   }
 
   &.header > * {
-    border-right: solid 1px;
-    @include white(20%, border-right-color);
+    border-right: solid 1px $txt-color-hue1;
     margin-bottom: 1rem;
-    @include white(20%, color);
+    color: $txt-color-hue2;
   }
 
   & > *:first-child {

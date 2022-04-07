@@ -1,0 +1,46 @@
+@use "../shared";
+@use "../../../../../assets/helpers.scss" as *;
+
+.container__image--right {
+  background-color: $bg-color;
+  height: 100%;
+  width: 7rem;
+  padding: 0.5rem;
+
+  p {
+    font-size: 0.8rem;
+    position: relative;
+    padding-top: 1rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $txt-color;
+      width: 2rem;
+      height: 3px;
+    }
+  }
+}
+
+.container__colors {
+  @extend .container__elements_grid;
+
+  .container__color {
+    @extend .container__element_grid;
+
+    &:first-child {
+      background-color: goldenrod;
+    }
+    &:nth-child(2) {
+      background-color: lightcoral;
+    }
+    &:nth-child(3) {
+      background-color: #00a2ed;
+    }
+    &:nth-child(4) {
+      background-color: mediumseagreen;
+    }
+  }
+}
