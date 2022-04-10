@@ -13,6 +13,9 @@
   </ng-template>
   <div class="header__buttons">
     <button class="exit-button" title="Minimalize" (click)="minimalize()">_</button>
+    <button class="exit-button" title="{{isMaximized ? 'Restore down' : 'Maximize'}}" (click)="maximize()">
+      <div class="maximize"></div>
+    </button>
     <button class="exit-button" title="Close" (click)="close()">X</button>
   </div>
 </div>

@@ -11,5 +11,7 @@ export interface DesktopSavedOptions {
   nightDisplayValue: number;
   colorAccent: string,
   isTransparent: boolean,
-  theme: string
+  theme: string,
+  background: string,
+  backgroundFit: string,
 }

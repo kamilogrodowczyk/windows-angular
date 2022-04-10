@@ -46,8 +46,16 @@
       <div class="container__select">
         <p>Choose a fit</p>
         <label for="your-background-fit">
-          <select name="your-background-fit" id="your-background-fit">
-            <option *ngFor="let bckg of backgroundFit" [ngValue]="bckg">
+          <select
+            name="your-background-fit"
+            id="your-background-fit"
+            (change)="setBackgroundFit($event)"
+          >
+            <option
+              *ngFor="let bckg of backgroundFit"
+              [ngValue]="bckg"
+              [selected]="selectedBackgroundFit === bckg"
+            >
               {{ bckg }}
             </option>
           </select>
@@ -57,10 +65,36 @@
     <div *ngSwitchCase="'Solid color'">
       <p>Choose background color</p>
       <div class="container__colors">
-        <button #btn1 class="container__color" title="Goldenrod"></button>
-        <button #btn2 class="container__color" title="Lightcoral"></button>
-        <button #btn3 class="container__color" title="Blue"></button>
-        <button #btn4 class="container__color" title="Mediumseagreen"></button>
+        <button
+          #btn1
+          class="container__color"
+          title="Goldenrod"
+          (click)="setBackground(btn1.title)"
+        ></button>
+        <button
+          #btn2
+          class="container__color"
+          title="Lightcoral"
+          (click)="setBackground(btn2.title)"
+        ></button>
+        <button
+          #btn3
+          class="container__color"
+          title="Blue"
+          (click)="setBackground(btn3.title)"
+        ></button>
+        <button
+          #btn4
+          class="container__color"
+          title="Mediumseagreen"
+          (click)="setBackground(btn4.title)"
+        ></button>
+        <button
+          #btn5
+          class="container__color"
+          title="Black"
+          (click)="setBackground(btn5.title)"
+        ></button>
       </div>
     </div>
   </div>

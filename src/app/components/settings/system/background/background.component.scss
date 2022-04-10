@@ -8,9 +8,6 @@
 .container__background,
 .container__color {
   @extend .container__element_grid;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 }
 
 .container__background {
@@ -33,6 +30,9 @@
   }
   &:nth-child(4) {
     background-color: mediumseagreen;
+  }
+  &:nth-child(5) {
+    background-color: #222;
   }
 }
 

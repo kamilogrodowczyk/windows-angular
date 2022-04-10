@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap, share } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
+  HttpResponse,
 } from '@angular/common/http';
 import { DesktopItem } from '../types/desktopItems';
 import { catchError } from 'rxjs';
@@ -43,9 +44,12 @@ export class DesktopItemsService {
 
   getItems(): Observable<DesktopItem[]> {
     const optionsJson = this.storage.get('options') || '{}';
-    const isSorted = optionsJson !== null ? JSON.parse(optionsJson)['sortBy'] : '{}';
+    const isSorted =
+      optionsJson !== null ? JSON.parse(optionsJson)['sortBy'] : '{}';
     return this.http
-      .get<DesktopItem[]>(`${this.iconsUrl}${isSorted ? `?_sort=${isSorted}` : ''}`)
+      .get<DesktopItem[]>(
+        `${this.iconsUrl}${isSorted ? `?_sort=${isSorted}` : ''}`
+      )
       .pipe(catchError(this.handleError<DesktopItem[]>('getItems')));
   }
 
@@ -57,6 +61,7 @@ export class DesktopItemsService {
         catchError(this.handleError<DesktopItem>('getItem'))
       );
   }
+
   getItemById(id: number): Observable<DesktopItem> {
     return this.http.get<DesktopItem[]>(`${this.iconsUrl}/?id=${id}`).pipe(
       map((items) => items[0]),

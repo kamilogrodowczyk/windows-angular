@@ -4,7 +4,8 @@
 $red: #ff3333;
 
 :root {
-  --background: url('https://wallpaperaccess.com/full/2382371.jpg');
+  --background: #222;
+  --background-fit: cover;
 }
 
 html {
@@ -24,6 +25,12 @@ html {
 body {
   overflow-x: hidden;
   overflow-y: hidden;
+  background-color: #222;
+  background: var(--background);
+  background-repeat: no-repeat;
+  background-size: var(--background-fit);
+  height: 100vh;
+
   --accent-color: #00a2ed;
   --accent-color-lighten: #65c2ee;
   --alpha: 0.7;

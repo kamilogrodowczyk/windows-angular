@@ -74,7 +74,7 @@ p {
 .container__image {
   background-image: var(--background);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: var(--background-fit);
   background-position: center;
   height: 10rem;
   display: flex;

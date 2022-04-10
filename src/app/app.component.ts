@@ -1,4 +1,5 @@
 import { Component, DoCheck } from '@angular/core';
+import { DesktopItemsService } from './services/desktop-items.service';
 import { OverlayDesktopMenuService } from './services/overlay-desktop-menu.service';
 import { BrowserStorageService } from './services/storage.service';
 
@@ -16,7 +17,7 @@ export class AppComponent implements DoCheck {
 
   ngOnInit(): void {
     this.setNightLight();
-    this.setColorAccent();
+    this.setSavedSettings();
   }
 
   ngDoCheck() {
@@ -27,7 +28,7 @@ export class AppComponent implements DoCheck {
 
   constructor(
     private overlayMenu: OverlayDesktopMenuService,
-    private storage: BrowserStorageService
+    private storage: BrowserStorageService,
   ) {
     this.storage
       .getStorageSubject()
@@ -45,7 +46,7 @@ export class AppComponent implements DoCheck {
     this.nightLightValue = isActive ? value : '0';
   }
 
-  setColorAccent() {
+  setSavedSettings() {
     const optionsJson = this.storage.get('options') || '{}';
     const value =
       optionsJson !== null ? JSON.parse(optionsJson)['colorAccent'] : '';
@@ -53,6 +54,10 @@ export class AppComponent implements DoCheck {
       optionsJson !== null ? JSON.parse(optionsJson)['isTransparent'] : '';
     const theme =
       optionsJson !== null ? JSON.parse(optionsJson)['theme'] : '';
+    const background =
+      optionsJson !== null ? JSON.parse(optionsJson)['background'] : '';
+    const backgroundFit =
+      optionsJson !== null ? JSON.parse(optionsJson)['backgroundFit'] : '';
 
     if (value) {
       document.body.classList.add(`${value}`);
@@ -70,6 +75,14 @@ export class AppComponent implements DoCheck {
       document.body.classList.add('light-theme');
     } else {
       document.body.classList.remove('light-theme');
+    }
+
+    if (background) {
+      document.documentElement.style.setProperty(`--background`, background);
+    }
+
+    if (backgroundFit) {
+      document.documentElement.style.setProperty(`--background-fit`, backgroundFit);
     }
   }
 
